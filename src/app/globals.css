@@ -1,25 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
 @import "tailwindcss";
 
-@theme {
-  --color-background: #e9ecf1;
-  --color-foreground: #2a2a2a;
-  --color-text-secondary: rgba(42, 42, 42, 0.55);
-  --color-border: rgba(42, 42, 42, 0.12);
-  --color-light-surface: #f5f4f0;
-  --color-dark-surface: #2a2a2a;
-  --color-text-on-dark: #f5f4f0;
-  --color-muted: rgba(42, 42, 42, 0.55);
-  --color-inverse: #2a2a2a;
-  --color-inverse-foreground: #f5f4f0;
-  --color-surface: #f5f4f0;
+@font-face {
+  font-family: "Inter Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/InterDisplay-Regular.woff2") format("woff2");
+}
 
-  --font-sans: var(--font-inter-tight), "Helvetica Neue", Helvetica, Arial,
+@font-face {
+  font-family: "Inter Display";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/InterDisplay-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter Display";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/InterDisplay-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter Display";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/InterDisplay-Bold.woff2") format("woff2");
+}
+
+@theme {
+  --color-background: #080808;
+  --color-foreground: #e7e9ee;
+  --color-text-secondary: rgba(231, 233, 238, 0.55);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-light-surface: #11100f;
+  --color-dark-surface: #0b0a09;
+  --color-text-on-dark: #f5f4f0;
+  --color-muted: rgba(231, 233, 238, 0.55);
+  --color-inverse: #17140f;
+  --color-inverse-foreground: #f5f4f0;
+  --color-inverse-muted: rgba(245, 244, 240, 0.6);
+  --color-surface: #11100f;
+
+  --color-on-light: #171310;
+  --color-tone-1: #17140f;
+  --color-tone-2: #1c1916;
+  --color-tone-3: #302923;
+  --color-tone-8: #d9dde4;
+  --color-tone-9: #eef0f4;
+
+  --color-accent: #ff6a00;
+  --color-accent-text: #ff8a4a;
+  --color-accent-strong: #ff6a1a;
+  --color-accent-soft-text: #ffd0a3;
+  --color-accent-soft: rgba(255, 106, 26, 0.1);
+  --color-accent-wash: rgba(255, 106, 26, 0.06);
+  --color-on-accent: #080808;
+
+  --font-sans: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
     sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo,
-    monospace;
-  --font-matrix: var(--font-matrix-type), ui-monospace, monospace;
-  --font-nevera: var(--font-nevera-type), ui-monospace, monospace;
-  --font-mileast: var(--font-mileast-type), ui-monospace, monospace;
+  --font-mono: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  --font-matrix: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  --font-michroma: "Michroma", var(--font-inter-display), "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  --font-mileast: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
 }
 
 body {
@@ -29,12 +81,45 @@ body {
 }
 
 :root {
+  color-scheme: dark;
+  --font-inter-display: "Inter Display";
   --header-height: 50px;
 }
 
 @media (min-width: 768px) {
   :root {
     --header-height: 88px;
+  }
+}
+
+.container-page {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+@media (min-width: 640px) {
+  .container-page {
+    padding-inline: 4vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-page {
+    padding-inline: 5vw;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-page {
+    padding-inline: 6vw;
+  }
+}
+
+@media (min-width: 1640px) {
+  .container-page {
+    padding-inline: 6vw;
   }
 }
 
@@ -90,6 +175,16 @@ body {
   }
   to {
     transform: translateX(calc(-50% - 0.25rem));
+  }
+}
+
+@keyframes testimonial-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }
 

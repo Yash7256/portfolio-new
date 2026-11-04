@@ -1,89 +1,128 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { Link } from "react-router";
 
-const mono =
-  "font-mono uppercase tracking-[0.02em] text-[12px] leading-[1.2]";
-const ease = [0.2, 0.7, 0.1, 1] as const;
-const linkClass = "transition-opacity duration-200 hover:opacity-50";
+const socialLinks = [
+  { label: "Instagram", href: "https://instagram.com" },
+  { label: "Dribbble", href: "https://dribbble.com" },
+  { label: "X", href: "https://x.com" },
+];
+
+const footerLinks = [
+  { label: "Home", href: "/" },
+  { label: "Works", href: "/works" },
+  { label: "Services", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Footer() {
+  const scrollToTop = () => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+  };
+
   return (
-    <footer className="overflow-hidden px-[11px] pb-8 pt-20 md:pt-28">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6, ease }}
-        className="grid grid-cols-1 gap-6 md:grid-cols-[50%_24%_1fr]"
-      >
-        <span className={`${mono} md:col-start-2`}>CONTACT</span>
-        <p className={`${mono} md:col-start-3`}>
-          FOR ALL ENQUIRIES PLEASE CONTACT{" "}
-          <a href="mailto:info@titarvl.com" className={linkClass}>
-            INFO@TITARVL.COM
-          </a>
-        </p>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6, ease }}
-        className="mt-12 md:mt-16"
-      >
-        <svg
-          viewBox="0 0 1000 360"
-          className="block w-full"
-          role="img"
-          aria-label="TITARVL"
-        >
-          <text
-            x="0"
-            y="315"
-            textLength="1000"
-            lengthAdjust="spacingAndGlyphs"
-            fontSize="360"
-            className="font-sans font-medium fill-current"
-          >
-            HARSHITA
-          </text>
-        </svg>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6, ease }}
-        className="relative z-10 -mt-[6vw] flex flex-col gap-2 md:grid md:grid-cols-[50%_24%_1fr]"
-      >
-        <span className={mono}>TITARVL</span>
-        <span className={`${mono} md:col-start-2`}>
-          © 2026 / ALL RIGHTS RESERVED
-        </span>
-        <div className="flex justify-between gap-4 md:col-start-3">
-          <span className={mono}>
-            <a href="/cookies-policy" className={linkClass}>
-              COOKIES POLICY
-            </a>{" "}
-            /{" "}
-            <a href="/privacy-policy" className={linkClass}>
-              PRIVACY POLICY
-            </a>
-          </span>
-          <span className={mono}>
-            <a href="#" className={linkClass}>
-              INSTAGRAM
-            </a>{" "}
-            /{" "}
-            <a href="#" className={linkClass}>
-              BEHANCE
-            </a>
-          </span>
+    <footer className="-mx-4 select-none border-t border-white/10 sm:-mx-[4vw] lg:-mx-[5vw] xl:-mx-[6vw]">
+      <div className="container-page py-14 md:py-20">
+        <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500 md:text-[11px]">
+          <span>Technology studio</span>
         </div>
-      </motion.div>
+
+        <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-[minmax(0,1fr)_280px] md:gap-10 lg:gap-16">
+          <div>
+            <p className="max-w-[16ch] font-sans text-[clamp(2rem,5vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.05em] text-foreground">
+              Where ideas become <span className="text-accent">real products.</span>
+            </p>
+            <p className="mt-6 max-w-[42ch] text-[14px] leading-relaxed text-neutral-400 md:text-[15px]">
+              We design, develop, and launch digital products for ambitious ideas.
+            </p>
+            <Link
+              to="/contact"
+              className="group mt-8 inline-flex items-center gap-3 border-b border-accent pb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground transition-colors duration-200 hover:text-accent"
+            >
+              Start a conversation
+              <span aria-hidden="true" className="text-accent transition-transform duration-200 group-hover:translate-x-1">↗</span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10">
+            <nav aria-label="Footer navigation">
+              <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Explore
+              </p>
+              <div className="flex flex-col items-start gap-3 font-sans text-[14px] text-neutral-300">
+                {footerLinks.map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="transition-colors duration-200 hover:text-accent"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </nav>
+
+            <div>
+              <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Elsewhere
+              </p>
+              <div className="flex flex-col items-start gap-3 font-sans text-[14px] text-neutral-300">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group transition-colors duration-200 hover:text-accent"
+                  >
+                    {social.label} <span className="text-accent transition-transform duration-200 group-hover:translate-x-1">↗</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="col-span-2">
+              <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Contact
+              </p>
+              <a
+                href="mailto:hello@anviklabs.com"
+                className="group inline-flex items-center gap-2 break-all font-sans text-[14px] text-neutral-300 transition-colors duration-200 hover:text-accent"
+              >
+                hello@anviklabs.com
+                <span className="text-accent transition-transform duration-200 group-hover:translate-x-1">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 border-t border-white/10 pt-5 md:mt-24">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <Link to="/" aria-label="Anvik Labs home" className="inline-flex">
+              <img
+                src="/logo.svg"
+                alt="Anvik Labs"
+                width={1010}
+                height={118}
+                className="h-8 w-auto md:h-10"
+              />
+            </Link>
+
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
+              <span>© 2026 Anvik Labs</span>
+              <span>All rights reserved</span>
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className="text-neutral-300 transition-colors duration-200 hover:text-accent"
+              >
+                Back to top ↑
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }

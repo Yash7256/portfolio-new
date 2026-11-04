@@ -1,161 +1,120 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-const mono =
-  "font-mono uppercase tracking-[0.02em] text-[12px] leading-[1.2]";
-const ease = [0.2, 0.7, 0.1, 1] as const;
-
-type FaqItem = {
-  index: string;
-  question: string;
-  tag: string;
-  answer: string;
-};
-
-const faqs: FaqItem[] = [
+const faqData = [
   {
-    index: "01",
-    question: "What services do you offer?",
-    tag: "SERVICES",
-    answer:
-      "Web design and development, graphic design, brand identity and full brand guidelines — delivered individually or as a complete system.",
+    q: "What services do you offer?",
+    a: "We specialize in end-to-end digital craft: from art direction, bespoke brand identity, and design systems, to native Framer development, motion design, and high-performance frontend architecture.",
   },
   {
-    index: "02",
-    question: "What is your typical turnaround time?",
-    tag: "TIMELINE",
-    answer:
-      "Most projects run four to eight weeks depending on scope; a clear schedule is agreed before any work begins.",
+    q: "What is your typical turnaround time?",
+    a: "Standard one-page or showcase projects typically take 7 to 14 business days. Comprehensive brand systems or multi-page CMS platforms usually take 3 to 5 weeks from kickoff to final deployment.",
   },
   {
-    index: "03",
-    question: "Do you only work in Framer?",
-    tag: "TOOLS",
-    answer:
-      "No. Framer is one option — the work is also designed and built with code and other tools whenever the project calls for it.",
+    q: "Do you only work in Framer?",
+    a: "While Framer is our preferred tool for lightning-fast visual execution and real-time client collaboration, we also engineer custom Next.js, React, Tailwind, and WebGL experiences when complex architectures demand it.",
   },
   {
-    index: "04",
-    question: "Can you handle both design and development?",
-    tag: "WORKFLOW",
-    answer:
-      "Yes — concept, typography, design and production front-end are handled end to end.",
+    q: "Can you handle both design and build?",
+    a: "Yes. Blending design and code with zero handoff friction is our core advantage. You work directly with the creator who both designs the visual identity and builds the production site.",
   },
   {
-    index: "05",
-    question: "Do you offer brand strategy as well?",
-    tag: "SCOPE",
-    answer:
-      "Yes, positioning and strategy can sit alongside identity and web work when the full picture is needed.",
+    q: "Do you offer brand strategy too?",
+    a: "Absolutely. Visual execution only works when grounded in clear positioning. We define core messaging, visual hierarchy, typography tone, and competitive differentiators before opening design software.",
   },
   {
-    index: "06",
-    question: "What does your process look like?",
-    tag: "PROCESS",
-    answer:
-      "Discovery, direction, design, build and launch — with clear checkpoints and one open line of communication throughout.",
+    q: "What’s your process like?",
+    a: "Our process is structured in four clear phases: Discovery & Architecture, Visual Identity & Art Direction, Native Build & Motion Implementation, and QA, Performance Tuning & Global Launch.",
   },
 ];
 
-function FaqRow({
-  item,
-  open,
-  onToggle,
-}: {
-  item: FaqItem;
-  open: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, ease }}
-      className="border-b border-foreground"
-    >
-      <button
-        type="button"
-        aria-expanded={open}
-        aria-controls={`faq-panel-${item.index}`}
-        onClick={onToggle}
-        className="grid w-full grid-cols-[auto_1fr] items-center gap-4 py-5 text-left md:min-h-[60px] md:grid-cols-[50%_1fr] md:py-0"
-      >
-        <span className={mono}>[{item.index}]</span>
-        <div className="flex items-center justify-between gap-4">
-          <span className={`${mono} font-medium`}>{item.question}</span>
-          <span className="flex items-center gap-4">
-            <span className={`${mono} hidden text-muted md:inline`}>
-              {item.tag}
-            </span>
-            <motion.span
-              animate={{ rotate: open ? 180 : 0 }}
-              transition={{ duration: 0.3, ease }}
-              className={`${mono} leading-none`}
-              aria-hidden
-            >
-              ▼
-            </motion.span>
-          </span>
-        </div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={`faq-panel-${item.index}`}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease }}
-            className="overflow-hidden"
-          >
-            <div className="pb-6 md:grid md:grid-cols-[50%_1fr]">
-              <p className="max-w-[52ch] font-sans text-[16px] leading-[1.4] md:col-start-2">
-                {item.answer}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
 export default function Faq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const toggle = (idx: number) => {
+    setOpenIndex(openIndex === idx ? null : idx);
+  };
 
   return (
-    <section id="faq" className="px-[11px] py-20 md:py-28">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6, ease }}
-        className="md:grid md:grid-cols-2 md:gap-8"
-      >
-        <span className={mono}>FREQUENTLY ASKED QUESTIONS</span>
-        <div className="mt-6 flex flex-col gap-4 md:mt-0 md:flex-row md:items-start md:justify-between">
-          <h2 className="font-sans text-[32px] font-medium uppercase leading-[0.95] tracking-[-0.04em] md:text-[48px] lg:text-[56px]">
-            CLARITY
-            <br />
-            BUILDS THE IMAGE
-          </h2>
-          <span className={mono}>CLARITY</span>
+    <section id="faq" className="py-16 md:py-24 border-t border-white/10 select-none">
+      {/* Meta Header */}
+      <div className="flex items-center justify-between text-[11px] md:text-[12px] font-mono uppercase tracking-[0.05em] text-neutral-400 mb-8 md:mb-12">
+        <div className="flex items-center gap-2">
+          <span className="text-neutral-500">©</span>
+          <span>Help Center</span>
+          <span className="text-neutral-500 font-sans">ヘルプ</span>
         </div>
-      </motion.div>
+        <div className="flex items-center gap-2">
+          <span>(WDX® — 12)</span>
+          <span className="hidden sm:inline text-neutral-500">·</span>
+          <span className="hidden sm:inline">Clarifications</span>
+        </div>
+      </div>
 
-      <div className="mt-12 md:mt-16">
-        {faqs.map((item, index) => (
-          <FaqRow
-            key={item.index}
-            item={item}
-            open={openIndex === index}
-            onToggle={() => setOpenIndex(openIndex === index ? null : index)}
-          />
-        ))}
+      {/* Headline & Subtitle */}
+      <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 pb-10 border-b border-white/10">
+        <div>
+          <h2 className="font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-bold tracking-[-0.04em] leading-none text-foreground uppercase">
+            FAQ.
+          </h2>
+        </div>
+        <div className="max-w-md">
+          <p className="font-sans text-[14px] md:text-[15px] text-neutral-400 leading-relaxed">
+            Clarifying Deliverable&apos;s Before They Begin with Real Process and Honest <span className="text-neutral-300 font-medium">アンサー.</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Accordion List */}
+      <div className="divide-y divide-white/10 mt-6">
+        {faqData.map((item, idx) => {
+          const isOpen = openIndex === idx;
+          return (
+            <div key={idx} className="py-5 md:py-6">
+              <button
+                type="button"
+                onClick={() => toggle(idx)}
+                className="w-full flex items-center justify-between text-left gap-4 group cursor-pointer focus-visible:outline-none"
+                aria-expanded={isOpen}
+              >
+                <div className="flex items-center gap-4 md:gap-8">
+                  <span className="font-mono text-[12px] text-neutral-500 w-8">
+                    [0{idx + 1}]
+                  </span>
+                  <span className="font-sans text-[17px] md:text-[20px] font-medium text-foreground group-hover:text-white transition-colors">
+                    {item.q}
+                  </span>
+                </div>
+
+                <span
+                  className={`w-7 h-7 rounded-full border border-white/15 flex items-center justify-center font-mono text-[14px] transition-transform duration-200 shrink-0 ${
+                    isOpen ? "rotate-45 bg-white text-black border-white" : "text-neutral-400"
+                  }`}
+                >
+                  +
+                </span>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pl-12 md:pl-16 pr-4 pt-3 pb-2 text-[14px] md:text-[15px] font-sans text-neutral-400 leading-relaxed max-w-3xl">
+                      {item.a}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

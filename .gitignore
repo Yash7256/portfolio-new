@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# react router
+/.react-router/
+
 # production
 /build
 

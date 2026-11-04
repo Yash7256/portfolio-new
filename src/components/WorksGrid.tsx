@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router";
+import Image from "@/components/Img";
 import type { Work } from "@/data/works";
 import { useShuffled } from "@/lib/useShuffled";
 
@@ -18,14 +18,13 @@ export default function WorksGrid({ works }: { works: Work[] }) {
           key={work.slug}
           className={index % 2 === 1 ? "md:mt-24" : undefined}
         >
-          <Link href={`/works/${work.slug}`} className="group block">
+          <Link to={`/works/${work.slug}`} className="group block">
             <div className="relative aspect-[4/5] overflow-hidden bg-light-surface">
               <Image
                 src={work.hero.src}
                 alt={work.hero.alt}
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                preload={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
             </div>

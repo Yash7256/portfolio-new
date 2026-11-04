@@ -13,7 +13,7 @@ const words = statement.split(" ");
 
 export default function WhatIDo() {
   return (
-    <section id="what-i-do" className="px-[11px] py-20 md:py-28">
+    <section id="what-i-do" className="py-20 md:py-28">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

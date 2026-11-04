@@ -1,22 +1,31 @@
-import type { Metadata } from "next";
+import type { MetaFunction } from "react-router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
-import Latest from "@/components/Latest";
-import { getMockupMedia } from "@/lib/mockups";
+import Faq from "@/components/Faq";
 
-export const metadata: Metadata = {
-  title: "Contact — TITARVL",
-  description: "Get in touch with TITARVL — design, brand identity and web.",
-};
+export const meta: MetaFunction = () => [
+  { title: "Contact — Anvik Labs" },
+  {
+    name: "description",
+    content:
+      "Contact Anvik Labs about product design and engineering work.",
+  },
+  { property: "og:title", content: "Contact — Anvik Labs" },
+  {
+    property: "og:description",
+    content:
+      "Contact Anvik Labs about product design and engineering work.",
+  },
+];
 
 export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className="flex flex-1 flex-col pt-[var(--header-height)]">
+      <main className="flex flex-1 flex-col pt-24 md:pt-28">
         <Contact standalone />
-        <Latest mockups={getMockupMedia()} />
+        <Faq />
       </main>
       <Footer />
     </>

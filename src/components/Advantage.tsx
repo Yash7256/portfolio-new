@@ -39,7 +39,7 @@ function CountUp({ value, suffix }: { value: number; suffix: string }) {
 
 export default function Advantage() {
   return (
-    <section id="the-advantage" className="px-[11px] py-20 md:py-28">
+    <section id="the-advantage" className="py-20 md:py-28">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}

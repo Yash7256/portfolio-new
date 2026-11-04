@@ -1,174 +1,126 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useMarqueeTiming } from "./useMarqueeTiming";
 
-const mono =
-  "font-mono uppercase tracking-[0.02em] text-[12px] leading-[1.2]";
-const ease = [0.2, 0.7, 0.1, 1] as const;
-
-type ServiceImage = { wide?: boolean; tone: string; text: string };
-
-type Service = {
-  index: string;
-  title: string;
-  sublabel: string;
-  description: string;
-  images: ServiceImage[];
-};
-
-const services: Service[] = [
+const services = [
   {
-    index: "01",
-    title: "WEB DESIGN & DEVELOPMENT",
-    sublabel: "SITE STRUCTURE",
-    description:
-      "Design and build of fast, accessible sites — from information architecture and typography systems through to production front-end.",
-    images: [
-      { tone: "bg-neutral-200", text: "text-muted" },
-      { wide: true, tone: "bg-foreground", text: "text-inverse-foreground" },
-      { tone: "bg-neutral-300", text: "text-muted" },
-      { tone: "bg-neutral-800", text: "text-inverse-foreground" },
-    ],
+    name: "Web Development",
+    discipline: "Engineering",
+    detail: "React / Next.js",
+    scope: "Design to Launch",
   },
   {
-    index: "02",
-    title: "GRAPHIC DESIGN",
-    sublabel: "VISUAL ASSETS",
-    description:
-      "Editorial layouts, campaign artwork and print collateral shaped by a strict, flexible typographic system.",
-    images: [
-      { tone: "bg-neutral-100", text: "text-muted" },
-      { wide: true, tone: "bg-neutral-300", text: "text-muted" },
-      { tone: "bg-neutral-900", text: "text-inverse-foreground" },
-      { tone: "bg-neutral-200", text: "text-muted" },
-    ],
+    name: "Product Design",
+    discipline: "Design",
+    detail: "Interface / Systems",
+    scope: "Research to UI",
   },
   {
-    index: "03",
-    title: "BRAND IDENTITY",
-    sublabel: "VISUAL SYSTEM",
-    description:
-      "Logotypes, marks and a considered visual language that scales across every touchpoint.",
-    images: [
-      { tone: "bg-neutral-800", text: "text-inverse-foreground" },
-      { wide: true, tone: "bg-neutral-200", text: "text-muted" },
-      { tone: "bg-foreground", text: "text-inverse-foreground" },
-      { tone: "bg-neutral-100", text: "text-muted" },
-    ],
+    name: "AI Solutions",
+    discipline: "Applied AI",
+    detail: "LLM / Automation",
+    scope: "Prototype to Production",
   },
   {
-    index: "04",
-    title: "BRAND GUIDELINES",
-    sublabel: "IDENTITY SYSTEM",
-    description:
-      "Clear rules for type, colour, spacing and tone so the identity stays consistent as it grows.",
-    images: [
-      { tone: "bg-neutral-300", text: "text-muted" },
-      { wide: true, tone: "bg-neutral-900", text: "text-inverse-foreground" },
-      { tone: "bg-neutral-200", text: "text-muted" },
-      { tone: "bg-neutral-800", text: "text-inverse-foreground" },
-    ],
+    name: "Website Maintenance",
+    discipline: "Care",
+    detail: "Performance / Updates",
+    scope: "Ongoing Support",
   },
 ];
 
-function ServiceRow({ service }: { service: Service }) {
-  const [mode, setMode] = useState<"images" | "description">("images");
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, ease }}
-      className="grid grid-cols-1 gap-6 border-b border-foreground py-6 md:grid-cols-2 md:gap-0 md:py-0"
-    >
-      <div className="flex flex-col justify-between gap-8 md:min-h-[224px] md:py-8 md:pr-8">
-        <div className="flex flex-col gap-2 md:flex-row md:items-start md:gap-6">
-          <span className={mono}>[{service.index}]</span>
-          <h3 className="font-sans text-[28px] font-medium uppercase leading-[0.95] tracking-[-0.03em] md:text-[40px]">
-            {service.title}
-          </h3>
-        </div>
-
-        <div className="flex items-end justify-between gap-4">
-          <span className={`${mono} text-muted`}>{service.sublabel}</span>
-          <div className={`${mono} flex items-center gap-3`}>
-            <button
-              type="button"
-              aria-pressed={mode === "images"}
-              onClick={() => setMode("images")}
-              className={`transition-opacity duration-200 ${
-                mode === "images" ? "text-foreground" : "text-muted hover:opacity-70"
-              }`}
-            >
-              IMAGES
-            </button>
-            <span className="text-muted">/</span>
-            <button
-              type="button"
-              aria-pressed={mode === "description"}
-              onClick={() => setMode("description")}
-              className={`transition-opacity duration-200 ${
-                mode === "description"
-                  ? "text-foreground"
-                  : "text-muted hover:opacity-70"
-              }`}
-            >
-              DESCRIPTION
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="-mr-[11px] overflow-x-auto md:overflow-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {mode === "images" ? (
-          <div className="flex w-max items-center gap-2">
-            {service.images.map((image, imageIndex) => (
-              <div
-                key={imageIndex}
-                className={`flex h-[200px] shrink-0 items-center justify-center ${image.wide ? "w-[320px]" : "w-40"} ${image.tone}`}
-              >
-                <span className={`${mono} ${image.text} opacity-60`}>
-                  {service.index}.{imageIndex + 1}
-                </span>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="max-w-[42ch] font-sans text-[16px] leading-[1.4] md:py-8">
-            {service.description}
-          </p>
-        )}
-      </div>
-    </motion.div>
-  );
-}
-
 export default function Services() {
+  const reduceMotion = useReducedMotion();
+  const { marqueeRef, duration } = useMarqueeTiming();
+
   return (
-    <section id="services" className="px-[11px] py-20 md:py-28">
+    <section
+      id="services"
+      aria-labelledby="services-heading"
+      className="py-16 md:py-24 border-t border-white/10 select-none"
+    >
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={reduceMotion ? undefined : { opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6, ease }}
-        className="flex items-end justify-between gap-4"
+        viewport={{ once: true, amount: 0.8 }}
+        transition={{ type: "spring", stiffness: 130, damping: 24, mass: 0.7 }}
+        className="flex items-center justify-between text-[11px] md:text-[12px] font-mono uppercase tracking-[0.05em] text-neutral-400 mb-8 md:mb-12"
       >
-        <h2 className="font-sans text-[48px] font-medium uppercase leading-[0.95] tracking-[-0.04em] md:text-[72px]">
-          SERVICE(S)
-        </h2>
-        <a
-          href="/about#services"
-          className={`${mono} shrink-0 transition-opacity duration-200 hover:opacity-50`}
-        >
-          [ VIEW ALL ]
-        </a>
       </motion.div>
 
-      <div className="mt-12 md:mt-16">
-        {services.map((service) => (
-          <ServiceRow key={service.index} service={service} />
+      <h2 id="services-heading" className="sr-only">
+        Services
+      </h2>
+
+      <div
+        aria-hidden="true"
+        className="pb-6 md:pb-8 border-b border-white/10 overflow-hidden"
+      >
+        <motion.div
+          initial={reduceMotion ? undefined : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ type: "spring", stiffness: 130, damping: 24, mass: 0.7 }}
+        >
+          <motion.div
+            animate={reduceMotion ? undefined : { x: ["0%", "-50%"] }}
+            transition={{ duration, repeat: Infinity, repeatType: "loop", repeatDelay: 0, ease: "linear" }}
+            ref={marqueeRef}
+            className="flex w-max whitespace-nowrap will-change-transform"
+          >
+            {[0, 1].map((i) => (
+              <div key={i} className="flex items-center">
+                {[0, 1].map((j) => (
+                  <span
+                    key={j}
+                    className="inline-flex w-max shrink-0 whitespace-nowrap font-sans text-[clamp(2.5rem,10vw,8rem)] font-bold uppercase leading-none tracking-[-0.04em]"
+                  >
+                    Services<span aria-hidden="true" className="inline-block px-16">·</span>
+                  </span>
+                ))}
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <div className="divide-y divide-white/10 mt-6 md:mt-8">
+        {services.map((item, idx) => (
+          <motion.div
+            key={item.name}
+            initial={reduceMotion ? undefined : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={reduceMotion ? undefined : { y: -1, scale: 1.002 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.998 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{
+              type: "spring",
+              stiffness: 150,
+              damping: 24,
+              mass: 0.55,
+              delay: reduceMotion ? 0 : 0.18 + idx * 0.1,
+            }}
+            className="group rounded-lg px-2 py-5 transition-colors duration-300 hover:bg-white/[0.02] hover:ring-1 hover:ring-white/15 md:py-7"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+              <span className="font-mono text-[11px] text-neutral-500 w-8">
+                [0{idx + 1}]
+              </span>
+              <span className="font-sans text-[18px] md:text-[21px] font-semibold text-foreground group-hover:text-white transition-colors">
+                {item.name}
+              </span>
+              <span className="hidden sm:inline text-neutral-600">·</span>
+              <span className="font-sans text-[14px] md:text-[15px] text-neutral-400">
+                {item.discipline}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between sm:justify-end gap-6 text-[12px] md:text-[13px] font-mono text-neutral-400">
+              <span className="text-neutral-500">{item.detail}</span>
+              <span className="text-neutral-300 font-medium">{item.scope}</span>
+            </div>
+          </motion.div>
         ))}
       </div>
     </section>

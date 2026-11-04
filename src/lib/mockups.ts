@@ -1,18 +1,3 @@
-import { readdirSync } from "node:fs";
-import path from "node:path";
-import { getImageProps } from "next/image";
-
-const IMAGE_EXTENSIONS = new Set([
-  ".avif",
-  ".gif",
-  ".jpeg",
-  ".jpg",
-  ".png",
-  ".webp",
-]);
-
-const VIDEO_EXTENSIONS = new Set([".m4v", ".mov", ".mp4", ".webm"]);
-
 export type MockupMedia = {
   src: string;
   type: "image" | "video";
@@ -23,32 +8,25 @@ export type MockupImage = {
   optimizedSrc: string;
 };
 
-function getMockupFiles(): string[] {
-  const directory = path.join(process.cwd(), "public", "mockups");
+const MOCKUP_FILES = [
+  "Aurora Skincare Laptop in Mossy Terrain.png",
+  "ChatGPT Image Oct 21, 2026, 11_43_29 AM.png",
+  "ChatGPT Image Oct 25, 2026, 11_31_23 PM.png",
+  "ChatGPT Image Oct 25, 2026, 11_40_35 PM.png",
+  "ChatGPT Image Oct 26, 2026, 12_18_55 AM.png",
+  "ChatGPT Image Oct 26, 2026, 12_25_16 AM.png",
+  "ChatGPT Image Oct 26, 2026, 12_36_11 AM.png",
+  "ChatGPT Image Oct 26, 2026, 12_40_05 AM.png",
+  "M003T1519 A scroll Macbook Mockup 20sep25 (1).png",
+  "MacBook Air - 61.mp4",
+  "Wayfarer Website on a Cozy Blue Sofa.png",
+];
 
-  try {
-    return readdirSync(directory, { withFileTypes: true })
-      .filter((entry) => entry.isFile())
-      .map((entry) => entry.name)
-      .filter((name) => {
-        if (name.startsWith(".")) return false;
-
-        const extension = path.extname(name).toLowerCase();
-        return (
-          IMAGE_EXTENSIONS.has(extension) || VIDEO_EXTENSIONS.has(extension)
-        );
-      })
-      .sort((a, b) =>
-        a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }),
-      );
-  } catch {
-    return [];
-  }
-}
+const VIDEO_EXTENSIONS = new Set([".m4v", ".mov", ".mp4", ".webm"]);
 
 export function getMockupMedia(): MockupMedia[] {
-  return getMockupFiles().map((file) => {
-    const extension = path.extname(file).toLowerCase();
+  return MOCKUP_FILES.map((file) => {
+    const extension = file.slice(file.lastIndexOf(".")).toLowerCase();
 
     return {
       src: `/mockups/${encodeURIComponent(file)}`,
@@ -58,23 +36,9 @@ export function getMockupMedia(): MockupMedia[] {
 }
 
 export function getMockupImages(): MockupImage[] {
-  return getMockupMedia().flatMap((media) => {
-    if (media.type !== "image") return [];
-
-    try {
-      const { props } = getImageProps({
-        src: media.src,
-        alt: "",
-        width: 640,
-        height: 360,
-        quality: 75,
-      });
-
-      const optimizedSrc = typeof props.src === "string" ? props.src : "";
-
-      return optimizedSrc ? [{ src: media.src, optimizedSrc }] : [];
-    } catch {
-      return [];
-    }
-  });
+  return getMockupMedia().flatMap((media) =>
+    media.type === "image"
+      ? [{ src: media.src, optimizedSrc: media.src }]
+      : [],
+  );
 }
