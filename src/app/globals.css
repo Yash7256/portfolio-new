@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
 @import "tailwindcss";
 
 @font-face {
@@ -67,8 +68,8 @@
     sans-serif;
   --font-matrix: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
     sans-serif;
-  --font-nevera: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-michroma: "Michroma", var(--font-inter-display), "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
   --font-mileast: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
     sans-serif;
 }

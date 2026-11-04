@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { useMarqueeTiming } from "./useMarqueeTiming";
 
 const services = [
   {
@@ -31,6 +32,7 @@ const services = [
 
 export default function Services() {
   const reduceMotion = useReducedMotion();
+  const { marqueeRef, duration } = useMarqueeTiming();
 
   return (
     <section
@@ -45,15 +47,6 @@ export default function Services() {
         transition={{ type: "spring", stiffness: 130, damping: 24, mass: 0.7 }}
         className="flex items-center justify-between text-[11px] md:text-[12px] font-mono uppercase tracking-[0.05em] text-neutral-400 mb-8 md:mb-12"
       >
-        <div className="flex items-center gap-2">
-          <span className="text-neutral-500">©</span>
-          <span>Services</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span>(WDX® — 07)</span>
-          <span className="hidden sm:inline text-neutral-500">·</span>
-          <span className="hidden sm:inline">Capabilities</span>
-        </div>
       </motion.div>
 
       <h2 id="services-heading" className="sr-only">
@@ -72,17 +65,18 @@ export default function Services() {
         >
           <motion.div
             animate={reduceMotion ? undefined : { x: ["0%", "-50%"] }}
-            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="flex whitespace-nowrap"
+            transition={{ duration, repeat: Infinity, repeatType: "loop", repeatDelay: 0, ease: "linear" }}
+            ref={marqueeRef}
+            className="flex w-max whitespace-nowrap will-change-transform"
           >
             {[0, 1].map((i) => (
               <div key={i} className="flex items-center">
                 {[0, 1].map((j) => (
                   <span
                     key={j}
-                    className="whitespace-nowrap font-sans text-[clamp(2.5rem,10vw,8rem)] font-bold tracking-[-0.04em] leading-none text-foreground uppercase pr-16 md:pr-28"
+                    className="inline-flex w-max shrink-0 whitespace-nowrap font-sans text-[clamp(2.5rem,10vw,8rem)] font-bold uppercase leading-none tracking-[-0.04em]"
                   >
-                    Services©
+                    Services<span aria-hidden="true" className="inline-block px-16">·</span>
                   </span>
                 ))}
               </div>

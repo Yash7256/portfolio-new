@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "react-router";
 import {
   motion,
   useMotionValue,
@@ -9,8 +8,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-
-const ease = [0.16, 1, 0.3, 1] as const;
+import { useMarqueeTiming } from "./useMarqueeTiming";
 
 type PortraitProps = {
   src: string;
@@ -150,23 +148,13 @@ function Portrait({
 export default function MeetTheHumans() {
   const reduceMotion = useReducedMotion();
   const [hoveredProfile, setHoveredProfile] = useState<"harshita" | "yash" | null>(null);
+  const { marqueeRef, duration } = useMarqueeTiming();
 
   return (
     <section
       aria-labelledby="humans-heading"
       className="relative overflow-hidden py-10 select-none md:py-14"
     >
-      <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.05em] text-neutral-400 md:text-[12px]">
-        <div className="flex items-center gap-2">
-          <span className="text-neutral-500">©</span>
-          <span>The Humans</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span>(WDX® — 04)</span>
-          <span className="hidden text-neutral-500 sm:inline">·</span>
-          <span className="hidden sm:inline">People</span>
-        </div>
-      </div>
 
       <h2 id="humans-heading" className="sr-only">
         Meet The Humans
@@ -178,7 +166,8 @@ export default function MeetTheHumans() {
       >
         <motion.div
           animate={reduceMotion ? undefined : { x: ["0%", "-50%"] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+          transition={{ duration, repeat: Infinity, repeatType: "loop", repeatDelay: 0, ease: "linear" }}
+          ref={marqueeRef}
           className="flex w-max whitespace-nowrap will-change-transform"
         >
           {[0, 1].map((half) => (
@@ -186,27 +175,14 @@ export default function MeetTheHumans() {
               {[0, 1].map((item) => (
                 <span
                   key={item}
-                  className="whitespace-nowrap pr-16 font-sans text-[clamp(2.5rem,10vw,8rem)] font-bold uppercase leading-none tracking-[-0.04em] text-foreground md:pr-28"
+                  className="inline-flex w-max shrink-0 whitespace-nowrap font-sans text-[clamp(2.5rem,10vw,8rem)] font-bold uppercase leading-none tracking-[-0.04em] text-foreground"
                 >
-                  Meet The Humans©
+                  Meet The Humans<span aria-hidden="true" className="inline-block px-16">·</span>
                 </span>
               ))}
             </div>
           ))}
         </motion.div>
-      </div>
-
-      <div className="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-8">
-        <p className="max-w-[52ch] text-pretty text-[13px] leading-relaxed text-neutral-400 md:text-[14px]">
-          Anvik Labs is small on purpose: two people, one shared standard, and no
-          layers between the idea and the build.
-        </p>
-        <div className="flex shrink-0 items-center gap-3">
-          <span className="h-px w-8 bg-accent" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
-            Two people / one table / zero handoffs
-          </span>
-        </div>
       </div>
 
       <div className="relative mx-auto mt-8 grid w-full max-w-[1120px] grid-cols-1 gap-y-14 md:mt-10 md:gap-y-16 lg:grid-cols-2 lg:items-start lg:gap-x-10 lg:gap-y-0 xl:gap-x-12">
@@ -237,9 +213,14 @@ export default function MeetTheHumans() {
             transition={{ type: "spring", stiffness: 110, damping: 22, mass: 0.7, delay: 0.12 }}
             className="mt-4 md:mt-5"
           >
+            <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
+              <span className="text-accent">01</span>
+              <span aria-hidden="true" className="h-px w-5 bg-white/20" />
+              <span>The Designer</span>
+            </div>
             <h3
               id="human-harshita"
-              className="font-sans text-[clamp(1.875rem,3vw,2.25rem)] font-medium leading-none tracking-[-0.04em] text-foreground"
+              className="mt-3 font-sans text-[clamp(1.875rem,3vw,2.25rem)] font-medium leading-none tracking-[-0.04em] text-[#F5F1EA]"
             >
               Harshita Upadhyay
             </h3>
@@ -249,18 +230,18 @@ export default function MeetTheHumans() {
               transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.35 }}
               className="mt-3 block h-px bg-accent"
             />
-            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-500">
+            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-300">
               Design / Product / UI
             </p>
-            <p className="mt-4 max-w-[46ch] text-pretty text-[13px] leading-relaxed text-neutral-400 md:text-[14px]">
+            <p className="mt-5 max-w-[46ch] text-pretty text-[13px] leading-[1.65] text-neutral-300 md:text-[14px]">
               Harshita is the designer in the room — part systems thinker, part
               compulsive doodler. She turns tangled product flows into interfaces
               that feel obvious, then worries the last two percent until they feel
               inevitable.
             </p>
 
-            <div className="mt-6 grid gap-6 sm:grid-cols-[1.1fr_0.9fr] sm:gap-8">
-              <div className="relative self-start border-l border-accent/20 pl-4">
+            <div className="mt-7 grid gap-6 sm:grid-cols-[1.1fr_0.9fr] sm:gap-8">
+              <div className="relative self-start border-l border-accent/30 pl-4">
                 <motion.span
                   aria-hidden="true"
                   initial={reduceMotion ? { height: "100%" } : { height: 0 }}
@@ -269,20 +250,20 @@ export default function MeetTheHumans() {
                   transition={{ type: "spring", stiffness: 170, damping: 24, mass: 0.5, delay: 0.08 }}
                   className="absolute left-[-1px] top-0 w-px bg-accent"
                 />
-                <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-accent/80 transition-opacity duration-300 group-hover/profile:opacity-100">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent transition-opacity duration-300 group-hover/profile:opacity-100">
                   Enjoys building
                 </span>
-                <p className="mt-2 text-[13px] leading-relaxed text-neutral-300">
+                <p className="mt-2.5 text-[13px] leading-[1.6] text-neutral-300 md:text-[14px]">
                   Interfaces that make complicated products feel calm — and the
                   systems that keep them honest.
                 </p>
               </div>
 
-              <dl className="border-t border-white/10 pt-4 sm:border-t-0 sm:pt-0">
-                <dt className="font-mono text-[9px] uppercase tracking-[0.22em] text-neutral-500 opacity-80 transition-opacity duration-300 group-hover/profile:opacity-100">
+              <dl className="border-t border-white/10 pt-5 sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400 transition-opacity duration-300 group-hover/profile:opacity-100">
                   Off the clock
                 </dt>
-                <dd className="mt-2.5 max-w-[24ch] text-[12px] leading-relaxed text-neutral-400 md:text-[13px]">
+                <dd className="mt-2.5 max-w-[24ch] text-[13px] leading-[1.6] text-neutral-300 md:text-[14px]">
                   design systems, typography, user research, ceramics
                 </dd>
               </dl>
@@ -320,11 +301,16 @@ export default function MeetTheHumans() {
             transition={{ type: "spring", stiffness: 110, damping: 22, mass: 0.7, delay: 0.3 }}
             className="mt-4 md:mt-5"
           >
+            <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
+              <span className="text-accent">02</span>
+              <span aria-hidden="true" className="h-px w-5 bg-white/20" />
+              <span>The Engineer</span>
+            </div>
             <h3
               id="human-yash"
-              className="font-sans text-[clamp(1.875rem,3vw,2.25rem)] font-medium leading-none tracking-[-0.04em] text-foreground"
+              className="mt-3 font-sans text-[clamp(1.875rem,3vw,2.25rem)] font-medium leading-none tracking-[-0.04em] text-[#F5F1EA]"
             >
-              Yash
+              Aman Raj
             </h3>
             <motion.span
               aria-hidden="true"
@@ -332,18 +318,18 @@ export default function MeetTheHumans() {
               transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.35 }}
               className="mt-3 block h-px bg-accent"
             />
-            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-500">
+            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-300">
               Engineering / Product
             </p>
-            <p className="mt-4 max-w-[46ch] text-pretty text-[13px] leading-relaxed text-neutral-400 md:text-[14px]">
+            <p className="mt-5 max-w-[46ch] text-pretty text-[13px] leading-[1.65] text-neutral-300 md:text-[14px]">
               Yash is the engineer who loves the invisible work: architecture,
               performance, and the small decisions that keep a product fast and
               honest. He prototypes early, breaks things on purpose, and rebuilds
               them simpler.
             </p>
 
-            <div className="mt-6 grid gap-6 sm:grid-cols-[1.1fr_0.9fr] sm:gap-8">
-              <div className="relative self-start border-l border-accent/20 pl-4">
+            <div className="mt-7 grid gap-6 sm:grid-cols-[1.1fr_0.9fr] sm:gap-8">
+              <div className="relative self-start border-l border-accent/30 pl-4">
                 <motion.span
                   aria-hidden="true"
                   initial={reduceMotion ? { height: "100%" } : { height: 0 }}
@@ -352,20 +338,20 @@ export default function MeetTheHumans() {
                   transition={{ type: "spring", stiffness: 170, damping: 24, mass: 0.5, delay: 0.08 }}
                   className="absolute left-[-1px] top-0 w-px bg-accent"
                 />
-                <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-accent/80 transition-opacity duration-300 group-hover/profile:opacity-100">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent transition-opacity duration-300 group-hover/profile:opacity-100">
                   Enjoys building
                 </span>
-                <p className="mt-2 text-[13px] leading-relaxed text-neutral-300">
+                <p className="mt-2.5 text-[13px] leading-[1.6] text-neutral-300 md:text-[14px]">
                   Tools that make complex products feel effortless — and the
                   scaffolding that lets design move fast without breaking.
                 </p>
               </div>
 
-              <dl className="border-t border-white/10 pt-4 sm:border-t-0 sm:pt-0">
-                <dt className="font-mono text-[9px] uppercase tracking-[0.22em] text-neutral-500 opacity-80 transition-opacity duration-300 group-hover/profile:opacity-100">
+              <dl className="border-t border-white/10 pt-5 sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400 transition-opacity duration-300 group-hover/profile:opacity-100">
                   Off the clock
                 </dt>
-                <dd className="mt-2.5 max-w-[24ch] text-[12px] leading-relaxed text-neutral-400 md:text-[13px]">
+                <dd className="mt-2.5 max-w-[24ch] text-[13px] leading-[1.6] text-neutral-300 md:text-[14px]">
                   product engineering, performance, open source, film photography
                 </dd>
               </dl>
@@ -375,33 +361,6 @@ export default function MeetTheHumans() {
 
       </div>
 
-      <motion.div
-        initial={reduceMotion ? undefined : { opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.8, ease }}
-        className="mt-10 flex flex-col gap-5 border-t border-white/10 pt-5 md:mt-14 md:flex-row md:items-end md:justify-between"
-      >
-        <div>
-          <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-accent">
-            Same table
-          </span>
-          <p className="mt-2.5 max-w-[24ch] font-sans text-[clamp(1.3rem,1.7vw,1.7rem)] font-medium leading-[1.05] tracking-[-0.03em] text-foreground">
-            Different obsessions. Same standard.{" "}
-            <span className="text-accent">That&apos;s the studio.</span>
-          </p>
-        </div>
-
-        <Link
-          to="/contact"
-          className="group inline-flex w-fit items-center gap-3 rounded-full border border-white/15 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground transition-colors duration-300 hover:border-accent/60 hover:text-accent"
-        >
-          Start a conversation
-          <span aria-hidden="true" className="text-accent">
-            ↗
-          </span>
-        </Link>
-      </motion.div>
     </section>
   );
 }

@@ -1,4 +1,7 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const products = [
   { id: "chisel-ui", label: "Chisel UI" },
@@ -6,7 +9,28 @@ const products = [
   { id: "designers-room", label: "Designers Room" },
 ];
 
+const showcaseImages = [
+  { src: "/CyberSec-toolkit.png", alt: "CyberSec Toolkit" },
+  { src: "/notifyed.png", alt: "Notifyed" },
+  { src: "/chisel-ui.png", alt: "Chisel UI" },
+  { src: "/designersroom.png", alt: "Designers Room" },
+];
+
 export default function Hero() {
+  const [showcaseIndex, setShowcaseIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (showcaseIndex === null) return;
+
+    const timer = window.setInterval(() => {
+      setShowcaseIndex((current) =>
+        current === null ? 0 : (current + 1) % showcaseImages.length,
+      );
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, [showcaseIndex]);
+
   return (
     <section
       id="hero"
@@ -76,21 +100,32 @@ export default function Hero() {
         <div className="lg:col-span-5 xl:col-span-5 w-full flex justify-end -mr-4 sm:-mr-[4vw] lg:-mr-[5vw] xl:-mr-[6vw] lg:-mt-2">
           <div className="relative w-full aspect-[16/9] rounded-l-2xl md:rounded-l-3xl rounded-r-none bg-tone-1 border border-white/10 border-r-0 overflow-hidden shadow-2xl flex flex-col items-center justify-center group">
             <div className="relative w-full h-full bg-black flex items-center justify-center">
-              <video
-                src="/mockups/MacBook%20Air%20-%2061.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover object-center"
-              />
+              <AnimatePresence mode="sync" initial={false}>
+                {showcaseIndex === null ? (
+                <video
+                  key="hero-video"
+                  src="/hero.mp4"
+                  autoPlay
+                  muted
+                  playsInline
+                  onEnded={() => setShowcaseIndex(0)}
+                  aria-label="Where ideas become real products."
+                  className="h-full w-full scale-[1.04] object-cover object-center"
+                />
+                ) : (
+                  <motion.img
+                    key={showcaseImages[showcaseIndex].src}
+                    src={showcaseImages[showcaseIndex].src}
+                    alt={showcaseImages[showcaseIndex].alt}
+                    initial={{ x: "100%" }}
+                    animate={{ x: 0 }}
+                    exit={{ x: "-100%" }}
+                    transition={{ duration: 0.7, ease }}
+                    className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-center"
+                  />
+                )}
+              </AnimatePresence>
 
-              {/* Video Overlay Badge */}
-              <div className="absolute top-3 left-3 z-20 flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[10px] md:text-[11px] font-mono uppercase tracking-wider text-neutral-200">
-                  Showreel
-                </span>
-              </div>
             </div>
           </div>
         </div>
@@ -102,7 +137,7 @@ export default function Hero() {
       {/* Monumental Typography */}
       <div className="relative w-full overflow-visible select-none py-2 md:py-3">
         <div className="relative z-10 flex items-center justify-center w-full font-sans font-bold leading-none tracking-[-0.045em] text-foreground">
-          <span className="inline-block whitespace-nowrap text-[clamp(2rem,12vw,12rem)]">
+          <span className="inline-block whitespace-nowrap font-michroma font-normal text-[clamp(2rem,12vw,12rem)] [word-spacing:0.2em]">
             Anvik Labs
           </span>
         </div>
@@ -113,10 +148,7 @@ export default function Hero() {
 
       {/* Bottom Metadata Status Bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] md:text-[12px] font-mono tracking-[0.04em] text-neutral-400 pt-1 pb-1">
-        {/* Left: Interface Version */}
-        <div className="flex items-center gap-2">
-          <span>© 2026 / anviklabs</span>
-        </div>
+
 
         {/* Center: Scroll Down Cue */}
         <a
@@ -128,11 +160,6 @@ export default function Hero() {
             ↓
           </span>
         </a>
-
-        {/* Right: Role / Discipline */}
-        <div className="flex items-center gap-2">
-          <span>TECHNOLOGY LAB</span>
-        </div>
       </div>
     </section>
   );

@@ -1,66 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useMarqueeTiming } from "./useMarqueeTiming";
+import testimonialsData from "../data/testimonials.json";
 
-const testimonials = [
-  {
-    quote:
-      "Anvik Labs joined as a small team and immediately operated like part of ours. They found the simplest version of a complicated product, then shipped it with a level of finish we had not seen from a larger studio.",
-    role: "Founder",
-    sector: "SaaS platform",
-    rotation: 28,
-  },
-  {
-    quote:
-      "The work was clear from the first review. No theatre, no unnecessary layers — just a sharp read on the problem and a product our customers could understand immediately.",
-    role: "Head of Product",
-    sector: "Fintech",
-    rotation: -34,
-  },
-  {
-    quote:
-      "They treated the brand and the build as one system. That made the handoff unusually calm, and it shows in how consistent the experience still feels months later.",
-    role: "Creative Director",
-    sector: "Culture & media",
-    rotation: 62,
-  },
-];
-
-const logoPlaceholders = Array.from({ length: 8 }, (_, index) => index);
-
-function PlaceholderMark({ index }: { index: number }) {
-  const variant = index % 4;
-
-  if (variant === 0) {
-    return (
-      <span className="relative block h-4 w-4 rounded-full border border-current">
-        <span className="absolute inset-1 rounded-full border border-current" />
-      </span>
-    );
-  }
-
-  if (variant === 1) {
-    return <span className="block h-4 w-4 rotate-45 border border-current" />;
-  }
-
-  if (variant === 2) {
-    return (
-      <span className="flex h-4 w-4 flex-col justify-between">
-        <span className="h-px w-full bg-current" />
-        <span className="h-px w-full bg-current" />
-        <span className="h-px w-3/4 bg-current" />
-      </span>
-    );
-  }
-
-  return (
-    <span className="relative block h-4 w-4">
-      <span className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-current" />
-      <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
-    </span>
-  );
-}
+const testimonials = testimonialsData.map((testimonial) => ({
+  ...testimonial,
+  sector: testimonial.role.split(",")[0],
+}));
 
 function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   return (
@@ -83,8 +31,19 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
 export default function Testimonials() {
   const [active, setActive] = useState(0);
   const reduceMotion = useReducedMotion();
+  const { marqueeRef, duration } = useMarqueeTiming();
   const story = testimonials[active];
   const total = String(testimonials.length).padStart(2, "0");
+
+  useEffect(() => {
+    if (reduceMotion || testimonials.length < 2) return;
+
+    const timer = window.setInterval(() => {
+      setActive((current) => (current + 1) % testimonials.length);
+    }, 6000);
+
+    return () => window.clearInterval(timer);
+  }, [reduceMotion]);
 
   const goTo = (direction: number) => {
     setActive((current) => (current + direction + testimonials.length) % testimonials.length);
@@ -105,28 +64,43 @@ export default function Testimonials() {
     >
       <div className="container-page py-14 md:py-20">
         <h2 id="testimonials-heading" className="sr-only">
-          Client stories and testimonials
+          Client testimonials
         </h2>
 
-        <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400 md:text-[11px]">
-          <span>© Testimonials</span>
-          <span className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 bg-accent" />
-            <span>Placeholder content</span>
-            <span className="hidden text-neutral-700 sm:inline">·</span>
-            <span className="hidden sm:inline">(WDX® — 08)</span>
-          </span>
+        <div
+          aria-hidden="true"
+          className="-mx-5 mt-6 w-[calc(100%+40px)] overflow-hidden border-b border-white/10 pb-6 sm:-mx-[4vw] sm:w-[calc(100%+8vw)] md:mt-8 md:pb-8 lg:-mx-[5vw] lg:w-[calc(100%+10vw)] xl:-mx-[6vw] xl:w-[calc(100%+12vw)]"
+        >
+          <motion.div
+            animate={reduceMotion ? undefined : { x: ["0%", "-50%"] }}
+            transition={{ duration, repeat: Infinity, repeatType: "loop", repeatDelay: 0, ease: "linear" }}
+            ref={marqueeRef}
+            className="flex w-max whitespace-nowrap"
+          >
+            {[0, 1].map((half) => (
+              <div key={half} className="flex items-center">
+                {[0, 1].map((item) => (
+                  <span
+                    key={item}
+                    className="inline-flex w-max shrink-0 whitespace-nowrap font-sans text-[clamp(2.5rem,10vw,8rem)] font-bold uppercase leading-none tracking-[-0.04em] text-foreground"
+                  >
+                    Testimonials<span aria-hidden="true" className="inline-block px-16">·</span>
+                  </span>
+                ))}
+              </div>
+            ))}
+          </motion.div>
         </div>
 
-        <div className="mt-6 grid overflow-hidden border border-tone-3 bg-background md:mt-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-          <div className="flex flex-col justify-between p-6 md:p-9 lg:p-11">
+        <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900/30 transition-colors duration-300 md:mt-8 md:rounded-3xl hover:border-white/20">
+          <div className="flex flex-col justify-between p-6 md:p-8 lg:p-10">
             <div>
               <div className="flex items-center justify-between gap-6">
                 <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
                   <span className="h-px w-6 bg-accent" />
                   <span>Client stories</span>
                 </div>
-                <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-500">
+                <span className="rounded-full bg-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-300">
                   {story.sector}
                 </span>
               </div>
@@ -135,7 +109,7 @@ export default function Testimonials() {
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div key={active} {...fade}>
                     <blockquote>
-                      <p className="max-w-[44ch] text-pretty font-sans text-[clamp(1.3rem,1.8vw,2rem)] leading-[1.5] tracking-[-0.025em] text-foreground">
+                      <p className="max-w-[48ch] text-pretty font-sans text-[clamp(1.5rem,2.2vw,2.4rem)] font-medium leading-[1.3] tracking-[-0.035em] text-[#EAE7E2]">
                         {story.quote}
                       </p>
                     </blockquote>
@@ -143,11 +117,11 @@ export default function Testimonials() {
                     <div className="mt-8 flex items-start gap-3">
                       <span className="mt-1.5 h-2 w-2 shrink-0 bg-accent" />
                       <div>
-                        <p className="font-sans text-[15px] font-medium tracking-[-0.01em] text-foreground">
-                          Client name
+                        <p className="font-sans text-[15px] font-semibold tracking-[-0.01em] text-[#F5F1EA]">
+                          {story.person}
                         </p>
-                        <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400">
-                          {story.role} / Company
+                        <p className="mt-1 inline-flex rounded-full bg-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-300">
+                          {story.role}
                         </p>
                       </div>
                     </div>
@@ -156,10 +130,10 @@ export default function Testimonials() {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center justify-between border-t border-tone-3 pt-4">
-              <span className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-500">
+            <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-4">
+              <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400">
                 <span className="h-1.5 w-1.5 bg-accent/70" />
-                Sample story
+                Verified testimonial
               </span>
 
               <div className="flex items-center gap-3">
@@ -167,14 +141,14 @@ export default function Testimonials() {
                   type="button"
                   onClick={() => goTo(-1)}
                   aria-label="Previous client story"
-                  className="flex h-8 w-8 items-center justify-center border border-tone-3 text-neutral-400 transition-colors duration-200 hover:border-white/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-neutral-950/50 text-neutral-400 transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-on-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
                 >
                   <ArrowIcon direction="left" />
                 </button>
 
                 <span
                   aria-live="polite"
-                  className="min-w-14 text-center font-mono text-[10px] tracking-[0.16em] text-neutral-400"
+                  className="min-w-14 text-center font-mono text-[10px] tracking-[0.16em] text-neutral-300"
                 >
                   {String(active + 1).padStart(2, "0")} / {total}
                 </span>
@@ -183,7 +157,7 @@ export default function Testimonials() {
                   type="button"
                   onClick={() => goTo(1)}
                   aria-label="Next client story"
-                  className="flex h-8 w-8 items-center justify-center border border-tone-3 text-neutral-400 transition-colors duration-200 hover:border-white/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-neutral-950/50 text-neutral-400 transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-on-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
                 >
                   <ArrowIcon direction="right" />
                 </button>
@@ -191,98 +165,45 @@ export default function Testimonials() {
             </div>
           </div>
 
-          <div className="relative min-h-[320px] overflow-hidden border-t border-tone-3 md:min-h-0 md:border-l md:border-t-0">
-            <div className="relative flex h-full min-h-[320px] flex-col justify-between p-6 md:min-h-0 md:p-8">
-              <div className="flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-500">
-                <span>Studio signature</span>
-                <span>
-                  {String(active + 1).padStart(2, "0")} / {total}
-                </span>
-              </div>
-
-              <div className="flex flex-1 items-center justify-center py-10">
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    initial={reduceMotion ? false : { opacity: 0, scale: 0.97 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.99 }}
-                    transition={{
-                      duration: reduceMotion ? 0 : 0.36,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className="relative flex h-52 w-52 items-center justify-center md:h-60 md:w-60"
-                  >
-                    <div className="absolute inset-0 motion-safe:animate-[testimonial-orbit_36s_linear_infinite] [transform-origin:50%_50%] will-change-transform">
-                      <div className="absolute inset-0 rounded-full border border-white/10" />
-                      <div className="absolute inset-6 rounded-full border border-tone-3" />
-                      <div
-                        className="absolute inset-0 rounded-full border border-transparent"
-                        style={{
-                          borderTopColor: "var(--color-accent)",
-                          transform: `rotate(${story.rotation}deg)`,
-                        }}
-                      />
-                      <div className="absolute right-4 top-4 h-1.5 w-1.5 bg-accent" />
-                    </div>
-                    <div className="absolute inset-x-0 top-1/2 h-px bg-white/10" />
-                    <div className="absolute inset-y-0 left-1/2 w-px bg-white/10" />
-                    <div className="absolute left-1/2 top-1/2 flex h-20 w-[280px] -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-tone-3 bg-background lg:h-24 lg:w-[350px] lg:px-2 xl:h-28 xl:w-[430px]">
-                      <img
-                        src="/logo.svg"
-                        alt="Anvik Labs"
-                        width={1010}
-                        height={118}
-                        className="h-8 w-auto lg:h-10 xl:h-12"
-                      />
-                    </div>
-                    <div className="absolute bottom-4 left-4 font-mono text-[8px] uppercase tracking-[0.2em] text-neutral-500">
-                      Anvik / Labs
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              <div className="flex items-end justify-between gap-4 border-t border-tone-3 pt-4 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
-                <span>Product design / engineering</span>
-                <span className="text-right">{story.sector}</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="mt-4">
-          <div className="mb-3 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-500">
-            <span>Client logo grid</span>
-            <span>Placeholder positions</span>
+          <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400">
+            <span>Client names</span>
+            <span>{testimonials.length} positions</span>
           </div>
 
-          <div className="grid grid-cols-2 border-l border-t border-tone-3 md:grid-cols-4">
-            {logoPlaceholders.map((index) => (
-              <div
-                key={index}
-                className={`group flex h-24 items-center justify-center border-b border-r border-tone-3 transition-colors duration-300 md:h-28 ${
-                  index % 2 === 0 ? "bg-background" : "bg-white/[0.02]"
-                }`}
-                title="Placeholder client logo"
+          <div className="grid grid-cols-1 border-l border-t border-white/10 md:grid-cols-2">
+            {testimonials.map((testimonial, index) => (
+              <button
+                type="button"
+                key={testimonial.id}
+                onClick={() => setActive(index)}
+                aria-label={`Show testimonial from ${testimonial.person}`}
+                aria-pressed={active === index}
+                className={`group flex h-16 items-center justify-center border-b border-r border-white/10 px-2 transition-colors duration-300 md:h-20 ${
+                  active === index
+                    ? "border-accent/40 bg-[#24170F] text-accent"
+                    : index % 2 === 0
+                      ? "bg-background text-neutral-300"
+                      : "bg-neutral-900/30 text-neutral-300"
+                } ${index === testimonials.length - 1 && testimonials.length % 2 !== 0 ? "md:col-span-2" : ""}`}
               >
-                <div className="flex items-center gap-2.5 text-neutral-500 transition-colors duration-300 group-hover:text-neutral-200">
-                  <PlaceholderMark index={index} />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.18em]">
-                    Client {String(index + 1).padStart(2, "0")}
-                  </span>
+                <div className="w-full !whitespace-nowrap text-center font-mono text-[clamp(0.72rem,1.1vw,0.9375rem)] font-semibold uppercase tracking-[0.06em] leading-none transition-colors duration-300 group-hover:text-accent">
+                  {testimonial.person}
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
 
         <div className="mt-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <p className="max-w-[68ch] font-mono text-[9px] uppercase leading-relaxed tracking-[0.14em] text-neutral-400">
-            Development placeholder — replace the sample quote, attribution, and
-            logo marks with verified client content before launch.
+            Testimonials from collaborators and clients across design, development,
+            and digital product work.
           </p>
-          <span className="shrink-0 font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-500">
-            08 positions / 4 columns
+          <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-400">
+            {testimonials.length} clients / 2 columns
           </span>
         </div>
       </div>

@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import FeaturedProduct from "@/components/FeaturedProduct";
 import MeetTheHumans from "@/components/MeetTheHumans";
-import Philosophy from "@/components/Philosophy";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
 import Articles from "@/components/Articles";
@@ -25,7 +24,6 @@ export default function Home() {
         <Hero />
         <FeaturedProduct />
         <MeetTheHumans />
-        <Philosophy />
         <Services />
         <Testimonials />
         <Articles />

@@ -3,95 +3,124 @@
 import { Link } from "react-router";
 
 const socialLinks = [
-  { label: "Instagram", href: "https://www.instagram.com/" },
-  { label: "Dribbble", href: "https://dribbble.com/" },
-  { label: "Framer", href: "https://www.framer.com/" },
-  { label: "Twitter", href: "https://x.com/" },
+  { label: "Instagram", href: "https://instagram.com" },
+  { label: "Dribbble", href: "https://dribbble.com" },
+  { label: "X", href: "https://x.com" },
+];
+
+const footerLinks = [
+  { label: "Home", href: "/" },
+  { label: "Works", href: "/works" },
+  { label: "Services", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
   };
 
   return (
-    <footer className="pt-16 pb-12 border-t border-white/10 select-none">
-      {/* Meta Header */}
-      <div className="flex items-center justify-between text-[11px] md:text-[12px] font-mono uppercase tracking-[0.05em] text-neutral-400 mb-8 md:mb-12">
-        <div className="flex items-center gap-2">
-          <span className="text-neutral-500">©</span>
-          <span>Final Section</span>
-          <span className="text-neutral-500 font-sans">クロージング</span>
+    <footer className="-mx-4 select-none border-t border-white/10 sm:-mx-[4vw] lg:-mx-[5vw] xl:-mx-[6vw]">
+      <div className="container-page py-14 md:py-20">
+        <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500 md:text-[11px]">
+          <span>Technology studio</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span>(WDX® — 13)</span>
-          <span className="hidden sm:inline text-neutral-500">·</span>
-          <span className="hidden sm:inline">Studio Wrap</span>
-        </div>
-      </div>
 
-      {/* Tags row */}
-      <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-8">
-        <span className="px-3 py-1 rounded-full bg-neutral-900 border border-white/10">
-          Independent
-        </span>
-        <span className="px-3 py-1 rounded-full bg-neutral-900 border border-white/10">
-          Overview
-        </span>
-        <span className="px-3 py-1 rounded-full bg-neutral-900 border border-white/10">
-          Multidisciplinary
-        </span>
-        <span className="px-3 py-1 rounded-full bg-neutral-900 border border-white/10">
-          Focused
-        </span>
-      </div>
+        <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-[minmax(0,1fr)_280px] md:gap-10 lg:gap-16">
+          <div>
+            <p className="max-w-[16ch] font-sans text-[clamp(2rem,5vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.05em] text-foreground">
+              Where ideas become <span className="text-accent">real products.</span>
+            </p>
+            <p className="mt-6 max-w-[42ch] text-[14px] leading-relaxed text-neutral-400 md:text-[15px]">
+              We design, develop, and launch digital products for ambitious ideas.
+            </p>
+            <Link
+              to="/contact"
+              className="group mt-8 inline-flex items-center gap-3 border-b border-accent pb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground transition-colors duration-200 hover:text-accent"
+            >
+              Start a conversation
+              <span aria-hidden="true" className="text-accent transition-transform duration-200 group-hover:translate-x-1">↗</span>
+            </Link>
+          </div>
 
-      {/* Main Statement */}
-      <div className="max-w-4xl mb-12 md:mb-16">
-        <p className="font-sans text-[clamp(1.5rem,3.4vw,2.75rem)] font-medium leading-[1.15] tracking-[-0.03em] text-foreground text-balance">
-          I build expressive, performance-driven websites by blending clean design and native development inside Framer to help creative teams and modern brands stand out with intention.
-        </p>
-      </div>
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10">
+            <nav aria-label="Footer navigation">
+              <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Explore
+              </p>
+              <div className="flex flex-col items-start gap-3 font-sans text-[14px] text-neutral-300">
+                {footerLinks.map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="transition-colors duration-200 hover:text-accent"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </nav>
 
-      {/* Bottom Bar: Back to Top + Socials + Copyright */}
-      <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-[12px] md:text-[13px] font-mono text-neutral-400">
-        {/* Back to Top */}
-        <button
-          type="button"
-          onClick={scrollToTop}
-          className="flex items-center gap-2 text-neutral-300 hover:text-white transition-colors uppercase tracking-widest cursor-pointer"
-        >
-          <span>[ BACK TO TOP ]</span>
-          <span>↑</span>
-        </button>
+            <div>
+              <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Elsewhere
+              </p>
+              <div className="flex flex-col items-start gap-3 font-sans text-[14px] text-neutral-300">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group transition-colors duration-200 hover:text-accent"
+                  >
+                    {social.label} <span className="text-accent transition-transform duration-200 group-hover:translate-x-1">↗</span>
+                  </a>
+                ))}
+              </div>
+            </div>
 
-        {/* Social Networks */}
-        <div className="flex items-center gap-4">
-          <span className="text-neutral-500 uppercase tracking-wider text-[11px]">
-            Networks:
-          </span>
-          <div className="flex items-center gap-3">
-            {socialLinks.map((s, idx) => (
-              <span key={s.label} className="inline-flex items-center gap-3">
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  {s.label}
-                </a>
-                {idx < socialLinks.length - 1 && (
-                  <span className="text-neutral-600">,</span>
-                )}
-              </span>
-            ))}
+            <div className="col-span-2">
+              <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Contact
+              </p>
+              <a
+                href="mailto:hello@anviklabs.com"
+                className="group inline-flex items-center gap-2 break-all font-sans text-[14px] text-neutral-300 transition-colors duration-200 hover:text-accent"
+              >
+                hello@anviklabs.com
+                <span className="text-accent transition-transform duration-200 group-hover:translate-x-1">↗</span>
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="text-neutral-500">
-          <span>©2025 Palmer® — All Rights Reserved</span>
+        <div className="mt-16 border-t border-white/10 pt-5 md:mt-24">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <Link to="/" aria-label="Anvik Labs home" className="inline-flex">
+              <img
+                src="/logo.svg"
+                alt="Anvik Labs"
+                width={1010}
+                height={118}
+                className="h-8 w-auto md:h-10"
+              />
+            </Link>
+
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
+              <span>© 2026 Anvik Labs</span>
+              <span>All rights reserved</span>
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className="text-neutral-300 transition-colors duration-200 hover:text-accent"
+              >
+                Back to top ↑
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

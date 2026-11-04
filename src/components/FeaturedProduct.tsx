@@ -154,11 +154,6 @@ export default function FeaturedProduct() {
           </div>
         </div>
       </div>
-
-      <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-4 font-mono text-[11px] uppercase tracking-[0.05em] text-neutral-400 sm:flex-row sm:items-center sm:justify-between md:mt-16 md:pt-5 md:text-[12px]">
-        <span className="text-neutral-500">© Featured Product</span>
-        <span>Independent Technology Studio · India</span>
-      </div>
     </section>
   );
 }

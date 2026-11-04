@@ -8,15 +8,15 @@
   },
   {
     "id": "skedio",
-    "quote": "Harshita has been a great part of our Skedio team. She brings strong UI skills, a thoughtful design approach, and a good sense of structure.",
+    "quote": "Working with Harshita and Aman was a great experience. Harshita handled the complete website design, while Aman took care of development, SEO, and the overall technical implementation. They worked together to bring the vision of my design studio to life, creating a polished, fully responsive website that reflects the studio's identity. Everything was handled smoothly, from the initial design to the final launch.",
     "person": "Skedio Team",
     "role": "Product & Design Partner, Skedio",
     "side": "right"
   },
   {
     "id": "neurobots",
-    "quote": "Harshita served as our LeadDesigner at NeuroBots Robotics Club and consistently delivered outstanding work. Her reliability and creativity made a real impact.",
-    "person": "Neelesh Kumar Sahu",
+    "quote": "The NeuroBots Robotics Club needed a website that could represent its activities, initiatives, and work within the institution. Harshita took charge of the website design, and Aman handled the development. The result provides a dedicated digital presence for the club, making it easier to showcase its work and communicate what NeuroBots is all about. I appreciate their efforts in bringing this project to completion.",
+    "person": "Prof. Neelesh Kumar Sahu",
     "role": "Club Faculty Coordinator, NeuroBots GGITS",
     "side": "left"
   },
@@ -26,5 +26,12 @@
     "person": "Digvijay Singh Shekhawat",
     "role": "Founder, FinnAI",
     "side": "right"
+  },
+  {
+    "id": "sedative-physio",
+    "quote": "Working with Anvik Labs was a great experience. They handled the entire website development process for Cerative Physio, from UI/UX design to complete front-end and back-end development. The team delivered the project on time, with a responsive website that works seamlessly across devices. I appreciated their approach to understanding our platform and translating our requirements into a functional digital product.",
+    "person": "Dr. Akshay Kumar PT",
+    "role": "Founder, Sedative Physio"
+
   }
 ]
