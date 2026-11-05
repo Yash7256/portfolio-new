@@ -73,15 +73,9 @@ export default function Hero() {
         <span>Independent studio / India</span>
         <a
           href="#featured-product"
-          className="group flex items-center gap-1.5 text-neutral-300 transition-colors duration-200 hover:text-foreground"
+          className="text-neutral-300 transition-colors duration-200 hover:text-foreground"
         >
-          <span>Selected work</span>
-          <span
-            aria-hidden="true"
-            className="inline-block transition-transform duration-200 group-hover:translate-y-0.5"
-          >
-            ↓
-          </span>
+          Selected work
         </a>
         <span>Working globally / 2026</span>
       </div>

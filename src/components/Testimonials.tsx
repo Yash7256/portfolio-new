@@ -10,6 +10,9 @@ type Testimonial = (typeof testimonialsData)[number] & {
 
 const testimonials: Testimonial[] = testimonialsData;
 
+const quoteClass =
+  "mx-auto max-w-[54ch] text-pretty font-serif text-[clamp(1.6rem,3.1vw,2.7rem)] font-normal leading-[1.14] tracking-[-0.015em] text-foreground";
+
 function getInitials(person: string) {
   return person
     .replace(/^(Prof\.|Dr\.)\s+/i, "")
@@ -18,24 +21,6 @@ function getInitials(person: string) {
     .map((part) => part[0])
     .join("")
     .toUpperCase();
-}
-
-function ArrowIcon({ direction }: { direction: "left" | "right" }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path
-        d={
-          direction === "left"
-            ? "M10.5 3.5 6 8l4.5 4.5M6 8h7"
-            : "M5.5 3.5 10 8l-4.5 4.5M10 8H3"
-        }
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
 }
 
 export default function Testimonials() {
@@ -101,10 +86,22 @@ export default function Testimonials() {
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.figure key={active} {...fade}>
-              <blockquote>
-                <p className="mx-auto max-w-[54ch] text-pretty font-serif text-[clamp(1.6rem,3.1vw,2.7rem)] font-normal leading-[1.14] tracking-[-0.015em] text-foreground">
-                  &ldquo;{story.quote.trim()}&rdquo;
-                </p>
+              <blockquote className="relative">
+                <div aria-hidden="true" className="invisible grid select-none">
+                  {testimonials.map((item) => (
+                    <p
+                      key={item.id}
+                      className={`${quoteClass} col-start-1 row-start-1`}
+                    >
+                      &ldquo;{item.quote.trim()}&rdquo;
+                    </p>
+                  ))}
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <p className={quoteClass}>
+                    &ldquo;{story.quote.trim()}&rdquo;
+                  </p>
+                </div>
               </blockquote>
 
               <figcaption className="mt-10 flex flex-col items-center md:mt-12">
@@ -140,9 +137,9 @@ export default function Testimonials() {
             type="button"
             onClick={() => goTo(-1)}
             aria-label="Previous testimonial"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
+            className="font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
           >
-            <ArrowIcon direction="left" />
+            Previous
           </button>
 
           <span className="min-w-[4.5rem] font-mono text-[12px] tracking-[0.14em] text-neutral-500">
@@ -154,9 +151,9 @@ export default function Testimonials() {
             type="button"
             onClick={() => goTo(1)}
             aria-label="Next testimonial"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
+            className="font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
           >
-            <ArrowIcon direction="right" />
+            Next
           </button>
 
           <span aria-hidden="true" className="h-3 w-px bg-white/15" />

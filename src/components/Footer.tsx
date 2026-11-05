@@ -36,15 +36,9 @@ export default function Footer() {
             </p>
             <Link
               to="/contact"
-              className="group mt-8 inline-flex items-center gap-3 border-b border-accent pb-2 font-mono text-[12px] uppercase tracking-[0.16em] text-foreground transition-colors duration-200 hover:text-accent"
+              className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-sans text-[15px] font-semibold tracking-tight text-black shadow-lg transition-colors hover:bg-neutral-200"
             >
               Start a conversation
-              <span
-                aria-hidden="true"
-                className="text-accent transition-transform duration-200 group-hover:translate-x-1"
-              >
-                ↗
-              </span>
             </Link>
           </div>
 
@@ -104,7 +98,7 @@ export default function Footer() {
                 onClick={scrollToTop}
                 className="text-neutral-300 transition-colors duration-200 hover:text-accent"
               >
-                Back to top ↑
+                Back to top
               </button>
             </div>
           </div>

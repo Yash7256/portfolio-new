@@ -76,7 +76,7 @@ Do not introduce a second accent. Do not switch the site to a light theme. Avoid
 ### Featured product
 
 - Editorial two-column feature for Designers Room.
-- Logo, product name, short description, and a footer-style CTA: mono uppercase label, accent underline, animated arrow.
+- Logo, product name, short description, and the standard CTA: a white pill button with a black label and no icon.
 
 ### Meet the Humans
 
@@ -96,6 +96,7 @@ Do not introduce a second accent. Do not switch the site to a light theme. Avoid
 - Author block directly below: 56px circular avatar, name in Inter semibold, role and organization in muted Inter.
 - Avatars are optional. When no image exists, a circular initials fallback is used.
 - Data comes from `src/data/testimonials.json`.
+- The quote area reserves the height of the longest testimonial, so rotation never shifts the page.
 - Auto-advances every 7 seconds. Rotation pauses on hover, keyboard focus, or when the visitor presses Pause.
 - Navigation is also manual: previous/next controls, a pause/play control, and an `01 / 05` counter.
 - `aria-live` is polite only while rotation is paused, so automatic changes are not announced repeatedly.
@@ -104,7 +105,10 @@ Do not introduce a second accent. Do not switch the site to a light theme. Avoid
 
 ### Writing
 
-- One editorial row: source/date, category, title, description, author, and external-link action.
+- One editorial row: source/date and category on the left, title and description in the middle, and an optional 16:9 preview thumbnail on the right.
+- Author and external-link action sit as a small mono meta line beneath the description.
+- The thumbnail is approximately 220px wide on desktop, narrows on tablet, and stacks beneath the description on mobile. It uses a 4px radius, `object-fit: cover`, and scales to 1.03 on row hover over 300ms.
+- Articles without a preview image omit the thumbnail column without changing the row layout.
 - External articles open in a new tab with `rel="noreferrer"`.
 
 ### Contact
@@ -117,7 +121,7 @@ Do not introduce a second accent. Do not switch the site to a light theme. Avoid
 ### Footer
 
 - Studio statement, footer navigation, email, and back-to-top control.
-- The CTA link follows the same mono/underline/arrow pattern as the featured product.
+- The CTA uses the same white pill button pattern as the featured product.
 
 ### Works and gallery
 
