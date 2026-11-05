@@ -22,12 +22,12 @@ const mockup = (file: string, alt: string): WorkImage => ({
   alt,
 });
 
-const AURORA = "Aurora Skincare Laptop in Mossy Terrain.png";
-const CHATGPT_21 = "ChatGPT Image Oct 21, 2026, 11_43_29 AM.png";
-const CHATGPT_25 = "ChatGPT Image Oct 25, 2026, 11_31_23 PM.png";
-const CHATGPT_40 = "ChatGPT Image Oct 25, 2026, 11_40_35 PM.png";
-const MACBOOK = "M003T1519 A scroll Macbook Mockup 20sep25 (1).png";
-const WAYFARER = "Wayfarer Website on a Cozy Blue Sofa.png";
+const AURORA = "aurora-skincare-laptop.png";
+const CHRONICAE = "chronicae-editorial-spread.png";
+const ARCANE = "arcane-studio-laptop.png";
+const EDIFIER = "edifier-magazine-cover.png";
+const MACBOOK = "macbook-scroll-mockup.png";
+const WAYFARER = "wayfarer-screen-in-interior.png";
 
 export const works: Work[] = [
   {
@@ -51,7 +51,7 @@ export const works: Work[] = [
     ),
     gallery: [
       mockup(
-        CHATGPT_21,
+        CHRONICAE,
         "Chronicae identity applied to a printed editorial spread.",
       ),
       mockup(
@@ -76,7 +76,7 @@ export const works: Work[] = [
       "The site pairs large architectural imagery with small, precise metadata. Navigation stays out of the way so the work can be read at its own scale.",
     ],
     hero: mockup(
-      CHATGPT_25,
+      ARCANE,
       "Arcane Studio website displayed on a laptop in a dim interior.",
     ),
     gallery: [
@@ -115,7 +115,7 @@ export const works: Work[] = [
         "Solara product page shown on a screen in a bright interior.",
       ),
       mockup(
-        CHATGPT_21,
+        CHRONICAE,
         "Solara packaging and editorial material arranged in a studio setting.",
       ),
     ],
@@ -136,7 +136,7 @@ export const works: Work[] = [
       "Online, the issue structure carries over into a scrollable reading experience. Each feature keeps its own rhythm while sharing the same navigation and type scale.",
     ],
     hero: mockup(
-      CHATGPT_40,
+      EDIFIER,
       "Edifier magazine cover and feature spread displayed on a laptop.",
     ),
     gallery: [
@@ -145,7 +145,7 @@ export const works: Work[] = [
         "Edifier magazine website shown on a laptop in a studio.",
       ),
       mockup(
-        CHATGPT_25,
+        ARCANE,
         "Edifier printed pages laid out on a neutral surface.",
       ),
     ],
@@ -171,7 +171,7 @@ export const works: Work[] = [
     ),
     gallery: [
       mockup(
-        CHATGPT_21,
+        CHRONICAE,
         "Rowan Keats portfolio spread with portrait photography.",
       ),
       mockup(
@@ -201,11 +201,11 @@ export const works: Work[] = [
     ),
     gallery: [
       mockup(
-        CHATGPT_40,
+        EDIFIER,
         "Big Baby Tape magazine spread with large display typography.",
       ),
       mockup(
-        CHATGPT_25,
+        ARCANE,
         "Big Baby Tape issue covers arranged on a table.",
       ),
     ],
@@ -226,7 +226,7 @@ export const works: Work[] = [
       "Packaging uses the same components at a larger scale, with typography printed directly onto the material rather than applied as a separate layer.",
     ],
     hero: mockup(
-      CHATGPT_25,
+      ARCANE,
       "Cartes d'Atelier stationery and packaging arranged on a studio surface.",
     ),
     gallery: [
@@ -261,7 +261,7 @@ export const works: Work[] = [
     ),
     gallery: [
       mockup(
-        CHATGPT_21,
+        CHRONICAE,
         "Palmira identity applied to a printed guest guide.",
       ),
       mockup(
@@ -286,7 +286,7 @@ export const works: Work[] = [
       "The marketing site mirrors the product: direct language, short sections and interface imagery that shows the tool at work rather than dressing it up.",
     ],
     hero: mockup(
-      CHATGPT_40,
+      EDIFIER,
       "Scene Pro product interface shown on a laptop in a production setting.",
     ),
     gallery: [
@@ -316,16 +316,16 @@ export const works: Work[] = [
       "The website acts as a shared index rather than a template, listing releases by date and letting the covers do most of the navigation.",
     ],
     hero: mockup(
-      CHATGPT_21,
+      CHRONICAE,
       "Exala publication covers and website shown on a laptop.",
     ),
     gallery: [
       mockup(
-        CHATGPT_25,
+        ARCANE,
         "Exala editorial spreads arranged on a neutral surface.",
       ),
       mockup(
-        CHATGPT_40,
+        EDIFIER,
         "Exala website displayed on a laptop with a minimal layout.",
       ),
     ],

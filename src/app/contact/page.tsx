@@ -23,8 +23,8 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className="flex flex-1 flex-col pt-24 md:pt-28">
-        <Contact standalone />
+      <main id="main-content" className="flex flex-1 flex-col pt-24 md:pt-28">
+        <Contact />
         <Faq />
       </main>
       <Footer />

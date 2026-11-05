@@ -15,7 +15,7 @@ export default function ChallengePage() {
   return (
     <>
       <Navbar />
-      <main className="flex flex-1 flex-col pt-[var(--header-height)]">
+      <main id="main-content" className="flex flex-1 flex-col pt-[var(--header-height)]">
         <ComingSoon
           label="CHALLENGE"
           description="A new space for design challenges and prompts. I'm building it now. Check back soon."

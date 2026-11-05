@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Anvik Labs
 
-## Getting Started
+Portfolio and studio site for Anvik Labs, a product design and engineering studio. The site is a dark, type-led React Router application with a small set of editorial routes: home, selected work, project detail, gallery, contact, and two community pages.
 
-First, run the development server:
+## Stack
+
+- React 19
+- React Router 8 with Vite
+- Tailwind CSS 4
+- Framer Motion
+- TypeScript
+
+## Development
+
+Requires Node.js 22 or newer.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Vite prints the local URL. Run the production build with:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Checks
 
-## Learn More
+```bash
+npm run typecheck
+npm run lint
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Run all three before considering a change complete.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Route | Purpose |
+| --- | --- |
+| `/` | Home: introduction, Designers Room feature, team, services, testimonials, writing |
+| `/works` | Selected work index |
+| `/works/:slug` | Project case study |
+| `/gallery` | Work imagery archive |
+| `/contact` | Inquiry details and mailto form |
+| `/challenge` | Community challenge page |
+| `/community` | Community page |
 
-## Deploy on Vercel
+Routes are declared in `src/routes.ts`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+src/
+  app/                 Route modules and global styles
+  components/          Shared UI and home-page sections
+  data/                Work and testimonial content
+  lib/site.ts          Site metadata
+  root.tsx             Document shell, fonts, skip link, hash scrolling
+  routes.ts            React Router route config
+public/
+  fonts/               Self-hosted Inter Display files
+  mockups/             Project mockups
+  profile/             Team imagery
+```
+
+## Content
+
+- Project data lives in `src/data/works.ts`. Each project supplies its own index, slug, metadata, summary, body copy, hero image, gallery images, and next-project relationship.
+- Testimonials live in `src/data/testimonials.json`. Author avatars are optional via an `avatar` field; entries without an image render a circular initials fallback.
+- The contact form intentionally opens an email draft to `hello@anviklabs.com`. There is no backend or message storage.
+- Before launch, confirm that project names, case-study copy, mockups, and client quotes are approved for publication. Some current project content is portfolio placeholder material.
+
+## Design and accessibility
+
+- Global tokens and base styles are in `src/app/globals.css`.
+- Keep the dark palette, restrained accent use, hairline rules, and editorial type hierarchy.
+- Avoid decorative gradients, heavy shadows, oversized radii, and generic card grids.
+- Use semantic landmarks, one `h1` per page, visible focus states, labelled form controls, and alt text for meaningful images.
+- Respect `prefers-reduced-motion` for animated content.
+- The current design system is documented in [`design.md`](./design.md).
+- The frontend audit and its remaining risks are in [`docs/frontend-ai-slop-audit.md`](./docs/frontend-ai-slop-audit.md).
+
+## Deployment
+
+The app builds to `build/client` and can be deployed to any static host that supports React Router's SPA fallback. The build also prerenders repository routes. Set the host to serve `build/client` and fall back to `build/client/__spa-fallback.html` for unknown paths.

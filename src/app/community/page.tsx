@@ -15,7 +15,7 @@ export default function CommunityPage() {
   return (
     <>
       <Navbar />
-      <main className="flex flex-1 flex-col pt-[var(--header-height)]">
+      <main id="main-content" className="flex flex-1 flex-col pt-[var(--header-height)]">
         <ComingSoon
           label="COMMUNITY"
           description="A place for the design community to connect and share work. I'm building it now. Check back soon."

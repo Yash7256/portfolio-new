@@ -1,8 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useMarqueeTiming } from "./useMarqueeTiming";
-
 const articles = [
   {
     id: "harshita-linkedin",
@@ -17,71 +12,55 @@ const articles = [
 ];
 
 export default function Articles() {
-  const { marqueeRef, duration } = useMarqueeTiming();
-
   return (
-    <section className="py-16 md:py-24 border-t border-white/10 select-none">
-
-      {/* Headline */}
-      <div className="pb-6 md:pb-8 border-b border-white/10 overflow-hidden">
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration, repeat: Infinity, repeatType: "loop", repeatDelay: 0, ease: "linear" }}
-          ref={marqueeRef}
-          className="flex w-max whitespace-nowrap"
+    <section
+      id="writing"
+      aria-labelledby="writing-heading"
+      className="border-t border-white/10 py-16 md:py-24"
+    >
+      <div className="pb-8 md:pb-10">
+        <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-neutral-500">
+          Writing / 005
+        </p>
+        <h2
+          id="writing-heading"
+          className="mt-3 font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-foreground"
         >
-          {[0, 1].map((i) => (
-            <div key={i} className="flex items-center">
-              <h2 className="inline-flex w-max shrink-0 whitespace-nowrap font-sans text-[clamp(2.5rem,10vw,8rem)] font-bold uppercase leading-none tracking-[-0.04em]">
-                Featured Article<span aria-hidden="true" className="inline-block px-16">·</span>
-              </h2>
-              <h2 className="inline-flex w-max shrink-0 whitespace-nowrap font-sans text-[clamp(2.5rem,10vw,8rem)] font-bold uppercase leading-none tracking-[-0.04em]">
-                Featured Article<span aria-hidden="true" className="inline-block px-16">·</span>
-              </h2>
-            </div>
-          ))}
-        </motion.div>
+          From the journal.
+        </h2>
       </div>
 
-      {/* Articles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 md:mt-8">
-        {articles.map((item) => (
-          <a
-            key={item.id}
-            href={item.href}
-            target="_blank"
-            rel="noreferrer"
-            className={`p-8 rounded-2xl md:rounded-3xl border border-white/10 bg-neutral-900/30 hover:bg-neutral-900 hover:border-white/20 transition-all duration-300 flex flex-col justify-between group ${
-              articles.length === 1
-                ? "md:col-span-2 md:w-[calc(50%_-_0.75rem)] md:justify-self-center"
-                : ""
-            }`}
-          >
-            <div>
-              <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-wider text-neutral-500 mb-4">
-                <span>{item.date}</span>
-                <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-neutral-300">
-                  {item.category}
-                </span>
-              </div>
+      {articles.map((item) => (
+        <a
+          key={item.id}
+          href={item.href}
+          target="_blank"
+          rel="noreferrer"
+          className="group grid gap-4 border-y border-white/10 py-6 transition-colors duration-300 hover:border-accent/50 md:grid-cols-[160px_minmax(0,1fr)_auto] md:items-start md:gap-8 md:py-8"
+        >
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[12px] uppercase tracking-[0.1em] text-neutral-500">
+            <span>{item.date}</span>
+            <span aria-hidden="true">/</span>
+            <span className="text-accent">{item.category}</span>
+          </div>
 
-              <h3 className="font-sans text-[18px] md:text-[22px] font-medium leading-snug text-foreground group-hover:text-white transition-colors">
-                &ldquo;{item.title}&rdquo;
-              </h3>
-              <p className="mt-3 max-w-[60ch] text-[13px] leading-relaxed text-neutral-400">
-                {item.description}
-              </p>
-            </div>
+          <div>
+            <h3 className="max-w-[34ch] font-sans text-[20px] font-medium leading-snug text-foreground transition-colors group-hover:text-accent md:text-[24px]">
+              {item.title}
+            </h3>
+            <p className="mt-3 max-w-[58ch] text-[13px] leading-relaxed text-neutral-400 md:text-[14px]">
+              {item.description}
+            </p>
+          </div>
 
-            <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-[12px] font-mono text-neutral-400">
-              <span className="text-neutral-300 font-semibold">{item.author}</span>
-              <span className="group-hover:translate-x-1 transition-transform duration-200">
-                READ ARTICLE →
-              </span>
-            </div>
-          </a>
-        ))}
-      </div>
+          <div className="flex items-center gap-4 font-mono text-[12px] uppercase tracking-[0.1em] text-neutral-400 md:flex-col md:items-end md:gap-2">
+            <span className="text-neutral-300">{item.author}</span>
+            <span className="transition-transform duration-200 group-hover:translate-x-1">
+              Read article ↗
+            </span>
+          </div>
+        </a>
+      ))}
     </section>
   );
 }

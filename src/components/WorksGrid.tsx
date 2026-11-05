@@ -3,22 +3,25 @@
 import { Link } from "react-router";
 import Image from "@/components/Img";
 import type { Work } from "@/data/works";
-import { useShuffled } from "@/lib/useShuffled";
 
 const mono =
   "font-mono uppercase tracking-[0.02em] text-[12px] leading-[1.2]";
 
 export default function WorksGrid({ works }: { works: Work[] }) {
-  const orderedWorks = useShuffled(works);
-
   return (
-    <div className="grid grid-cols-1 gap-x-4 gap-y-14 md:grid-cols-2 md:gap-x-6 md:gap-y-20">
-      {orderedWorks.map((work, index) => (
+    <div
+      aria-label="Selected works"
+      className="grid grid-cols-1 gap-x-4 gap-y-14 md:grid-cols-2 md:gap-x-6 md:gap-y-20"
+    >
+      {works.map((work, index) => (
         <article
           key={work.slug}
           className={index % 2 === 1 ? "md:mt-24" : undefined}
         >
-          <Link to={`/works/${work.slug}`} className="group block">
+          <Link
+            to={`/works/${work.slug}`}
+            className="group block focus-visible:outline-offset-8"
+          >
             <div className="relative aspect-[4/5] overflow-hidden bg-light-surface">
               <Image
                 src={work.hero.src}

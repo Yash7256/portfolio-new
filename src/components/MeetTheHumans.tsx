@@ -8,7 +8,6 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useMarqueeTiming } from "./useMarqueeTiming";
 
 type PortraitProps = {
   src: string;
@@ -22,6 +21,8 @@ type PortraitProps = {
   id: string;
   delay?: number;
   imagePositionClassName: string;
+  width: number;
+  height: number;
   showFavicon?: boolean;
   faviconPositionClassName?: string;
   faviconVerticalPositionClassName?: string;
@@ -41,6 +42,8 @@ function Portrait({
   id,
   delay = 0,
   imagePositionClassName,
+  width,
+  height,
   showFavicon = false,
   faviconPositionClassName = "left-1/2",
   faviconVerticalPositionClassName = "top-0",
@@ -117,6 +120,8 @@ function Portrait({
             <img
               src={src}
               alt={alt}
+              width={width}
+              height={height}
               loading="lazy"
               decoding="async"
               className={`h-full w-full origin-top scale-[1.1] object-contain object-bottom brightness-[1.06] contrast-[1.16] saturate-[1.04] transition-[filter] duration-500 md:group-hover/portrait:blur-[3px] ${imagePositionClassName}`}
@@ -130,7 +135,7 @@ function Portrait({
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"
       />
 
-      <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center bg-black/65 p-8 opacity-100 transition-opacity duration-300 md:bg-black/70 md:p-10 md:opacity-0 md:backdrop-blur-[2px] md:group-hover/portrait:opacity-100">
+      <div className="pointer-events-none absolute inset-0 z-30 flex items-end justify-center bg-black/65 p-8 pb-8 opacity-100 transition-opacity duration-300 md:bg-black/70 md:p-10 md:opacity-0 md:backdrop-blur-[2px] md:group-hover/portrait:opacity-100">
         <p className="max-w-[38ch] text-pretty text-center font-sans text-[15px] font-medium leading-relaxed text-[#F5F1EA] md:text-[18px]">
           {description}
         </p>
@@ -149,11 +154,11 @@ function Portrait({
       <figcaption
         className="sr-only"
       >
-        <h3
+        <p
           className="font-sans text-[clamp(1.5rem,2.2vw,2.2rem)] font-medium leading-[0.95] tracking-[-0.04em] text-white"
         >
           {name}
-        </h3>
+        </p>
         <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-white/70">
           {role}
         </p>
@@ -164,8 +169,7 @@ function Portrait({
 
 export default function MeetTheHumans() {
   const reduceMotion = useReducedMotion();
-  const [hoveredProfile, setHoveredProfile] = useState<"harshita" | "yash" | null>(null);
-  const { marqueeRef, duration } = useMarqueeTiming();
+  const [hoveredProfile, setHoveredProfile] = useState<"harshita" | "aman" | null>(null);
 
   return (
     <section
@@ -173,33 +177,16 @@ export default function MeetTheHumans() {
       className="relative overflow-hidden py-10 select-none md:py-14"
     >
 
-      <h2 id="humans-heading" className="sr-only">
-        Meet The Humans
-      </h2>
-
-      <div
-        aria-hidden="true"
-        className="mt-8 w-full overflow-hidden border-b border-white/10 pb-6 md:mt-12 md:pb-8"
-      >
-        <motion.div
-          animate={reduceMotion ? undefined : { x: ["0%", "-50%"] }}
-          transition={{ duration, repeat: Infinity, repeatType: "loop", repeatDelay: 0, ease: "linear" }}
-          ref={marqueeRef}
-          className="flex w-max whitespace-nowrap will-change-transform"
+      <div className="pb-8 md:pb-10">
+        <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-neutral-500">
+          The studio / 002
+        </p>
+        <h2
+          id="humans-heading"
+          className="mt-3 font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-foreground"
         >
-          {[0, 1].map((half) => (
-            <div key={half} className="flex items-center">
-              {[0, 1].map((item) => (
-                <span
-                  key={item}
-                  className="inline-flex w-max shrink-0 whitespace-nowrap font-sans text-[clamp(2.5rem,10vw,8rem)] font-bold uppercase leading-none tracking-[-0.04em] text-foreground"
-                >
-                  Meet The Humans<span aria-hidden="true" className="inline-block px-16">·</span>
-                </span>
-              ))}
-            </div>
-          ))}
-        </motion.div>
+          Meet the humans.
+        </h2>
       </div>
 
       <div className="relative mx-auto mt-8 grid w-full max-w-[1120px] grid-cols-1 gap-y-14 md:mt-10 md:gap-y-16 lg:grid-cols-2 lg:items-start lg:gap-x-10 lg:gap-y-0 xl:gap-x-12">
@@ -220,8 +207,10 @@ export default function MeetTheHumans() {
             watermark="Designer"
             id="human-harshita"
             imagePositionClassName="translate-y-6 md:translate-y-7"
+            width={713}
+            height={1600}
             showFavicon
-            isOppositeHovered={hoveredProfile === "yash"}
+            isOppositeHovered={hoveredProfile === "aman"}
             reduceMotion={reduceMotion}
           />
 
@@ -252,23 +241,25 @@ export default function MeetTheHumans() {
         </article>
 
         <article
-          aria-labelledby="human-yash"
-          onMouseEnter={() => setHoveredProfile("yash")}
+          aria-labelledby="human-aman"
+          onMouseEnter={() => setHoveredProfile("aman")}
           onMouseLeave={() => setHoveredProfile(null)}
           className="group/profile relative min-w-0 md:ml-auto md:max-w-[560px] lg:mt-24 lg:ml-0 lg:max-w-none xl:mt-28"
         >
           <Portrait
             src="/profile/amanraj-cutout.png"
-            alt="Yash, engineer at Anvik Labs"
-            name="Yash"
+            alt="Aman Raj, engineer at Anvik Labs"
+            name="Aman Raj"
             role="Engineering / Product"
-            description="Yash is the engineer who loves the invisible work: architecture, performance, and the small decisions that keep a product fast and honest. He prototypes early, breaks things on purpose, and rebuilds them simpler."
+            description="Aman is the engineer who loves the invisible work: architecture, performance, and the small decisions that keep a product fast and honest. He prototypes early, breaks things on purpose, and rebuilds them simpler."
             index="02"
             label="The Engineer"
             watermark="Engineer"
-            id="human-yash"
+            id="human-aman"
             delay={0.18}
             imagePositionClassName="translate-y-4 md:translate-y-5"
+            width={1048}
+            height={1600}
             showFavicon
             faviconPositionClassName="-left-1/2"
             faviconVerticalPositionClassName="-top-28"
@@ -284,7 +275,7 @@ export default function MeetTheHumans() {
             className="mt-4 md:mt-5"
           >
             <h3
-              id="human-yash"
+              id="human-aman"
               className="mt-3 font-sans text-[clamp(2.125rem,3.5vw,2.75rem)] font-medium leading-none tracking-[-0.04em] text-[#F5F1EA]"
             >
               Aman Raj
@@ -293,7 +284,7 @@ export default function MeetTheHumans() {
               Engineering / Product
             </p>
             <p className="mt-5 max-w-[46ch] text-pretty text-[13px] leading-[1.65] text-neutral-300 md:hidden">
-              Yash is the engineer who loves the invisible work: architecture,
+              Aman is the engineer who loves the invisible work: architecture,
               performance, and the small decisions that keep a product fast and
               honest. He prototypes early, breaks things on purpose, and rebuilds
               them simpler.

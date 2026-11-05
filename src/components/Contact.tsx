@@ -1,239 +1,249 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 const servicesOptions = [
-  "Brand Identity",
-  "Web Design",
-  "Framer Development",
-  "Motion Design",
-  "Full Package",
+  "Product design",
+  "Web development",
+  "AI solutions",
+  "Website maintenance",
+  "Not sure yet",
 ];
 
 const budgetOptions = [
-  "Under $5k",
-  "$5k to $10k",
-  "$10k to $25k",
-  "$25k+",
+  "Under $1k",
+  "$1k to $5k",
+  "$5k to $15k",
+  "$15k+",
+  "Not sure yet",
 ];
 
-export default function Contact({ standalone = false }: { standalone?: boolean }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [selectedService, setSelectedService] = useState("Web Design");
-  const [selectedBudget, setSelectedBudget] = useState("$5k to $10k");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+const fieldClass =
+  "w-full border-b border-white/20 bg-transparent py-3 font-sans text-[15px] text-foreground placeholder:text-neutral-600 transition-colors focus:border-accent";
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !email || !message) return;
-    setStatus("sending");
-    setTimeout(() => {
-      setStatus("success");
-    }, 1200);
+export default function Contact() {
+  const [status, setStatus] = useState<"idle" | "opened">("idle");
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get("name") ?? "");
+    const email = String(data.get("email") ?? "");
+    const service = String(data.get("service") ?? "");
+    const budget = String(data.get("budget") ?? "");
+    const message = String(data.get("message") ?? "");
+
+    const subject = encodeURIComponent(`Project inquiry — ${name}`);
+    const body = encodeURIComponent(
+      [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Service: ${service}`,
+        `Budget: ${budget}`,
+        "",
+        message,
+      ].join("\n"),
+    );
+
+    window.location.href = `mailto:hello@anviklabs.com?subject=${subject}&body=${body}`;
+    setStatus("opened");
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 border-t border-white/10 select-none">
-      {/* Meta Header */}
-      <div className="flex items-center justify-between text-[11px] md:text-[12px] font-mono uppercase tracking-[0.05em] text-neutral-400 mb-8 md:mb-12">
-        <div className="flex items-center gap-2">
-          <span className="text-neutral-500">©</span>
-          <span>Direct Inquiry</span>
-          <span className="text-neutral-500 font-sans">お問い合わせ</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span>(WDX® · CONTACT)</span>
-          <span className="hidden sm:inline text-neutral-500">·</span>
-          <span className="hidden sm:inline">24/7 Remote</span>
-        </div>
+    <section
+      id="contact"
+      aria-labelledby="contact-heading"
+      className="border-t border-white/10 pb-16 pt-10 md:pb-24 md:pt-14"
+    >
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400 md:mb-12">
+        <span className="text-neutral-500">Inquiry / 006</span>
+        <span>Independent studio / India</span>
       </div>
 
-      {/* Title */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-white/10">
-        <h1 className="font-sans text-[clamp(2.8rem,8vw,7.5rem)] font-bold tracking-[-0.04em] leading-none text-foreground uppercase">
-          Call Me
+      <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end">
+        <h1
+          id="contact-heading"
+          className="font-sans text-[clamp(2.8rem,8vw,7.5rem)] font-medium leading-none tracking-[-0.045em] text-foreground"
+        >
+          Start a project.
         </h1>
-        <div className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-wider text-neutral-400">
-          <span>AVAILABLE FOR NEW PROJECTS</span>
-        </div>
+        <p className="max-w-[32ch] font-mono text-[12px] uppercase leading-relaxed tracking-[0.12em] text-neutral-400">
+          Available for new product design and engineering work.
+        </p>
       </div>
 
-      {/* Main Grid: Direct Channels (Left) + Interactive Form (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mt-12 items-start">
-        {/* Left Column: Contact Details */}
-        <div className="lg:col-span-5 flex flex-col justify-between space-y-10">
+      <div className="mt-12 grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14">
+        <div className="space-y-10 lg:col-span-5">
           <div>
-            <span className="font-mono text-[11px] uppercase tracking-widest text-neutral-500 block mb-2">
-              DIRECT EMAIL
+            <span className="mb-2 block font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-500">
+              Direct email
             </span>
             <a
-              href="mailto:sayhi@akihiko.com"
-              className="font-sans text-[22px] md:text-[28px] font-semibold text-white hover:text-neutral-300 transition-colors underline decoration-white/20 underline-offset-8"
+              href="mailto:hello@anviklabs.com"
+              className="break-all font-sans text-[22px] font-semibold text-foreground underline decoration-white/20 underline-offset-8 transition-colors hover:text-accent md:text-[28px]"
             >
-              sayhi@akihiko.com
+              hello@anviklabs.com
             </a>
           </div>
 
           <div>
-            <span className="font-mono text-[11px] uppercase tracking-widest text-neutral-500 block mb-2">
-              TELEPHONE / WHATSAPP
+            <span className="mb-2 block font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-500">
+              Studio
             </span>
-            <a
-              href="tel:+1345664565"
-              className="font-sans text-[20px] md:text-[24px] font-medium text-neutral-200 hover:text-white transition-colors"
-            >
-              +1 34566 4565
-            </a>
-          </div>
-
-          <div>
-            <span className="font-mono text-[11px] uppercase tracking-widest text-neutral-500 block mb-2">
-              STUDIO LOCATION
-            </span>
-            <p className="font-sans text-[15px] text-neutral-300 leading-relaxed">
-              Office: Shibuya-ku, Tokyo, Japan.<br />
-              Working with global clients across Tokyo (JST), London (GMT), and New York (EST).
+            <p className="max-w-[34ch] font-sans text-[15px] leading-relaxed text-neutral-300">
+              Based in India, working with teams across time zones. Remote-first,
+              with calls scheduled around your working day.
             </p>
           </div>
 
-          <div className="pt-6 border-t border-white/10 flex flex-col gap-2">
-            <span className="font-mono text-[11px] uppercase tracking-widest text-neutral-500">
-              SOCIAL CHANNELS
+          <div className="border-t border-white/10 pt-6">
+            <span className="mb-2 block font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-500">
+              What to include
             </span>
-            <div className="flex flex-wrap gap-4 text-[13px] font-sans text-neutral-300">
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Instagram ↗</a>
-              <a href="https://dribbble.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Dribbble ↗</a>
-              <a href="https://framer.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Framer ↗</a>
-              <a href="https://x.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Twitter ↗</a>
-            </div>
+            <p className="max-w-[34ch] font-sans text-[15px] leading-relaxed text-neutral-300">
+              A short description of the product, who it is for, what stage it is
+              at, and any deadline you are working towards.
+            </p>
           </div>
         </div>
 
-        {/* Right Column: High Craft Form */}
-        <div className="lg:col-span-7 bg-neutral-900/40 border border-white/10 rounded-2xl md:rounded-3xl p-8 md:p-10 shadow-2xl">
-          {status === "success" ? (
-            <div className="py-16 text-center select-none animate-in fade-in duration-300">
-              <div className="w-12 h-12 rounded-full bg-white text-black font-bold flex items-center justify-center mx-auto mb-4 text-xl">
-                ✓
-              </div>
-              <h3 className="font-sans text-[24px] font-semibold text-white mb-2">
-                Message Received.
-              </h3>
-              <p className="font-sans text-[14px] text-neutral-400 max-w-sm mx-auto">
-                Thank you for reaching out. We will review your project details and respond within 24 hours.
+        <div className="border border-white/10 bg-white/[0.02] p-6 md:p-8 lg:col-span-7">
+          {status === "opened" ? (
+            <div role="status" className="py-10">
+              <h2 className="font-sans text-[24px] font-medium text-foreground">
+                Your email draft is ready.
+              </h2>
+              <p className="mt-3 max-w-[46ch] font-sans text-[14px] leading-relaxed text-neutral-400">
+                Your email app should have opened with the project details filled
+                in. If it did not, send the same information directly to{" "}
+                <a
+                  href="mailto:hello@anviklabs.com"
+                  className="text-accent underline underline-offset-4"
+                >
+                  hello@anviklabs.com
+                </a>
+                .
               </p>
               <button
                 type="button"
                 onClick={() => setStatus("idle")}
-                className="mt-6 font-mono text-[11px] uppercase tracking-widest text-neutral-400 hover:text-white transition-colors"
+                className="mt-6 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400 transition-colors hover:text-foreground"
               >
-                [ SEND ANOTHER MESSAGE ]
+                [ Edit the details ]
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name & Email */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="block font-mono text-[11px] uppercase tracking-wider text-neutral-400 mb-2">
-                    Your Name *
+                  <label
+                    htmlFor="contact-name"
+                    className="mb-1 block font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400"
+                  >
+                    Your name *
                   </label>
                   <input
+                    id="contact-name"
+                    name="name"
                     type="text"
                     required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g. Kenji Sato"
-                    className="w-full bg-neutral-950 border border-white/10 rounded-xl px-4 py-3 font-sans text-[14px] text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors"
+                    autoComplete="name"
+                    placeholder="Your name"
+                    className={fieldClass}
                   />
                 </div>
                 <div>
-                  <label className="block font-mono text-[11px] uppercase tracking-wider text-neutral-400 mb-2">
-                    Email Address *
+                  <label
+                    htmlFor="contact-email"
+                    className="mb-1 block font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400"
+                  >
+                    Email address *
                   </label>
                   <input
+                    id="contact-email"
+                    name="email"
                     type="email"
                     required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
                     placeholder="name@company.com"
-                    className="w-full bg-neutral-950 border border-white/10 rounded-xl px-4 py-3 font-sans text-[14px] text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors"
+                    className={fieldClass}
                   />
                 </div>
               </div>
 
-              {/* Service Selection */}
-              <div>
-                <label className="block font-mono text-[11px] uppercase tracking-wider text-neutral-400 mb-2">
-                  Select Service
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {servicesOptions.map((s) => (
-                    <button
-                      key={s}
-                      type="button"
-                      onClick={() => setSelectedService(s)}
-                      className={`px-3 py-1.5 rounded-lg text-[12px] font-sans transition-all cursor-pointer ${
-                        selectedService === s
-                          ? "bg-white text-black font-semibold"
-                          : "bg-neutral-950 border border-white/10 text-neutral-400 hover:text-white"
-                      }`}
-                    >
-                      {s}
-                    </button>
-                  ))}
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="contact-service"
+                    className="mb-1 block font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400"
+                  >
+                    Service
+                  </label>
+                  <select
+                    id="contact-service"
+                    name="service"
+                    defaultValue="Product design"
+                    className={`${fieldClass} cursor-pointer`}
+                  >
+                    {servicesOptions.map((service) => (
+                      <option key={service} value={service}>
+                        {service}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label
+                    htmlFor="contact-budget"
+                    className="mb-1 block font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400"
+                  >
+                    Estimated budget
+                  </label>
+                  <select
+                    id="contact-budget"
+                    name="budget"
+                    defaultValue="Not sure yet"
+                    className={`${fieldClass} cursor-pointer`}
+                  >
+                    {budgetOptions.map((budget) => (
+                      <option key={budget} value={budget}>
+                        {budget}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
-              {/* Budget Range */}
               <div>
-                <label className="block font-mono text-[11px] uppercase tracking-wider text-neutral-400 mb-2">
-                  Estimated Budget
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {budgetOptions.map((b) => (
-                    <button
-                      key={b}
-                      type="button"
-                      onClick={() => setSelectedBudget(b)}
-                      className={`px-3 py-1.5 rounded-lg text-[12px] font-sans transition-all cursor-pointer ${
-                        selectedBudget === b
-                          ? "bg-white text-black font-semibold"
-                          : "bg-neutral-950 border border-white/10 text-neutral-400 hover:text-white"
-                      }`}
-                    >
-                      {b}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Project Brief */}
-              <div>
-                <label className="block font-mono text-[11px] uppercase tracking-wider text-neutral-400 mb-2">
-                  Project Details *
+                <label
+                  htmlFor="contact-message"
+                  className="mb-1 block font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400"
+                >
+                  Project details *
                 </label>
                 <textarea
+                  id="contact-message"
+                  name="message"
                   required
-                  rows={4}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Tell us about your brand, goals, target launch date, and scope..."
-                  className="w-full bg-neutral-950 border border-white/10 rounded-xl p-4 font-sans text-[14px] text-white placeholder:text-neutral-600 focus:outline-none focus:border-white/40 transition-colors resize-none"
+                  rows={5}
+                  placeholder="What are you building, who is it for, and what does success look like?"
+                  className={`${fieldClass} resize-none`}
                 />
               </div>
 
-              {/* Submit CTA */}
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="w-full py-3.5 rounded-full bg-white text-black font-sans font-semibold text-[14px] hover:bg-neutral-200 transition-colors shadow-lg disabled:opacity-50 cursor-pointer"
-              >
-                {status === "sending" ? "Transmitting..." : "Send Inquiry"}
-              </button>
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
+                <p className="max-w-[38ch] text-[12px] leading-relaxed text-neutral-500">
+                  This form opens a draft in your email app. Nothing is sent until
+                  you review and send it.
+                </p>
+                <button
+                  type="submit"
+                  className="inline-flex shrink-0 items-center justify-center rounded-[2px] bg-accent px-6 py-3 font-sans text-[14px] font-semibold text-background transition-colors hover:bg-accent-strong"
+                >
+                  Open email draft
+                </button>
+              </div>
             </form>
           )}
         </div>

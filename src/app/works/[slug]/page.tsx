@@ -30,7 +30,7 @@ export default function WorkPage() {
     return (
       <>
         <Navbar />
-        <main className="flex flex-1 flex-col items-start justify-center gap-6 pt-24 md:pt-28">
+        <main id="main-content" className="flex flex-1 flex-col items-start justify-center gap-6 pt-24 md:pt-28">
           <h1 className="font-sans text-[clamp(40px,7vw,96px)] font-medium uppercase leading-[0.9] tracking-[-0.05em]">
             Work not found
           </h1>
@@ -51,7 +51,7 @@ export default function WorkPage() {
   return (
     <>
       <Navbar />
-      <main className="flex flex-1 flex-col pt-24 md:pt-28">
+      <main id="main-content" className="flex flex-1 flex-col pt-24 md:pt-28">
         <article className="flex flex-1 flex-col">
           <header className="pt-8 md:pt-12">
             <div className={`${mono} flex items-center justify-between gap-4`}>

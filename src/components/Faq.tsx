@@ -1,96 +1,97 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const faqData = [
   {
     q: "What services do you offer?",
-    a: "We specialize in end-to-end digital craft: from art direction, bespoke brand identity, and design systems, to native Framer development, motion design, and high-performance frontend architecture.",
+    a: "We work across product design, design systems, web development, AI solutions and ongoing website care. Most engagements combine design and front-end engineering.",
   },
   {
-    q: "What is your typical turnaround time?",
-    a: "Standard one-page or showcase projects typically take 7 to 14 business days. Comprehensive brand systems or multi-page CMS platforms usually take 3 to 5 weeks from kickoff to final deployment.",
+    q: "How does a project start?",
+    a: "It starts with a short conversation about the product, the people using it and the outcome you need. If the fit is right, we agree on scope, timing and the first milestone before any work begins.",
   },
   {
-    q: "Do you only work in Framer?",
-    a: "While Framer is our preferred tool for lightning-fast visual execution and real-time client collaboration, we also engineer custom Next.js, React, Tailwind, and WebGL experiences when complex architectures demand it.",
+    q: "What is a typical turnaround?",
+    a: "A focused site or product slice usually takes two to four weeks. Larger product work runs in milestones over six to eight weeks. We agree on the first deliverable up front rather than promising a date for everything.",
   },
   {
-    q: "Can you handle both design and build?",
-    a: "Yes. Blending design and code with zero handoff friction is our core advantage. You work directly with the creator who both designs the visual identity and builds the production site.",
+    q: "Can you work with an existing team?",
+    a: "Yes. We can join an existing product team, work alongside your designers or engineers, or take a defined slice of the product from brief to launch.",
   },
   {
-    q: "Do you offer brand strategy too?",
-    a: "Absolutely. Visual execution only works when grounded in clear positioning. We define core messaging, visual hierarchy, typography tone, and competitive differentiators before opening design software.",
+    q: "Do you handle both design and build?",
+    a: "Yes. The person designing the interface works with the person building it from day one. That removes the handoff gap where intent usually gets lost.",
   },
   {
-    q: "What’s your process like?",
-    a: "Our process is structured in four clear phases: Discovery & Architecture, Visual Identity & Art Direction, Native Build & Motion Implementation, and QA, Performance Tuning & Global Launch.",
+    q: "How do we communicate during a project?",
+    a: "We keep a shared written record, send regular progress notes and hold a weekly call. You will always know what is in progress, what is blocked and what comes next.",
   },
 ];
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const toggle = (idx: number) => {
-    setOpenIndex(openIndex === idx ? null : idx);
+  const toggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" className="py-16 md:py-24 border-t border-white/10 select-none">
-      {/* Meta Header */}
-      <div className="flex items-center justify-between text-[11px] md:text-[12px] font-mono uppercase tracking-[0.05em] text-neutral-400 mb-8 md:mb-12">
-        <div className="flex items-center gap-2">
-          <span className="text-neutral-500">©</span>
-          <span>Help Center</span>
-          <span className="text-neutral-500 font-sans">ヘルプ</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span>(WDX® · 12)</span>
-          <span className="hidden sm:inline text-neutral-500">·</span>
-          <span className="hidden sm:inline">Clarifications</span>
-        </div>
+    <section
+      id="faq"
+      aria-labelledby="faq-heading"
+      className="border-t border-white/10 py-16 md:py-24"
+    >
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400 md:mb-12">
+        <span className="text-neutral-500">Notes / 007</span>
+        <span>Clarifications</span>
       </div>
 
-      {/* Headline & Subtitle */}
-      <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 pb-10 border-b border-white/10">
-        <div>
-          <h2 className="font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-bold tracking-[-0.04em] leading-none text-foreground uppercase">
-            FAQ.
-          </h2>
-        </div>
-        <div className="max-w-md">
-          <p className="font-sans text-[14px] md:text-[15px] text-neutral-400 leading-relaxed">
-            Clarifying Deliverable&apos;s Before They Begin with Real Process and Honest <span className="text-neutral-300 font-medium">アンサー.</span>
-          </p>
-        </div>
+      <div className="flex flex-col items-start justify-between gap-6 border-b border-white/10 pb-10 lg:flex-row lg:items-end">
+        <h2
+          id="faq-heading"
+          className="font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-none tracking-[-0.04em] text-foreground"
+        >
+          Questions.
+        </h2>
+        <p className="max-w-md font-sans text-[14px] leading-relaxed text-neutral-400 md:text-[15px]">
+          The practical details, before we begin. If something is missing, ask us
+          directly.
+        </p>
       </div>
 
-      {/* Accordion List */}
-      <div className="divide-y divide-white/10 mt-6">
-        {faqData.map((item, idx) => {
-          const isOpen = openIndex === idx;
+      <div className="mt-6 divide-y divide-white/10">
+        {faqData.map((item, index) => {
+          const isOpen = openIndex === index;
+          const panelId = `faq-panel-${index}`;
+          const buttonId = `faq-button-${index}`;
+
           return (
-            <div key={idx} className="py-5 md:py-6">
+            <div key={item.q} className="py-5 md:py-6">
               <button
+                id={buttonId}
                 type="button"
-                onClick={() => toggle(idx)}
-                className="w-full flex items-center justify-between text-left gap-4 group cursor-pointer focus-visible:outline-none"
+                onClick={() => toggle(index)}
+                className="group flex w-full items-center justify-between gap-4 text-left"
                 aria-expanded={isOpen}
+                aria-controls={panelId}
               >
                 <div className="flex items-center gap-4 md:gap-8">
-                  <span className="font-mono text-[12px] text-neutral-500 w-8">
-                    [0{idx + 1}]
+                  <span className="w-8 font-mono text-[12px] text-neutral-500">
+                    [0{index + 1}]
                   </span>
-                  <span className="font-sans text-[17px] md:text-[20px] font-medium text-foreground group-hover:text-white transition-colors">
+                  <span className="font-sans text-[17px] font-medium text-foreground transition-colors group-hover:text-accent md:text-[20px]">
                     {item.q}
                   </span>
                 </div>
 
                 <span
-                  className={`w-7 h-7 rounded-full border border-white/15 flex items-center justify-center font-mono text-[14px] transition-transform duration-200 shrink-0 ${
-                    isOpen ? "rotate-45 bg-white text-black border-white" : "text-neutral-400"
+                  aria-hidden="true"
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[2px] border border-white/15 font-mono text-[14px] transition-transform duration-200 ${
+                    isOpen
+                      ? "rotate-45 border-accent bg-accent text-background"
+                      : "text-neutral-400"
                   }`}
                 >
                   +
@@ -100,15 +101,18 @@ export default function Faq() {
               <AnimatePresence initial={false}>
                 {isOpen && (
                   <motion.div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="pl-12 md:pl-16 pr-4 pt-3 pb-2 text-[14px] md:text-[15px] font-sans text-neutral-400 leading-relaxed max-w-3xl">
+                    <p className="max-w-3xl pb-2 pl-12 pr-4 pt-3 font-sans text-[14px] leading-relaxed text-neutral-400 md:pl-16 md:text-[15px]">
                       {item.a}
-                    </div>
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>

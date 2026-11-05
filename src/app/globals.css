@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
 @import "tailwindcss";
 
 @font-face {
@@ -36,60 +35,116 @@
 @theme {
   --color-background: #080808;
   --color-foreground: #e7e9ee;
-  --color-text-secondary: rgba(231, 233, 238, 0.55);
-  --color-border: rgba(255, 255, 255, 0.1);
+  --color-text-secondary: rgba(231, 233, 238, 0.62);
+  --color-border: rgba(255, 255, 255, 0.12);
   --color-light-surface: #11100f;
   --color-dark-surface: #0b0a09;
   --color-text-on-dark: #f5f4f0;
-  --color-muted: rgba(231, 233, 238, 0.55);
+  --color-muted: rgba(231, 233, 238, 0.62);
   --color-inverse: #17140f;
   --color-inverse-foreground: #f5f4f0;
-  --color-inverse-muted: rgba(245, 244, 240, 0.6);
+  --color-inverse-muted: rgba(245, 244, 240, 0.66);
   --color-surface: #11100f;
 
   --color-on-light: #171310;
   --color-tone-1: #17140f;
   --color-tone-2: #1c1916;
   --color-tone-3: #302923;
-  --color-tone-8: #d9dde4;
-  --color-tone-9: #eef0f4;
 
   --color-accent: #ff6a00;
   --color-accent-text: #ff8a4a;
   --color-accent-strong: #ff6a1a;
   --color-accent-soft-text: #ffd0a3;
-  --color-accent-soft: rgba(255, 106, 26, 0.1);
+  --color-accent-soft: rgba(255, 106, 26, 0.12);
   --color-accent-wash: rgba(255, 106, 26, 0.06);
   --color-on-accent: #080808;
 
   --font-sans: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
     sans-serif;
-  --font-mono: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-  --font-matrix: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-  --font-michroma: "Michroma", var(--font-inter-display), "Helvetica Neue", Helvetica,
-    Arial, sans-serif;
-  --font-mileast: var(--font-inter-display), "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-}
-
-body {
-  background: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans);
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", "Roboto Mono",
+    Menlo, Consolas, monospace;
+  --font-michroma: "Michroma", var(--font-inter-display), "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  --font-serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype",
+    Palatino, Georgia, serif;
 }
 
 :root {
   color-scheme: dark;
   --font-inter-display: "Inter Display";
   --header-height: 50px;
+  --radius-control: 2px;
+  --radius-media: 8px;
 }
 
 @media (min-width: 768px) {
   :root {
     --header-height: 88px;
   }
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  background: var(--color-background);
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 16px);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-background);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+* {
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+  scrollbar-width: thin;
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  transform: translateY(-150%);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  padding: 10px 14px;
+  font: 600 12px/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline-color: var(--color-foreground);
 }
 
 .container-page {
@@ -117,86 +172,16 @@ body {
   }
 }
 
-@media (min-width: 1640px) {
-  .container-page {
-    padding-inline: 6vw;
-  }
-}
-
-.hero-letter-mask {
-  display: inline-block;
-  clip-path: inset(-0.25em -0.6em 0 -0.6em);
-}
-
-.hero-letter {
-  display: inline-block;
-  transform-origin: 50% 100%;
-  animation: hero-letter-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(0.2s + var(--i, 0) * 55ms);
-}
-
-.hero-rule {
-  background: var(--color-border);
-  transform-origin: center;
-  animation: hero-rule-sweep 2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
-}
-
-@keyframes hero-letter-rise {
-  from {
-    transform: translate3d(var(--spread, 0), 115%, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes hero-rule-sweep {
-  0% {
-    transform: scaleX(0);
-    opacity: 0;
-  }
-  35% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-  80% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scaleX(0);
-    opacity: 0;
-  }
-}
-
-@keyframes works-carousel {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-50% - 0.25rem));
-  }
-}
-
-@keyframes testimonial-orbit {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hero-letter {
-    animation: none;
-    transform: none;
+  html {
+    scroll-behavior: auto;
   }
 
-  .hero-rule {
-    animation: none;
-    opacity: 1;
-    transform: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
