@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -13,21 +13,51 @@ const quickLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const dialog = document.getElementById("mobile-navigation");
+      if (!dialog) return;
+
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
+    window.requestAnimationFrame(() => closeButtonRef.current?.focus());
 
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      menuButtonRef.current?.focus();
     };
   }, [open]);
 
@@ -38,7 +68,7 @@ export default function Navbar() {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-start justify-between py-4 text-[13px] leading-snug md:py-5 md:text-[14px]"
+          className="flex min-h-[var(--header-height)] items-center justify-between py-0 text-[13px] leading-snug md:text-[14px]"
         >
           <div className="flex flex-col">
             <Link
@@ -79,7 +109,8 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="font-mono text-[12px] font-semibold uppercase tracking-wider text-neutral-300 transition-opacity duration-200 hover:opacity-60 md:hidden"
+            ref={menuButtonRef}
+            className="inline-flex min-h-11 items-center font-mono text-[12px] font-semibold uppercase tracking-wider text-neutral-300 transition-opacity duration-200 hover:opacity-60 md:hidden"
             aria-label="Open navigation menu"
             aria-expanded={open}
             aria-controls="mobile-navigation"
@@ -104,7 +135,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-50 flex flex-col bg-background/95 px-4 py-5 backdrop-blur-xl sm:px-[4vw] md:hidden"
+            className="fixed inset-0 z-50 flex flex-col bg-background px-4 py-5 sm:px-[4vw] md:hidden"
           >
             <div className="flex items-center justify-between">
               <Link
@@ -124,7 +155,8 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="font-mono text-[12px] font-semibold uppercase tracking-wider text-neutral-300"
+                ref={closeButtonRef}
+                className="inline-flex min-h-11 items-center font-mono text-[12px] font-semibold uppercase tracking-wider text-neutral-300"
                 aria-label="Close navigation menu"
               >
                 [ CLOSE ]
@@ -140,7 +172,7 @@ export default function Navbar() {
                   key={item.label}
                   to={item.href}
                   onClick={() => setOpen(false)}
-                  className="font-sans text-[22px] font-medium tracking-tight text-foreground transition-opacity duration-200 hover:opacity-60"
+                  className="inline-flex min-h-11 items-center font-sans text-[22px] font-medium tracking-tight text-foreground transition-opacity duration-200 hover:opacity-60"
                 >
                   {item.label}
                 </Link>

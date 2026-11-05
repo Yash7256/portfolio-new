@@ -96,7 +96,7 @@ export default function Footer() {
               <button
                 type="button"
                 onClick={scrollToTop}
-                className="text-neutral-300 transition-colors duration-200 hover:text-accent"
+                className="inline-flex min-h-11 items-center text-neutral-300 transition-colors duration-200 hover:text-accent"
               >
                 Back to top
               </button>

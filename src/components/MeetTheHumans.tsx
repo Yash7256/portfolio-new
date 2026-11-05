@@ -135,12 +135,6 @@ function Portrait({
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"
       />
 
-      <div className="pointer-events-none absolute inset-0 z-30 flex items-end justify-center bg-black/65 p-8 pb-8 opacity-100 transition-opacity duration-300 md:bg-black/70 md:p-10 md:opacity-0 md:backdrop-blur-[2px] md:group-hover/portrait:opacity-100">
-        <p className="max-w-[38ch] text-pretty text-center font-sans text-[15px] font-medium leading-relaxed text-[#F5F1EA] md:text-[18px]">
-          {description}
-        </p>
-      </div>
-
       <div className="sr-only">
         <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-white/70">
           {index}
@@ -162,6 +156,7 @@ function Portrait({
         <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-white/70">
           {role}
         </p>
+        <p>{description}</p>
       </figcaption>
     </motion.figure>
   );
@@ -174,13 +169,10 @@ export default function MeetTheHumans() {
   return (
     <section
       aria-labelledby="humans-heading"
-      className="relative overflow-hidden py-10 select-none md:py-14"
+      className="relative overflow-hidden py-16 md:py-24"
     >
 
       <div className="pb-8 md:pb-10">
-        <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-neutral-500">
-          The studio / 002
-        </p>
         <h2
           id="humans-heading"
           className="mt-3 font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-foreground"
@@ -223,14 +215,14 @@ export default function MeetTheHumans() {
           >
             <h3
               id="human-harshita"
-              className="mt-3 font-sans text-[clamp(2.125rem,3.5vw,2.75rem)] font-medium leading-none tracking-[-0.04em] text-[#F5F1EA]"
+              className="mt-3 font-sans text-[clamp(2.125rem,3.5vw,2.75rem)] font-medium leading-none tracking-[-0.04em] text-foreground"
             >
               Harshita Upadhyay
             </h3>
             <p className="mt-2 font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-neutral-300 md:text-[13px]">
               Design / Product / UI
             </p>
-            <p className="mt-5 max-w-[46ch] text-pretty text-[13px] leading-[1.65] text-neutral-300 md:hidden">
+            <p className="mt-5 max-w-[46ch] text-pretty text-[14px] leading-[1.65] text-neutral-300">
               Harshita is the designer in the room, part systems thinker, part
               compulsive doodler. She turns tangled product flows into interfaces
               that feel obvious, then worries the last two percent until they feel
@@ -276,14 +268,14 @@ export default function MeetTheHumans() {
           >
             <h3
               id="human-aman"
-              className="mt-3 font-sans text-[clamp(2.125rem,3.5vw,2.75rem)] font-medium leading-none tracking-[-0.04em] text-[#F5F1EA]"
+              className="mt-3 font-sans text-[clamp(2.125rem,3.5vw,2.75rem)] font-medium leading-none tracking-[-0.04em] text-foreground"
             >
               Aman Raj
             </h3>
             <p className="mt-2 font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-neutral-300 md:text-[13px]">
               Engineering / Product
             </p>
-            <p className="mt-5 max-w-[46ch] text-pretty text-[13px] leading-[1.65] text-neutral-300 md:hidden">
+            <p className="mt-5 max-w-[46ch] text-pretty text-[14px] leading-[1.65] text-neutral-300">
               Aman is the engineer who loves the invisible work: architecture,
               performance, and the small decisions that keep a product fast and
               honest. He prototypes early, breaks things on purpose, and rebuilds

@@ -33,9 +33,6 @@ export default function Services() {
       className="border-t border-white/10 py-16 md:py-24"
     >
       <div className="pb-8 md:pb-10">
-        <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-neutral-500">
-          Capabilities / 003
-        </p>
         <h2
           id="services-heading"
           className="mt-3 font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-foreground"

@@ -34,9 +34,6 @@ export default function Articles() {
       className="border-t border-white/10 py-16 md:py-24"
     >
       <div className="pb-8 md:pb-10">
-        <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-neutral-500">
-          Writing / 005
-        </p>
         <h2
           id="writing-heading"
           className="mt-3 font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-foreground"
@@ -67,7 +64,7 @@ export default function Articles() {
             <h3 className="max-w-[34ch] font-sans text-[20px] font-medium leading-snug text-foreground transition-colors group-hover:text-accent md:text-[24px]">
               {item.title}
             </h3>
-            <p className="mt-3 max-w-[58ch] text-[13px] leading-relaxed text-neutral-400 md:text-[14px]">
+            <p className="mt-3 max-w-[58ch] text-[14px] leading-relaxed text-neutral-400 md:text-[15px]">
               {item.description}
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[12px] uppercase tracking-[0.1em] text-neutral-400">

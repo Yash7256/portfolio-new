@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
 
 const capabilities = [
   "Product design",
@@ -7,6 +9,63 @@ const capabilities = [
   "AI solutions",
 ];
 
+function CapabilitiesMarquee() {
+  const reduceMotion = useReducedMotion();
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(marqueeRef, { amount: 0.1 });
+  const loop = [...capabilities, ...capabilities];
+
+  if (reduceMotion) {
+    return (
+      <ul className="flex flex-wrap gap-x-5 gap-y-2 border-y border-white/10 py-5 font-sans text-[clamp(1.35rem,3.25vw,2.75rem)] font-medium leading-none tracking-[-0.04em] text-neutral-200">
+        {capabilities.map((capability) => (
+          <li key={capability}>{capability}</li>
+        ))}
+      </ul>
+    );
+  }
+
+  return (
+    <div
+      ref={marqueeRef}
+      className="relative w-full overflow-hidden border-y border-white/10 py-5 md:py-7"
+    >
+      <ul className="sr-only">
+        {capabilities.map((capability) => (
+          <li key={capability}>{capability}</li>
+        ))}
+      </ul>
+
+      <motion.div
+        aria-hidden="true"
+        animate={isInView ? { x: ["0%", "-50%"] } : { x: "0%" }}
+        transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+        className="flex w-max whitespace-nowrap font-sans text-[clamp(1.75rem,4.6vw,4.25rem)] font-medium leading-none tracking-[-0.045em] text-neutral-200 will-change-transform"
+      >
+        {[0, 1].map((half) => (
+          <div key={half} className="flex items-center">
+            {loop.map((capability, index) => (
+              <span key={index} className="flex items-center">
+                <span className="px-5 md:px-8">{capability}</span>
+                <span className="h-2 w-2 rounded-full bg-accent/70" />
+              </span>
+            ))}
+          </div>
+        ))}
+      </motion.div>
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[14%] bg-gradient-to-r from-background via-background/90 to-transparent backdrop-blur-[3px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[14%] bg-gradient-to-l from-background via-background/90 to-transparent backdrop-blur-[3px]"
+      />
+    </div>
+  );
+}
+
 export default function FeaturedProduct() {
   return (
     <section
@@ -14,15 +73,8 @@ export default function FeaturedProduct() {
       aria-labelledby="featured-product-title"
       className="border-t border-white/10 py-12 md:py-20 lg:py-24"
     >
-      <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4 md:mb-14 lg:mb-16">
-        <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-neutral-500">
-          Studio product / 001
-        </p>
-        <ul className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[12px] uppercase tracking-[0.08em] text-neutral-300">
-          {capabilities.map((capability) => (
-            <li key={capability}>{capability}</li>
-          ))}
-        </ul>
+      <div className="mb-10 md:mb-14 lg:mb-16">
+        <CapabilitiesMarquee />
       </div>
 
       <div className="grid grid-cols-1 items-center gap-8 md:gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
@@ -41,9 +93,6 @@ export default function FeaturedProduct() {
         </div>
 
         <div className="flex flex-col py-1 md:py-2 lg:col-span-6">
-          <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-accent">
-            Community product
-          </p>
           <h2
             id="featured-product-title"
             className="mt-3 flex items-center gap-3 font-sans text-[clamp(2.1rem,4.4vw,4.2rem)] font-medium leading-[1.08] tracking-[-0.035em] text-foreground md:gap-5"

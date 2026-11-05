@@ -1,7 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useReducedMotion,
+} from "framer-motion";
 import testimonialsData from "../data/testimonials.json";
 
 type Testimonial = (typeof testimonialsData)[number] & {
@@ -29,9 +34,11 @@ export default function Testimonials() {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { amount: 0.2 });
   const story = testimonials[active];
   const total = String(testimonials.length).padStart(2, "0");
-  const isPaused = paused || hovered || focused;
+  const isPaused = paused || hovered || focused || !isInView || reduceMotion;
 
   useEffect(() => {
     if (isPaused) return;
@@ -62,9 +69,10 @@ export default function Testimonials() {
 
   return (
     <section
+      ref={sectionRef}
       id="testimonials"
       aria-labelledby="testimonials-heading"
-      className="py-24 md:py-36"
+      className="py-20 md:py-28"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocusCapture={() => setFocused(true)}
@@ -74,8 +82,11 @@ export default function Testimonials() {
         }
       }}
     >
-      <h2 id="testimonials-heading" className="sr-only">
-        Client testimonials
+      <h2
+        id="testimonials-heading"
+        className="mb-10 text-center font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-foreground md:mb-14"
+      >
+        What people say.
       </h2>
 
       <div className="mx-auto flex max-w-[64rem] flex-col items-center text-center">
@@ -137,7 +148,7 @@ export default function Testimonials() {
             type="button"
             onClick={() => goTo(-1)}
             aria-label="Previous testimonial"
-            className="font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
+            className="inline-flex min-h-11 items-center px-2 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
           >
             Previous
           </button>
@@ -151,7 +162,7 @@ export default function Testimonials() {
             type="button"
             onClick={() => goTo(1)}
             aria-label="Next testimonial"
-            className="font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
+            className="inline-flex min-h-11 items-center px-2 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
           >
             Next
           </button>
@@ -167,7 +178,7 @@ export default function Testimonials() {
                 ? "Resume automatic testimonial rotation"
                 : "Pause automatic testimonial rotation"
             }
-            className="min-w-[3.5rem] font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
+            className="inline-flex min-h-11 min-w-[3.5rem] items-center justify-center px-2 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
           >
             {paused ? "Play" : "Pause"}
           </button>

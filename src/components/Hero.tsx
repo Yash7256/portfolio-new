@@ -4,16 +4,13 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      aria-label="Introduction"
+      aria-labelledby="hero-heading"
       className="relative flex min-h-[calc(100svh-var(--header-height))] flex-col justify-between pb-3 pt-32 md:pb-5 md:pt-44"
     >
       <div className="grid flex-1 grid-cols-1 items-start gap-6 lg:grid-cols-12 lg:gap-8">
         <div className="flex h-full flex-col justify-between pb-2 pt-0 lg:col-span-7 xl:col-span-7">
           <div>
-            <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-accent">
-              Product design + engineering
-            </p>
-            <h1 className="mt-4 font-sans text-[clamp(2.1rem,3.8vw,3.6rem)] font-medium leading-[1.08] tracking-[-0.035em] text-foreground">
+            <h1 id="hero-heading" className="mt-4 font-sans text-[clamp(2.1rem,3.8vw,3.6rem)] font-medium leading-[1.08] tracking-[-0.035em] text-foreground">
               Curious by design.
               <br />
               Precise by engineering.
@@ -29,13 +26,16 @@ export default function Hero() {
             <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-neutral-500">
               Selected products
             </p>
-            <ul className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 font-sans text-[15px] font-medium text-foreground md:text-[16px]">
-              {products.map((product) => (
-                <li key={product} className="flex items-center gap-5">
+            <ul className="mt-3 flex w-full flex-nowrap items-center gap-x-4 overflow-x-auto whitespace-nowrap font-sans text-[15px] font-medium text-foreground md:gap-x-5 md:text-[16px]">
+              {products.map((product, index) => (
+                <li key={product} className="flex shrink-0 items-center gap-x-4 md:gap-x-5">
                   <span>{product}</span>
-                  <span aria-hidden="true" className="text-accent">
-                    /
-                  </span>
+                  {index < products.length - 1 && (
+                    <span
+                      aria-hidden="true"
+                      className="h-1 w-1 shrink-0 rounded-full bg-accent"
+                    />
+                  )}
                 </li>
               ))}
             </ul>
@@ -70,14 +70,14 @@ export default function Hero() {
       <div aria-hidden className="my-2 h-px w-full bg-white/15 md:my-3" />
 
       <div className="flex flex-col items-center justify-between gap-3 pb-1 pt-1 font-mono text-[12px] tracking-[0.04em] text-neutral-400 sm:flex-row md:text-[12px]">
-        <span>Independent studio / India</span>
+        <span>Technology studio / India</span>
         <a
           href="#featured-product"
           className="text-neutral-300 transition-colors duration-200 hover:text-foreground"
         >
           Selected work
         </a>
-        <span>Working globally / 2026</span>
+
       </div>
     </section>
   );
