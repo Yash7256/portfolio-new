@@ -47,7 +47,7 @@ export default function Faq() {
           <span className="text-neutral-500 font-sans">ヘルプ</span>
         </div>
         <div className="flex items-center gap-2">
-          <span>(WDX® — 12)</span>
+          <span>(WDX® · 12)</span>
           <span className="hidden sm:inline text-neutral-500">·</span>
           <span className="hidden sm:inline">Clarifications</span>
         </div>

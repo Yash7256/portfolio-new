@@ -11,13 +11,13 @@ export const meta: MetaFunction = ({ params }) => {
   const work = getWork(params.slug ?? "");
 
   if (!work) {
-    return [{ title: "Work not found — Anvik Labs" }];
+    return [{ title: "Work not found | Anvik Labs" }];
   }
 
   return [
-    { title: `${work.name} — Anvik Labs` },
+    { title: `${work.name} | Anvik Labs` },
     { name: "description", content: work.summary },
-    { property: "og:title", content: `${work.name} — Anvik Labs` },
+    { property: "og:title", content: `${work.name} | Anvik Labs` },
     { property: "og:description", content: work.summary },
   ];
 };
@@ -106,7 +106,7 @@ export default function WorkPage() {
               className={`${mono} mt-3 flex items-baseline justify-between gap-4`}
             >
               <span>
-                {work.name} — {work.year}
+                {work.name} / {work.year}
               </span>
               <span>{work.index}.01</span>
             </figcaption>
@@ -157,7 +157,7 @@ export default function WorkPage() {
                     className={`${mono} mt-3 flex items-baseline justify-between gap-4`}
                   >
                     <span>
-                      {work.name} — {work.index}.{String(index + 2).padStart(2, "0")}
+                      {work.name} / {work.index}.{String(index + 2).padStart(2, "0")}
                     </span>
                     <span>{work.year}</span>
                   </figcaption>

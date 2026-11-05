@@ -13,8 +13,8 @@ const servicesOptions = [
 
 const budgetOptions = [
   "Under $5k",
-  "$5k — $10k",
-  "$10k — $25k",
+  "$5k to $10k",
+  "$10k to $25k",
   "$25k+",
 ];
 
@@ -22,7 +22,7 @@ export default function Contact({ standalone = false }: { standalone?: boolean }
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedService, setSelectedService] = useState("Web Design");
-  const [selectedBudget, setSelectedBudget] = useState("$5k — $10k");
+  const [selectedBudget, setSelectedBudget] = useState("$5k to $10k");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
@@ -45,7 +45,7 @@ export default function Contact({ standalone = false }: { standalone?: boolean }
           <span className="text-neutral-500 font-sans">お問い合わせ</span>
         </div>
         <div className="flex items-center gap-2">
-          <span>(WDX® — CONTACT)</span>
+          <span>(WDX® · CONTACT)</span>
           <span className="hidden sm:inline text-neutral-500">·</span>
           <span className="hidden sm:inline">24/7 Remote</span>
         </div>

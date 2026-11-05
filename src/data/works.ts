@@ -72,7 +72,7 @@ export const works: Work[] = [
     intro:
       "Arcane Studio works slowly, and the identity needed to reflect that pace. We built a visual language from proportion, shadow and a deliberately limited palette.",
     body: [
-      "The mark is drawn from the geometry of a threshold — a line that separates one condition from another. It scales from a drawing stamp to a full-bleed title without losing its balance.",
+      "The mark is drawn from the geometry of a threshold, a line that separates one condition from another. It scales from a drawing stamp to a full-bleed title without losing its balance.",
       "The site pairs large architectural imagery with small, precise metadata. Navigation stays out of the way so the work can be read at its own scale.",
     ],
     hero: mockup(
@@ -98,7 +98,7 @@ export const works: Work[] = [
     category: "IDENTITY / PACKAGING / WEB",
     services: ["Brand Identity", "Packaging", "Web Design"],
     summary:
-      "A skincare label built around light — warm, direct and deliberately unadorned.",
+      "A skincare label built around light: warm, direct and deliberately unadorned.",
     intro:
       "Solara began with a simple observation: skincare is mostly a story about light and surface. The identity keeps both visible without turning them into decoration.",
     body: [

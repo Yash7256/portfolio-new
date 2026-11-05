@@ -67,7 +67,7 @@ export default function Pricing() {
           <span className="text-neutral-500 font-sans">料金</span>
         </div>
         <div className="flex items-center gap-2">
-          <span>(WDX® — 10)</span>
+          <span>(WDX® · 10)</span>
           <span className="hidden sm:inline text-neutral-500">·</span>
           <span className="hidden sm:inline">Transparent Tiers</span>
         </div>

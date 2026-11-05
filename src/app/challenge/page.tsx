@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import ComingSoon from "@/components/ComingSoon";
 
 export const meta: MetaFunction = () => [
-  { title: "Challenge — Anvik Labs" },
+  { title: "Challenge | Anvik Labs" },
   {
     name: "description",
     content: "The Anvik Labs challenge page is coming soon.",
@@ -18,7 +18,7 @@ export default function ChallengePage() {
       <main className="flex flex-1 flex-col pt-[var(--header-height)]">
         <ComingSoon
           label="CHALLENGE"
-          description="A new space for design challenges and prompts. I'm building it now — check back soon."
+          description="A new space for design challenges and prompts. I'm building it now. Check back soon."
         />
       </main>
       <Footer />

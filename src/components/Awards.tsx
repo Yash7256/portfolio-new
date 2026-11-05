@@ -38,7 +38,7 @@ export default function Awards() {
           <span className="text-neutral-500 font-sans">受賞歴</span>
         </div>
         <div className="flex items-center gap-2">
-          <span>(WDX® — 09)</span>
+          <span>(WDX® · 09)</span>
           <span className="hidden sm:inline text-neutral-500">·</span>
           <span className="hidden sm:inline">Global Honors</span>
         </div>

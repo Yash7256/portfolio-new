@@ -4,14 +4,14 @@ import { Link, type MetaFunction } from "react-router";
 import Navbar from "@/components/Navbar";
 
 export const meta: MetaFunction = () => [
-  { title: "Gallery — Anvik Labs" },
+  { title: "Gallery | Anvik Labs" },
   {
     name: "description",
     content: "Photography and visual studies from Anvik Labs.",
   },
   {
     property: "og:title",
-    content: "Gallery — Anvik Labs",
+    content: "Gallery | Anvik Labs",
   },
   {
     property: "og:description",
@@ -215,7 +215,7 @@ export default function GalleryPage() {
               <span className="text-white font-semibold">
                 © HELP CENTER ヘルプ
               </span>
-              <span className="text-neutral-500">(WDX® — 01)</span>
+                <span className="text-neutral-500">(WDX® · 01)</span>
             </div>
             <span className="text-neutral-500">CLARIFICATIONS</span>
           </div>
@@ -292,7 +292,7 @@ export default function GalleryPage() {
                 <span className="text-white font-semibold">
                   © FINAL SECTION クロージング
                 </span>
-                <span className="text-neutral-500">(WDX® — 12)</span>
+                <span className="text-neutral-500">(WDX® · 12)</span>
               </div>
               <span className="text-neutral-500">STUDIO WRAP</span>
             </div>

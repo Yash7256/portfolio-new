@@ -92,88 +92,56 @@ export default function Testimonials() {
           </motion.div>
         </div>
 
-        <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900/30 transition-colors duration-300 md:mt-8 md:rounded-3xl hover:border-white/20">
-          <div className="flex flex-col justify-between p-6 md:p-8 lg:p-10">
-            <div>
-              <div className="flex items-center justify-between gap-6">
-                <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
-                  <span className="h-px w-6 bg-accent" />
-                  <span>Client stories</span>
-                </div>
-                <span className="rounded-full bg-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-300">
-                  {story.sector}
-                </span>
+        <div className="mt-6 border-y border-white/15 md:mt-8">
+          <div className="grid gap-8 py-7 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:gap-12 md:py-10 lg:gap-20">
+            <div className="min-w-0">
+              <div className="mb-6 flex items-center justify-between gap-4">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">Client story</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent">{story.sector}</span>
               </div>
 
-              <div className="mt-8 min-h-[250px] md:mt-10 md:min-h-[270px]">
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div key={active} {...fade}>
-                    <blockquote>
-                      <p className="max-w-[48ch] text-pretty font-sans text-[clamp(1.5rem,2.2vw,2.4rem)] font-medium leading-[1.3] tracking-[-0.035em] text-[#EAE7E2]">
-                        {story.quote}
-                      </p>
-                    </blockquote>
-
-                    <div className="mt-8 flex items-start gap-3">
-                      <span className="mt-1.5 h-2 w-2 shrink-0 bg-accent" />
-                      <div>
-                        <p className="font-sans text-[15px] font-semibold tracking-[-0.01em] text-[#F5F1EA]">
-                          {story.person}
-                        </p>
-                        <p className="mt-1 inline-flex rounded-full bg-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-300">
-                          {story.role}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div key={active} {...fade}>
+                  <blockquote>
+                    <p className="max-w-[58ch] text-pretty font-sans text-[clamp(1.375rem,2.1vw,2.25rem)] font-medium leading-[1.35] tracking-[-0.03em] text-[#EAE7E2]">
+                      “{story.quote}”
+                    </p>
+                  </blockquote>
+                  <div className="mt-7 border-l border-accent/70 pl-4">
+                    <p className="font-sans text-[15px] font-semibold text-[#F5F1EA]">{story.person}</p>
+                    <p className="mt-1 font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-neutral-400">{story.role}</p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
-            <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-4">
-              <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400">
-                <span className="h-1.5 w-1.5 bg-accent/70" />
-                Verified testimonial
+            <div className="flex items-center justify-between gap-5 border-t border-white/10 pt-5 md:flex-col md:items-end md:justify-end md:border-0 md:pt-0">
+              <span aria-live="polite" className="font-mono text-[11px] tracking-[0.14em] text-neutral-300">
+                {String(active + 1).padStart(2, "0")} <span className="text-neutral-500">/</span> {total}
               </span>
-
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => goTo(-1)}
                   aria-label="Previous client story"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-neutral-950/50 text-neutral-400 transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-on-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+                  className="flex h-10 w-10 items-center justify-center border border-white/15 text-neutral-300 transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
                 >
                   <ArrowIcon direction="left" />
                 </button>
-
-                <span
-                  aria-live="polite"
-                  className="min-w-14 text-center font-mono text-[10px] tracking-[0.16em] text-neutral-300"
-                >
-                  {String(active + 1).padStart(2, "0")} / {total}
-                </span>
-
                 <button
                   type="button"
                   onClick={() => goTo(1)}
                   aria-label="Next client story"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-neutral-950/50 text-neutral-400 transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-on-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+                  className="flex h-10 w-10 items-center justify-center border border-white/15 text-neutral-300 transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
                 >
                   <ArrowIcon direction="right" />
                 </button>
               </div>
             </div>
           </div>
-
         </div>
 
-        <div className="mt-4">
-          <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400">
-            <span>Client names</span>
-            <span>{testimonials.length} positions</span>
-          </div>
-
-          <div className="grid grid-cols-1 border-l border-t border-white/10 md:grid-cols-2">
+        <div className="mt-5 grid grid-cols-1 border-l border-t border-white/10 sm:grid-cols-2">
             {testimonials.map((testimonial, index) => (
               <button
                 type="button"
@@ -181,30 +149,19 @@ export default function Testimonials() {
                 onClick={() => setActive(index)}
                 aria-label={`Show testimonial from ${testimonial.person}`}
                 aria-pressed={active === index}
-                className={`group flex h-16 items-center justify-center border-b border-r border-white/10 px-2 transition-colors duration-300 md:h-20 ${
+                className={`group flex min-h-14 items-center border-b border-r border-white/10 px-4 text-left transition-colors duration-300 md:min-h-16 md:px-5 ${
                   active === index
-                    ? "border-accent/40 bg-[#24170F] text-accent"
+                    ? "border-accent/40 bg-[#1B1510] text-accent"
                     : index % 2 === 0
                       ? "bg-background text-neutral-300"
                       : "bg-neutral-900/30 text-neutral-300"
-                } ${index === testimonials.length - 1 && testimonials.length % 2 !== 0 ? "md:col-span-2" : ""}`}
+                } ${index === testimonials.length - 1 && testimonials.length % 2 !== 0 ? "sm:col-span-2" : ""}`}
               >
-                <div className="w-full !whitespace-nowrap text-center font-mono text-[clamp(0.72rem,1.1vw,0.9375rem)] font-semibold uppercase tracking-[0.06em] leading-none transition-colors duration-300 group-hover:text-accent">
+                <div className="w-full whitespace-nowrap font-mono text-[clamp(0.72rem,1.1vw,0.9375rem)] font-semibold uppercase tracking-[0.06em] leading-none transition-colors duration-300 group-hover:text-accent">
                   {testimonial.person}
                 </div>
               </button>
             ))}
-          </div>
-        </div>
-
-        <div className="mt-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-          <p className="max-w-[68ch] font-mono text-[9px] uppercase leading-relaxed tracking-[0.14em] text-neutral-400">
-            Testimonials from collaborators and clients across design, development,
-            and digital product work.
-          </p>
-          <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-400">
-            {testimonials.length} clients / 2 columns
-          </span>
         </div>
       </div>
     </section>

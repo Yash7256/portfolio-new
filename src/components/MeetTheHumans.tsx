@@ -15,8 +15,10 @@ type PortraitProps = {
   alt: string;
   name: string;
   role: string;
+  description: string;
   index: string;
   label: string;
+  watermark: string;
   id: string;
   delay?: number;
   imagePositionClassName: string;
@@ -32,8 +34,10 @@ function Portrait({
   alt,
   name,
   role,
+  description,
   index,
   label,
+  watermark,
   id,
   delay = 0,
   imagePositionClassName,
@@ -49,8 +53,6 @@ function Portrait({
   const springY = useSpring(pointerY, { stiffness: 180, damping: 24, mass: 0.45 });
   const imageX = useTransform(springX, [-0.5, 0.5], [-4, 4]);
   const imageY = useTransform(springY, [-0.5, 0.5], [-3, 3]);
-  const watermarkX = useTransform(springX, [-0.5, 0.5], [-2, 2]);
-  const watermarkY = useTransform(springY, [-0.5, 0.5], [-1.5, 1.5]);
 
   const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
     if (reduceMotion || event.pointerType !== "mouse") return;
@@ -73,18 +75,11 @@ function Portrait({
       transition={{ type: "spring", stiffness: 120, damping: 22, mass: 0.7, delay }}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
-      className={`relative overflow-hidden rounded-[5px] bg-black ring-1 transition-colors duration-500 ${isOppositeHovered ? "ring-white/30" : "ring-white/10"}`}
+      className={`group/portrait relative overflow-hidden rounded-[5px] bg-black ring-1 transition-colors duration-500 ${isOppositeHovered ? "ring-white/30" : "ring-white/10"}`}
     >
       <div
         className="relative aspect-[4/5] w-full overflow-hidden bg-black"
       >
-        <motion.img
-          src="/logo.svg"
-          alt="Anvik Labs watermark"
-          style={{ x: watermarkX, y: watermarkY }}
-          className="pointer-events-none absolute inset-0 z-0 h-full w-full translate-y-32"
-        />
-
         {showFavicon && (
           <img
             src="/favicon.svg"
@@ -92,6 +87,22 @@ function Portrait({
             aria-hidden="true"
             className={`pointer-events-none absolute ${faviconPositionClassName} ${faviconVerticalPositionClassName} z-10 h-full w-full object-contain opacity-20`}
           />
+        )}
+
+        {watermark === "Designer" || watermark === "Engineer" ? (
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute bottom-6 top-6 z-10 flex items-center font-mono text-[clamp(1rem,2.4vw,1.75rem)] font-semibold uppercase leading-none tracking-[0.18em] text-white/20 [writing-mode:vertical-rl] ${watermark === "Designer" ? "left-3 rotate-180" : "right-3"}`}
+          >
+            {watermark}
+          </span>
+        ) : (
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute right-5 top-6 z-10 whitespace-nowrap text-right font-mono text-[clamp(1rem,2.2vw,2rem)] font-semibold uppercase leading-none tracking-[0.12em] text-white/20"
+          >
+            {watermark}
+          </span>
         )}
 
         <motion.div
@@ -108,7 +119,7 @@ function Portrait({
               alt={alt}
               loading="lazy"
               decoding="async"
-              className={`h-full w-full origin-top scale-[1.1] object-contain object-bottom brightness-[1.12] contrast-[1.08] saturate-[1.03] ${imagePositionClassName}`}
+              className={`h-full w-full origin-top scale-[1.1] object-contain object-bottom brightness-[1.06] contrast-[1.16] saturate-[1.04] transition-[filter] duration-500 md:group-hover/portrait:blur-[3px] ${imagePositionClassName}`}
             />
           </motion.div>
         </motion.div>
@@ -118,6 +129,12 @@ function Portrait({
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"
       />
+
+      <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center bg-black/65 p-8 opacity-100 transition-opacity duration-300 md:bg-black/70 md:p-10 md:opacity-0 md:backdrop-blur-[2px] md:group-hover/portrait:opacity-100">
+        <p className="max-w-[38ch] text-pretty text-center font-sans text-[15px] font-medium leading-relaxed text-[#F5F1EA] md:text-[18px]">
+          {description}
+        </p>
+      </div>
 
       <div className="sr-only">
         <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-white/70">
@@ -197,8 +214,10 @@ export default function MeetTheHumans() {
             alt="Harshita Upadhyay, designer at Anvik Labs"
             name="Harshita Upadhyay"
             role="Design / Product & UI"
+            description="Harshita is the designer in the room, part systems thinker, part compulsive doodler. She turns tangled product flows into interfaces that feel obvious, then worries the last two percent until they feel inevitable."
             index="01"
             label="The Designer"
+            watermark="Designer"
             id="human-harshita"
             imagePositionClassName="translate-y-6 md:translate-y-7"
             showFavicon
@@ -213,61 +232,22 @@ export default function MeetTheHumans() {
             transition={{ type: "spring", stiffness: 110, damping: 22, mass: 0.7, delay: 0.12 }}
             className="mt-4 md:mt-5"
           >
-            <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
-              <span className="text-accent">01</span>
-              <span aria-hidden="true" className="h-px w-5 bg-white/20" />
-              <span>The Designer</span>
-            </div>
             <h3
               id="human-harshita"
-              className="mt-3 font-sans text-[clamp(1.875rem,3vw,2.25rem)] font-medium leading-none tracking-[-0.04em] text-[#F5F1EA]"
+              className="mt-3 font-sans text-[clamp(2.125rem,3.5vw,2.75rem)] font-medium leading-none tracking-[-0.04em] text-[#F5F1EA]"
             >
               Harshita Upadhyay
             </h3>
-            <motion.span
-              aria-hidden="true"
-              animate={{ width: hoveredProfile === "harshita" ? "3.5rem" : "2rem" }}
-              transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.35 }}
-              className="mt-3 block h-px bg-accent"
-            />
-            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-300">
+            <p className="mt-2 font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-neutral-300 md:text-[13px]">
               Design / Product / UI
             </p>
-            <p className="mt-5 max-w-[46ch] text-pretty text-[13px] leading-[1.65] text-neutral-300 md:text-[14px]">
-              Harshita is the designer in the room — part systems thinker, part
+            <p className="mt-5 max-w-[46ch] text-pretty text-[13px] leading-[1.65] text-neutral-300 md:hidden">
+              Harshita is the designer in the room, part systems thinker, part
               compulsive doodler. She turns tangled product flows into interfaces
               that feel obvious, then worries the last two percent until they feel
               inevitable.
             </p>
 
-            <div className="mt-7 grid gap-6 sm:grid-cols-[1.1fr_0.9fr] sm:gap-8">
-              <div className="relative self-start border-l border-accent/30 pl-4">
-                <motion.span
-                  aria-hidden="true"
-                  initial={reduceMotion ? { height: "100%" } : { height: 0 }}
-                  whileInView={{ height: "100%" }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ type: "spring", stiffness: 170, damping: 24, mass: 0.5, delay: 0.08 }}
-                  className="absolute left-[-1px] top-0 w-px bg-accent"
-                />
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent transition-opacity duration-300 group-hover/profile:opacity-100">
-                  Enjoys building
-                </span>
-                <p className="mt-2.5 text-[13px] leading-[1.6] text-neutral-300 md:text-[14px]">
-                  Interfaces that make complicated products feel calm — and the
-                  systems that keep them honest.
-                </p>
-              </div>
-
-              <dl className="border-t border-white/10 pt-5 sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
-                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400 transition-opacity duration-300 group-hover/profile:opacity-100">
-                  Off the clock
-                </dt>
-                <dd className="mt-2.5 max-w-[24ch] text-[13px] leading-[1.6] text-neutral-300 md:text-[14px]">
-                  design systems, typography, user research, ceramics
-                </dd>
-              </dl>
-            </div>
           </motion.div>
         </article>
 
@@ -282,8 +262,10 @@ export default function MeetTheHumans() {
             alt="Yash, engineer at Anvik Labs"
             name="Yash"
             role="Engineering / Product"
+            description="Yash is the engineer who loves the invisible work: architecture, performance, and the small decisions that keep a product fast and honest. He prototypes early, breaks things on purpose, and rebuilds them simpler."
             index="02"
             label="The Engineer"
+            watermark="Engineer"
             id="human-yash"
             delay={0.18}
             imagePositionClassName="translate-y-4 md:translate-y-5"
@@ -301,61 +283,22 @@ export default function MeetTheHumans() {
             transition={{ type: "spring", stiffness: 110, damping: 22, mass: 0.7, delay: 0.3 }}
             className="mt-4 md:mt-5"
           >
-            <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
-              <span className="text-accent">02</span>
-              <span aria-hidden="true" className="h-px w-5 bg-white/20" />
-              <span>The Engineer</span>
-            </div>
             <h3
               id="human-yash"
-              className="mt-3 font-sans text-[clamp(1.875rem,3vw,2.25rem)] font-medium leading-none tracking-[-0.04em] text-[#F5F1EA]"
+              className="mt-3 font-sans text-[clamp(2.125rem,3.5vw,2.75rem)] font-medium leading-none tracking-[-0.04em] text-[#F5F1EA]"
             >
               Aman Raj
             </h3>
-            <motion.span
-              aria-hidden="true"
-              animate={{ width: hoveredProfile === "yash" ? "3.5rem" : "2rem" }}
-              transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.35 }}
-              className="mt-3 block h-px bg-accent"
-            />
-            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-300">
+            <p className="mt-2 font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-neutral-300 md:text-[13px]">
               Engineering / Product
             </p>
-            <p className="mt-5 max-w-[46ch] text-pretty text-[13px] leading-[1.65] text-neutral-300 md:text-[14px]">
+            <p className="mt-5 max-w-[46ch] text-pretty text-[13px] leading-[1.65] text-neutral-300 md:hidden">
               Yash is the engineer who loves the invisible work: architecture,
               performance, and the small decisions that keep a product fast and
               honest. He prototypes early, breaks things on purpose, and rebuilds
               them simpler.
             </p>
 
-            <div className="mt-7 grid gap-6 sm:grid-cols-[1.1fr_0.9fr] sm:gap-8">
-              <div className="relative self-start border-l border-accent/30 pl-4">
-                <motion.span
-                  aria-hidden="true"
-                  initial={reduceMotion ? { height: "100%" } : { height: 0 }}
-                  whileInView={{ height: "100%" }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ type: "spring", stiffness: 170, damping: 24, mass: 0.5, delay: 0.08 }}
-                  className="absolute left-[-1px] top-0 w-px bg-accent"
-                />
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent transition-opacity duration-300 group-hover/profile:opacity-100">
-                  Enjoys building
-                </span>
-                <p className="mt-2.5 text-[13px] leading-[1.6] text-neutral-300 md:text-[14px]">
-                  Tools that make complex products feel effortless — and the
-                  scaffolding that lets design move fast without breaking.
-                </p>
-              </div>
-
-              <dl className="border-t border-white/10 pt-5 sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
-                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400 transition-opacity duration-300 group-hover/profile:opacity-100">
-                  Off the clock
-                </dt>
-                <dd className="mt-2.5 max-w-[24ch] text-[13px] leading-[1.6] text-neutral-300 md:text-[14px]">
-                  product engineering, performance, open source, film photography
-                </dd>
-              </dl>
-            </div>
           </motion.div>
         </article>
 

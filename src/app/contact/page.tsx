@@ -5,13 +5,13 @@ import Contact from "@/components/Contact";
 import Faq from "@/components/Faq";
 
 export const meta: MetaFunction = () => [
-  { title: "Contact — Anvik Labs" },
+  { title: "Contact | Anvik Labs" },
   {
     name: "description",
     content:
       "Contact Anvik Labs about product design and engineering work.",
   },
-  { property: "og:title", content: "Contact — Anvik Labs" },
+  { property: "og:title", content: "Contact | Anvik Labs" },
   {
     property: "og:description",
     content:
