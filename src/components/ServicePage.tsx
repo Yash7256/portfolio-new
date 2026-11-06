@@ -48,7 +48,7 @@ export default function ServicePage({ service, index }: { service: Service; inde
                 <div>
                   <p className="mb-5 font-mono text-[12px] uppercase tracking-[0.18em] text-neutral-500">Overview</p>
                   <p className="max-w-[28ch] font-sans text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.05] tracking-[-0.03em] text-foreground">{service.lead}</p>
-                  <p className="mt-6 max-w-[58ch] text-[14px] leading-relaxed text-neutral-400 sm:text-[15px]">{service.intro} See <Link to="/works" className="text-neutral-200 underline decoration-white/30 underline-offset-4 transition-colors hover:text-accent">selected work</Link>.</p>
+                  <p className="mt-6 max-w-[58ch] text-[14px] leading-relaxed text-neutral-400 sm:text-[15px]">{service.intro}</p>
                 </div>
                 <GlanceCard items={service.glance.filter(([label]) => label !== "Based in")} />
               </div>

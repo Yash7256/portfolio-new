@@ -23,7 +23,13 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-GB", {
+  const date = new Date(iso);
+
+  if (Number.isNaN(date.getTime())) {
+    return iso;
+  }
+
+  return date.toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -100,7 +106,7 @@ export default function JournalPage() {
                     <span className="font-mono text-[11px] text-neutral-500">
                       {formatDate(post.date)}
                     </span>
-                    <span className="font-mono text-[11px] text-neutral-600">{post.readTime}</span>
+                    <span className="font-mono text-[11px] text-neutral-600">{post.source ?? post.readTime}</span>
                   </div>
 
                   {/* Title */}
@@ -113,6 +119,16 @@ export default function JournalPage() {
                     {post.excerpt}
                   </p>
 
+                  {post.image && (
+                    <img
+                      src={post.image}
+                      alt={post.imageAlt ?? post.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="mt-2 block aspect-[16/9] w-full max-w-[360px] rounded-[4px] object-cover md:ml-auto md:max-w-[240px]"
+                    />
+                  )}
+
                   {/* CTA */}
                   {!post.draft && (
                     <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-400 transition-colors duration-200 group-hover:text-accent">
@@ -124,6 +140,17 @@ export default function JournalPage() {
 
               return post.draft ? (
                 <article key={post.id}>{inner}</article>
+              ) : post.externalUrl ? (
+                <article key={post.id}>
+                  <a
+                    href={post.externalUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group block transition-colors duration-200 hover:bg-white/[0.02] focus-visible:outline-offset-[-4px]"
+                  >
+                    {inner}
+                  </a>
+                </article>
               ) : (
                 <article key={post.id}>
                   <Link

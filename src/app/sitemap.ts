@@ -41,7 +41,7 @@ export function loader() {
       priority: "0.6",
     })),
     ...journal
-      .filter((post) => !post.draft)
+      .filter((post) => !post.draft && !post.externalUrl)
       .map((post) => ({
         loc: url(`/journal/${post.id}`),
         changefreq: "monthly" as const,

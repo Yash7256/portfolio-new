@@ -9,7 +9,9 @@ const mono =
   "font-mono uppercase tracking-[0.14em] text-[11px] leading-[1.2]";
 
 function getPost(id: string) {
-  return journal.find((post) => post.id === id && !post.draft);
+  return journal.find(
+    (post) => post.id === id && !post.draft && !post.externalUrl,
+  );
 }
 
 function formatDate(iso: string) {

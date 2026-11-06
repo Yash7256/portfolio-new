@@ -1,30 +1,5 @@
-type Article = {
-  id: string;
-  author: string;
-  date: string;
-  title: string;
-  description: string;
-  category: string;
-  href: string;
-  image?: string;
-  imageAlt?: string;
-};
-
-const articles: Article[] = [
-  {
-    id: "harshita-linkedin",
-    author: "Harshita Upadhyay",
-    date: "LinkedIn",
-    title: "Why Developers Need UI/UX & Product Designers: A Love Letter",
-    description:
-      "A thoughtful look at how developers and product designers can collaborate to build clearer, more human digital products.",
-    category: "Product Design",
-    href: "https://www.linkedin.com/pulse/why-developers-need-uiux-product-designers-love-letter-upadhyay-y6nuf/",
-    image: "/lovelettertodevs.jpeg",
-    imageAlt:
-      "Cover artwork for Why Developers Need UI/UX & Product Designers: A Love Letter",
-  },
-];
+import { Link } from "react-router";
+import { homepageJournalArticles } from "@/data/journal";
 
 export default function Articles() {
   return (
@@ -42,7 +17,7 @@ export default function Articles() {
         </h2>
       </div>
 
-      {articles.map((item) => (
+      {homepageJournalArticles.map((item) => (
         <a
           key={item.id}
           href={item.href}
@@ -91,6 +66,17 @@ export default function Articles() {
           )}
         </a>
       ))}
+
+      <div className="mt-8 flex justify-center md:justify-start">
+        <Link
+          to="/journal"
+          className="inline-flex items-center justify-center rounded-full border border-white/20 px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-300 transition-colors hover:border-white/50 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+        >
+          See more <span className="ml-2" aria-hidden="true">
+            →
+          </span>
+        </Link>
+      </div>
     </section>
   );
 }

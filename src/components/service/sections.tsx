@@ -26,7 +26,7 @@ export function NumberedGrid({ items }: { items: string[] }) {
       {items.map((item, index) => (
         <div
           key={item}
-          className="group border-b border-white/10 px-0 py-4 transition-colors hover:bg-accent-wash sm:px-4 sm:py-5 sm:odd:border-r sm:[&:nth-child(odd):last-child]:border-r-0"
+          className="border-b border-white/10 px-0 py-4 sm:px-4 sm:py-5 sm:odd:border-r sm:[&:nth-child(odd):last-child]:border-r-0"
         >
           <span className="font-mono text-[12px] tracking-[0.12em] text-accent">[{String(index + 1).padStart(2, "0")}]</span>
           <p className="mt-2 max-w-[34ch] text-[14px] leading-relaxed text-neutral-200 sm:text-[15px]">{item}</p>
