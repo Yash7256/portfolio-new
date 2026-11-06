@@ -33,7 +33,7 @@ export default function WorkPage() {
       <>
         <Navbar />
         <main id="main-content" className="flex flex-1 flex-col items-start justify-center gap-6 pt-24 md:pt-28">
-          <h1 className="font-sans text-[clamp(40px,7vw,96px)] font-medium uppercase leading-[0.9] tracking-[-0.05em]">
+          <h1 className="font-sans text-[clamp(2rem,7vw,6rem)] font-medium uppercase leading-[0.9] tracking-[-0.05em] break-words">
             Work not found
           </h1>
           <Link
@@ -66,16 +66,16 @@ export default function WorkPage() {
               <span>[{work.index}]</span>
             </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-6 md:mt-16 md:grid-cols-[50%_1fr] md:items-end md:gap-8">
-              <h1 className="font-sans text-[clamp(44px,7vw,120px)] font-medium uppercase leading-[0.85] tracking-[-0.05em]">
+            <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 md:mt-16 md:grid-cols-[50%_1fr] md:items-end md:gap-8">
+              <h1 className="font-sans text-[clamp(2rem,7vw,7.5rem)] font-medium uppercase leading-[0.88] tracking-[-0.05em] break-words">
                 {work.name}
               </h1>
-              <p className="max-w-[42ch] font-sans text-[18px] leading-[1.35] md:pb-2 md:text-[20px]">
+              <p className="max-w-[42ch] font-sans text-[15px] sm:text-[18px] leading-[1.4] md:pb-2 md:text-[20px]">
                 {work.summary}
               </p>
             </div>
 
-            <dl className="mt-12 grid grid-cols-2 gap-x-4 gap-y-6 border-y border-border py-6 md:mt-16 md:grid-cols-4 md:gap-8">
+            <dl className="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 border-y border-border py-5 sm:mt-12 sm:py-6 md:mt-16 md:grid-cols-4 md:gap-8">
               <div className="flex flex-col gap-2">
                 <dt className={`${mono} text-muted`}>DISCIPLINES</dt>
                 <dd className={`${mono}`}>{work.services.join(" / ")}</dd>

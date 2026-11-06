@@ -65,9 +65,17 @@ export default function Services() {
             <span className="font-sans text-[14px] text-neutral-400 md:text-[15px]">
               {item.discipline}
             </span>
-            <div className="flex items-center justify-between gap-6 font-mono text-[12px] text-neutral-400 md:justify-end md:text-[12px]">
+            <div className="flex items-center justify-between gap-4 font-mono text-[12px] text-neutral-400 md:justify-end md:gap-6">
               <span className="text-neutral-500">{item.detail}</span>
-              <span className="text-neutral-300">{item.scope}</span>
+              <span className="inline-flex items-center gap-1.5 text-neutral-300">
+                {item.scope}
+                <span
+                  aria-hidden="true"
+                  className="text-neutral-500 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-accent md:hidden"
+                >
+                  →
+                </span>
+              </span>
             </div>
             <span
               aria-hidden="true"

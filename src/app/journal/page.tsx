@@ -37,12 +37,12 @@ export default function JournalPage() {
 
       <main id="main-content" className="flex flex-1 flex-col pt-[var(--header-height)]">
         {/* Mobile header */}
-        <header className="border-b border-white/10 px-4 py-10 sm:px-[4vw] md:hidden">
-          <p className={`${mono} text-neutral-500`}>Writing</p>
-          <h1 className="mt-4 font-sans text-[clamp(4rem,16vw,8rem)] font-medium leading-[0.85] tracking-[-0.05em] text-foreground">
+        <header className="border-b border-white/10 px-4 py-8 sm:px-[4vw] sm:py-10 md:hidden">
+          <p className={`${mono} text-neutral-500`}>Writing · {String(journal.length).padStart(2, "0")} articles</p>
+          <h1 className="mt-3 font-sans text-[clamp(2.75rem,14vw,7rem)] font-medium leading-[0.88] tracking-[-0.05em] text-foreground break-words">
             Journal.
           </h1>
-          <p className="mt-5 text-[14px] leading-relaxed text-neutral-400">
+          <p className="mt-3 text-[13px] sm:text-[14px] leading-relaxed text-neutral-400">
             Thoughts on design, engineering, and building products.
           </p>
         </header>
@@ -59,7 +59,7 @@ export default function JournalPage() {
               </div>
 
               <div>
-                <h1 className="font-sans text-[clamp(4.5rem,8vw,8.5rem)] font-medium leading-[0.85] tracking-[-0.055em] text-foreground">
+                <h1 className="font-sans text-[clamp(4rem,7vw,8rem)] font-medium leading-[0.85] tracking-[-0.055em] text-foreground">
                   Journal.
                 </h1>
                 <p className="mt-6 max-w-[32ch] text-[14px] leading-relaxed text-neutral-400 lg:text-[15px]">
@@ -80,10 +80,10 @@ export default function JournalPage() {
               const colorCls = CATEGORY_COLORS[post.category] ?? "border-white/20 text-neutral-300";
               const inner = (
                 <div
-                  className={`flex flex-col gap-4 px-4 py-10 sm:px-[4vw] md:px-8 lg:px-10 xl:px-12${post.draft ? " opacity-60" : ""}`}
+                  className={`flex flex-col gap-3 px-4 py-6 sm:gap-4 sm:px-[4vw] sm:py-8 md:px-8 lg:px-10 xl:px-12${post.draft ? " opacity-60" : ""}`}
                 >
                   {/* Meta row */}
-                  <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                     <span className="font-mono text-[11px] text-neutral-600">
                       {String(idx + 1).padStart(3, "0")}
                     </span>
@@ -104,18 +104,18 @@ export default function JournalPage() {
                   </div>
 
                   {/* Title */}
-                  <h2 className="max-w-[52ch] font-sans text-[clamp(1.2rem,2.2vw,1.75rem)] font-medium leading-tight tracking-[-0.025em] text-foreground transition-colors duration-200 group-hover:text-accent">
+                  <h2 className="max-w-[52ch] font-sans text-[clamp(1.15rem,2.2vw,1.75rem)] font-medium leading-tight tracking-[-0.025em] text-foreground transition-colors duration-200 group-hover:text-accent break-words">
                     {post.title}
                   </h2>
 
                   {/* Excerpt */}
-                  <p className="max-w-[58ch] text-[14px] leading-relaxed text-neutral-400">
+                  <p className="max-w-[58ch] text-[13px] sm:text-[14px] leading-relaxed text-neutral-400">
                     {post.excerpt}
                   </p>
 
                   {/* CTA */}
                   {!post.draft && (
-                    <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500 transition-colors duration-200 group-hover:text-accent">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-400 transition-colors duration-200 group-hover:text-accent">
                       Read article →
                     </span>
                   )}

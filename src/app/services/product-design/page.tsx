@@ -43,14 +43,22 @@ export default function ProductDesignPage() {
 
       <main id="main-content" className="flex flex-1 flex-col pt-[var(--header-height)]">
         {/* Mobile header */}
-        <header className="border-b border-white/10 px-4 py-10 sm:px-[4vw] md:hidden">
+        <header className="border-b border-white/10 px-4 py-8 sm:px-[4vw] sm:py-10 md:hidden">
           <p className={`${mono} text-neutral-500`}>Service [02] · Design</p>
-          <h1 className="mt-4 font-sans text-[clamp(3rem,14vw,6rem)] font-medium leading-[0.88] tracking-[-0.05em] text-foreground">
+          <h1 className="mt-3 font-sans text-[clamp(2.25rem,10vw,5rem)] font-medium leading-[0.92] tracking-[-0.05em] text-foreground break-words">
             Product Design.
           </h1>
-          <p className="mt-5 text-[14px] leading-relaxed text-neutral-400">
+          <p className="mt-4 text-[13px] sm:text-[14px] leading-relaxed text-neutral-400">
             Research-grounded interfaces that feel inevitable to use.
           </p>
+          <div className="mt-6">
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 font-sans text-[13px] font-semibold tracking-tight text-black transition-colors hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Start a project →
+            </Link>
+          </div>
         </header>
 
         <div className="flex flex-1 flex-col md:flex-row">
@@ -63,7 +71,7 @@ export default function ProductDesignPage() {
               </div>
 
               <div>
-                <h1 className="font-sans text-[clamp(3rem,5.5vw,6rem)] font-medium leading-[0.88] tracking-[-0.055em] text-foreground">
+                <h1 className="font-sans text-[clamp(2.75rem,5vw,5.5rem)] font-medium leading-[0.88] tracking-[-0.055em] text-foreground">
                   Product Design.
                 </h1>
                 <p className="mt-6 max-w-[32ch] text-[14px] leading-relaxed text-neutral-400 lg:text-[15px]">
@@ -85,9 +93,9 @@ export default function ProductDesignPage() {
           <div className="flex-1 divide-y divide-white/10 border-t border-white/10 md:border-t-0">
 
             {/* Overview */}
-            <section className="px-4 py-14 sm:px-[4vw] md:px-8 lg:px-12 lg:py-16">
-              <p className={`${mono} mb-6 text-neutral-500`}>Overview</p>
-              <div className="max-w-[64ch] space-y-5 text-[15px] leading-relaxed text-neutral-300">
+            <section className="px-4 py-8 sm:px-[4vw] sm:py-10 md:px-8 md:py-12 lg:px-12 lg:py-16">
+              <p className={`${mono} mb-5 text-neutral-500`}>Overview</p>
+              <div className="max-w-[64ch] space-y-4 sm:space-y-5 text-[14px] sm:text-[15px] leading-relaxed text-neutral-300">
                 <p>
                   Good product design is invisible. Users accomplish what they set out to do without
                   friction, confusion, or second-guessing. We get there through research first —
@@ -107,13 +115,13 @@ export default function ProductDesignPage() {
             </section>
 
             {/* What's included */}
-            <section className="px-4 py-14 sm:px-[4vw] md:px-8 lg:px-12 lg:py-16">
-              <p className={`${mono} mb-6 text-neutral-500`}>What&apos;s included</p>
-              <ul className="space-y-4" aria-label="Deliverables">
+            <section className="px-4 py-8 sm:px-[4vw] sm:py-10 md:px-8 md:py-12 lg:px-12 lg:py-16">
+              <p className={`${mono} mb-5 text-neutral-500`}>What&apos;s included</p>
+              <ul className="space-y-3.5 sm:space-y-4" aria-label="Deliverables">
                 {included.map((item) => (
                   <li
                     key={item}
-                    className="border-l-2 border-accent pl-4 text-[15px] leading-snug text-neutral-300"
+                    className="border-l-2 border-accent pl-3.5 sm:pl-4 text-[14px] sm:text-[15px] leading-snug text-neutral-300"
                   >
                     {item}
                   </li>
@@ -122,44 +130,44 @@ export default function ProductDesignPage() {
             </section>
 
             {/* Process */}
-            <section className="px-4 py-14 sm:px-[4vw] md:px-8 lg:px-12 lg:py-16">
-              <p className={`${mono} mb-8 text-neutral-500`}>Process</p>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <section className="px-4 py-8 sm:px-[4vw] sm:py-10 md:px-8 md:py-12 lg:px-12 lg:py-16">
+              <p className={`${mono} mb-6 sm:mb-8 text-neutral-500`}>Process</p>
+              <div className="grid gap-3.5 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {process.map(({ step, label, desc }) => (
-                  <div key={step} className="border border-white/10 p-5">
+                  <div key={step} className="border border-white/10 p-4 sm:p-5">
                     <p className="font-mono text-[11px] text-neutral-600">{step}</p>
-                    <p className="mt-3 font-sans text-[16px] font-semibold text-foreground">{label}</p>
-                    <p className="mt-2 text-[13px] leading-relaxed text-neutral-500">{desc}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Why Anvik Labs */}
-            <section className="px-4 py-14 sm:px-[4vw] md:px-8 lg:px-12 lg:py-16">
-              <p className={`${mono} mb-6 text-neutral-500`}>Why Anvik Labs</p>
-              <div className="divide-y divide-white/10 border-y border-white/10">
-                {whyUs.map(({ title, desc }) => (
-                  <div key={title} className="py-5">
-                    <p className="font-sans text-[15px] font-semibold text-foreground">{title}</p>
+                    <p className="mt-2.5 font-sans text-[15px] sm:text-[16px] font-semibold text-foreground">{label}</p>
                     <p className="mt-1.5 text-[13px] leading-relaxed text-neutral-400">{desc}</p>
                   </div>
                 ))}
               </div>
             </section>
 
+            {/* Why Anvik Labs */}
+            <section className="px-4 py-8 sm:px-[4vw] sm:py-10 md:px-8 md:py-12 lg:px-12 lg:py-16">
+              <p className={`${mono} mb-5 text-neutral-500`}>Why Anvik Labs</p>
+              <div className="divide-y divide-white/10 border-y border-white/10">
+                {whyUs.map(({ title, desc }) => (
+                  <div key={title} className="py-4 sm:py-5">
+                    <p className="font-sans text-[14px] sm:text-[15px] font-semibold text-foreground">{title}</p>
+                    <p className="mt-1 text-[13px] leading-relaxed text-neutral-400">{desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             {/* CTA row */}
-            <section className="px-4 py-14 sm:px-[4vw] md:px-8 lg:px-12 lg:py-16">
-              <div className="flex flex-wrap items-center gap-6">
+            <section className="px-4 py-8 sm:px-[4vw] sm:py-10 md:px-8 md:py-12 lg:px-12 lg:py-16">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-sans text-[14px] font-semibold tracking-tight text-black transition-colors hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 sm:px-6 sm:py-3 font-sans text-[13px] sm:text-[14px] font-semibold tracking-tight text-black transition-colors hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   Start a project <span aria-hidden="true">→</span>
                 </Link>
                 <Link
                   to="/#services"
-                  className="font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-500 transition-colors hover:text-accent"
+                  className="font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-400 transition-colors hover:text-accent"
                 >
                   ← All services
                 </Link>

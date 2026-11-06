@@ -39,13 +39,16 @@ export default function WorksPage() {
         className="flex flex-1 flex-col pt-[var(--header-height)]"
       >
         {/* ── Mobile header (shown below md) ───────────────────────────────── */}
-        <header className="border-b border-white/10 px-4 py-10 sm:px-[4vw] md:hidden">
+        <header className="border-b border-white/10 px-4 py-8 sm:px-[4vw] sm:py-10 md:hidden">
           <p className={`${mono} text-neutral-500`}>
             Selected work · {String(projects.length).padStart(2, "0")} projects
           </p>
-          <h1 className="mt-4 font-sans text-[clamp(4rem,16vw,8rem)] font-medium leading-[0.85] tracking-[-0.05em] text-foreground">
+          <h1 className="mt-3 font-sans text-[clamp(2.75rem,14vw,7rem)] font-medium leading-[0.88] tracking-[-0.05em] text-foreground break-words">
             Works.
           </h1>
+          <p className="mt-3 text-[13px] sm:text-[14px] leading-relaxed text-neutral-400">
+            Identity, editorial, product and web — each project designed and built by the same small team.
+          </p>
         </header>
 
         {/* ── Two-column split (md+) ────────────────────────────────────────── */}
@@ -64,7 +67,7 @@ export default function WorksPage() {
 
               {/* Centre heading */}
               <div>
-                <h1 className="font-sans text-[clamp(4.5rem,8vw,8.5rem)] font-medium leading-[0.85] tracking-[-0.055em] text-foreground">
+                <h1 className="font-sans text-[clamp(4rem,7vw,8rem)] font-medium leading-[0.85] tracking-[-0.055em] text-foreground">
                   Works.
                 </h1>
                 <p className="mt-6 max-w-[32ch] text-[14px] leading-relaxed text-neutral-400 lg:text-[15px]">
@@ -87,7 +90,7 @@ export default function WorksPage() {
               <article key={project.id}>
                 <Link
                   to={`/works/${project.id}`}
-                  className="group flex flex-col gap-5 px-4 py-8 transition-colors duration-200 hover:bg-white/[0.02] focus-visible:outline-offset-[-4px] sm:px-[4vw] md:flex-row md:items-center md:gap-7 md:px-8 md:py-9 lg:px-10 lg:py-10 xl:px-12"
+                  className="group flex flex-col gap-4 px-4 py-6 transition-colors duration-200 hover:bg-white/[0.02] focus-visible:outline-offset-[-4px] sm:gap-5 sm:px-[4vw] sm:py-8 md:flex-row md:items-center md:gap-7 md:px-8 md:py-9 lg:px-10 lg:py-10 xl:px-12"
                 >
                   {/* Cover image */}
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-light-surface md:w-[220px] md:shrink-0 lg:w-[260px] xl:w-[300px]">
@@ -101,9 +104,9 @@ export default function WorksPage() {
                   </div>
 
                   {/* Text block */}
-                  <div className="flex flex-1 flex-col justify-center gap-2 min-w-0">
+                  <div className="flex flex-1 flex-col justify-center gap-1.5 sm:gap-2 min-w-0">
                     {/* Index + badges */}
-                    <div className="flex flex-wrap items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                       <span className={`${mono} text-neutral-600`}>
                         {String(index + 1).padStart(3, "0")}
                       </span>
@@ -124,21 +127,21 @@ export default function WorksPage() {
                     </div>
 
                     {/* Name */}
-                    <h2 className="font-sans text-[clamp(1.4rem,2.4vw,2rem)] font-medium leading-tight tracking-[-0.03em] text-foreground transition-colors duration-200 group-hover:text-accent">
+                    <h2 className="font-sans text-[clamp(1.2rem,2.2vw,1.85rem)] font-medium leading-tight tracking-[-0.03em] text-foreground transition-colors duration-200 group-hover:text-accent break-words">
                       {project.name}
                     </h2>
 
                     {/* Genre */}
-                    <p className={`${mono} text-neutral-500`}>{project.genre}</p>
+                    <p className={`${mono} text-[11px] text-neutral-500`}>{project.genre}</p>
 
                     {/* Description */}
-                    <p className="mt-2 max-w-[48ch] text-[13px] leading-relaxed text-neutral-400 lg:text-[14px]">
+                    <p className="mt-1 max-w-[48ch] text-[13px] leading-relaxed text-neutral-400 lg:text-[14px]">
                       {project.description}
                     </p>
 
                     {/* CTA */}
                     <span
-                      className={`${mono} mt-3 inline-flex items-center gap-1.5 text-neutral-300 transition-colors duration-200 group-hover:text-accent`}
+                      className={`${mono} mt-2 inline-flex items-center gap-1.5 text-[11px] text-neutral-400 transition-colors duration-200 group-hover:text-accent`}
                     >
                       View project
                       <span
