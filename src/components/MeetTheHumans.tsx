@@ -10,105 +10,101 @@ import {
 } from "framer-motion";
 import socials from "@/data/socials.json";
 
-// ── Brand-coloured SVG icons ──────────────────────────────────────────────────
+// ── Minimal inline SVG icons ──────────────────────────────────────────────────
 
-function IconLinkedIn({ size = 18 }: { size?: number }) {
+function IconLinkedIn({ className }: { className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect width="24" height="24" rx="4" fill="#0A66C2" />
-      <path
-        fill="#fff"
-        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-      />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
     </svg>
   );
 }
 
-function IconBehance({ size = 18 }: { size?: number }) {
+function IconBehance({ className }: { className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect width="24" height="24" rx="4" fill="#1769FF" />
-      <path
-        fill="#fff"
-        d="M6.938 4.503c.702 0 1.34.06 1.92.188.577.13 1.07.33 1.485.61.41.28.733.65.96 1.12.225.47.34 1.05.34 1.73 0 .74-.17 1.36-.507 1.86-.338.5-.837.9-1.502 1.22.906.26 1.576.72 2.022 1.37.448.65.673 1.44.673 2.37 0 .75-.14 1.4-.42 1.96-.28.56-.67 1.03-1.16 1.4-.48.37-1.05.65-1.7.83-.64.18-1.31.27-2.02.27H0V4.503h6.938zm-.34 5.57c.6 0 1.09-.15 1.46-.46.37-.3.55-.75.55-1.35 0-.3-.05-.56-.16-.78-.11-.22-.26-.4-.45-.54-.19-.14-.42-.24-.67-.3-.26-.06-.54-.09-.83-.09H3.5v3.52h3.1zm.16 5.83c.32 0 .62-.03.9-.1.28-.07.52-.18.73-.34.21-.16.37-.37.49-.63.12-.26.18-.58.18-.96 0-.76-.22-1.33-.64-1.7-.43-.37-1-.55-1.72-.55H3.5v4.28h3.26zm11.17-9.25c.56 0 1.08.09 1.56.27.48.18.9.44 1.24.79.35.35.62.78.82 1.29.2.51.3 1.09.3 1.74v.6H14.4c.03.84.27 1.5.7 1.97.44.47 1.05.7 1.84.7.55 0 1.03-.14 1.44-.42.4-.28.65-.58.74-.9h2.63c-.42 1.3-1.07 2.24-1.94 2.82-.87.58-1.93.87-3.17.87-.86 0-1.64-.14-2.33-.42-.69-.28-1.28-.68-1.76-1.19-.48-.51-.85-1.12-1.1-1.83-.26-.71-.39-1.5-.39-2.37 0-.84.14-1.62.4-2.34.27-.72.65-1.34 1.14-1.86.49-.52 1.08-.93 1.77-1.22.69-.29 1.46-.43 2.3-.43zm0 2.08c-.67 0-1.22.19-1.65.57-.43.38-.69.95-.79 1.7h4.76c-.05-.73-.27-1.3-.67-1.69-.4-.39-.93-.58-1.65-.58zM15.6 4.9h4.4v1.37H15.6V4.9z"
-      />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M6.938 4.503c.702 0 1.34.06 1.92.188.577.13 1.07.33 1.485.61.41.28.733.65.96 1.12.225.47.34 1.05.34 1.73 0 .74-.17 1.36-.507 1.86-.338.5-.837.9-1.502 1.22.906.26 1.576.72 2.022 1.37.448.65.673 1.44.673 2.37 0 .75-.14 1.4-.42 1.96-.28.56-.67 1.03-1.16 1.4-.48.37-1.05.65-1.7.83-.64.18-1.31.27-2.02.27H0V4.503h6.938zm-.34 5.57c.6 0 1.09-.15 1.46-.46.37-.3.55-.75.55-1.35 0-.3-.05-.56-.16-.78-.11-.22-.26-.4-.45-.54-.19-.14-.42-.24-.67-.3-.26-.06-.54-.09-.83-.09H3.5v3.52h3.1zm.16 5.83c.32 0 .62-.03.9-.1.28-.07.52-.18.73-.34.21-.16.37-.37.49-.63.12-.26.18-.58.18-.96 0-.76-.22-1.33-.64-1.7-.43-.37-1-.55-1.72-.55H3.5v4.28h3.26zm11.17-9.25c.56 0 1.08.09 1.56.27.48.18.9.44 1.24.79.35.35.62.78.82 1.29.2.51.3 1.09.3 1.74v.6H14.4c.03.84.27 1.5.7 1.97.44.47 1.05.7 1.84.7.55 0 1.03-.14 1.44-.42.4-.28.65-.58.74-.9h2.63c-.42 1.3-1.07 2.24-1.94 2.82-.87.58-1.93.87-3.17.87-.86 0-1.64-.14-2.33-.42-.69-.28-1.28-.68-1.76-1.19-.48-.51-.85-1.12-1.1-1.83-.26-.71-.39-1.5-.39-2.37 0-.84.14-1.62.4-2.34.27-.72.65-1.34 1.14-1.86.49-.52 1.08-.93 1.77-1.22.69-.29 1.46-.43 2.3-.43zm0 2.08c-.67 0-1.22.19-1.65.57-.43.38-.69.95-.79 1.7h4.76c-.05-.73-.27-1.3-.67-1.69-.4-.39-.93-.58-1.65-.58zM15.6 4.9h4.4v1.37H15.6V4.9z" />
     </svg>
   );
 }
 
-function IconInstagram({ size = 18 }: { size?: number }) {
+function IconInstagram({ className }: { className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <defs>
-        <radialGradient id="ig-g1" cx="30%" cy="107%" r="150%">
-          <stop offset="0%" stopColor="#fdf497" />
-          <stop offset="10%" stopColor="#fdf497" />
-          <stop offset="30%" stopColor="#fd5949" />
-          <stop offset="60%" stopColor="#d6249f" />
-          <stop offset="90%" stopColor="#285AEB" />
-        </radialGradient>
-      </defs>
-      <rect width="24" height="24" rx="6" fill="url(#ig-g1)" />
-      <path
-        fill="#fff"
-        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"
-      />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
     </svg>
   );
 }
 
-function IconFigma({ size = 18 }: { size?: number }) {
+function IconFigma({ className }: { className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect width="24" height="24" rx="4" fill="#1E1E1E" />
-      {/* Figma multi-colour logo */}
-      <path fill="#F24E1E" d="M8.148 12A2.853 2.853 0 0 1 11 9.147h1.265v5.706H11A2.853 2.853 0 0 1 8.148 12z" />
-      <path fill="#FF7262" d="M11 6.294H8.148A2.853 2.853 0 0 0 11 9.147V6.294z" />
-      <path fill="#A259FF" d="M11 6.294h2.853A2.853 2.853 0 0 0 11 3.44V6.294z" />
-      <path fill="#0ACF83" d="M13.853 6.294H11v2.853h2.853a2.853 2.853 0 0 0 0-5.706V6.294z" />
-      <path fill="#1ABCFE" d="M13.853 9.147H11v2.853h2.853a2.853 2.853 0 1 0 0-5.706v2.853z" />
-      <path fill="#FF7262" d="M11 3.44v2.854h2.853A2.853 2.853 0 0 0 11 3.44z" />
-      <path fill="#0ACF83" d="M13.853 6.294H11v2.853h2.853a2.853 2.853 0 0 0 0-5.706z" />
-      <path fill="#1ABCFE" d="M16.706 12A2.853 2.853 0 0 1 13.853 14.853H11V9.147h2.853A2.853 2.853 0 0 1 16.706 12z" />
-      <path fill="#A259FF" d="M11 14.853v2.853A2.853 2.853 0 0 0 13.853 14.853H11z" />
-      <path fill="#F24E1E" d="M8.148 17.706A2.853 2.853 0 0 0 11 20.56v-2.854H8.148a2.853 2.853 0 0 0 0 0z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.354-3.02-3.019-3.02h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.026-4.49 4.515-4.49h4.563v4.49c0 2.476-2.014 4.49-4.563 4.49zm-.024-7.51a3.016 3.016 0 0 0-3.019 3.019 3.016 3.016 0 0 0 3.019 3.019c1.665 0 3.093-1.355 3.093-3.019v-3.019H8.148zm7.704 0h-.012c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49 4.49 2.014 4.49 4.49-2.014 4.49-4.478 4.49zm0-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.019 3.019 3.019c1.665 0 3.019-1.355 3.019-3.019s-1.354-3.019-3.019-3.019z" />
     </svg>
   );
 }
 
-function IconGitHub({ size = 18 }: { size?: number }) {
+function IconGitHub({ className }: { className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect width="24" height="24" rx="4" fill="#24292E" />
-      <path
-        fill="#fff"
-        d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-      />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
     </svg>
   );
 }
 
-function IconTwitterX({ size = 18 }: { size?: number }) {
+function IconTwitterX({ className }: { className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect width="24" height="24" rx="4" fill="#000" />
-      <path
-        fill="#fff"
-        d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
-      />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
     </svg>
   );
 }
 
 type SocialIconId = "linkedin" | "behance" | "instagram" | "figma" | "github" | "twitter";
 
-function SocialIcon({ id, size }: { id: SocialIconId; size?: number }) {
-  if (id === "linkedin") return <IconLinkedIn size={size} />;
-  if (id === "behance") return <IconBehance size={size} />;
-  if (id === "instagram") return <IconInstagram size={size} />;
-  if (id === "figma") return <IconFigma size={size} />;
-  if (id === "github") return <IconGitHub size={size} />;
-  if (id === "twitter") return <IconTwitterX size={size} />;
+function SocialIcon({ id, className }: { id: SocialIconId; className?: string }) {
+  if (id === "linkedin") return <IconLinkedIn className={className} />;
+  if (id === "behance") return <IconBehance className={className} />;
+  if (id === "instagram") return <IconInstagram className={className} />;
+  if (id === "figma") return <IconFigma className={className} />;
+  if (id === "github") return <IconGitHub className={className} />;
+  if (id === "twitter") return <IconTwitterX className={className} />;
   return null;
 }
 
@@ -133,7 +129,6 @@ type PortraitProps = {
   faviconVerticalPositionClassName?: string;
   isOppositeHovered?: boolean;
   reduceMotion: boolean | null;
-  socialLinks?: SocialLink[];
 };
 
 function Portrait({
@@ -155,7 +150,6 @@ function Portrait({
   faviconVerticalPositionClassName = "top-0",
   isOppositeHovered = false,
   reduceMotion,
-  socialLinks = [],
 }: PortraitProps) {
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -242,27 +236,6 @@ function Portrait({
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"
       />
 
-      {/* Social icons overlay — bottom of the portrait card */}
-      {socialLinks.length > 0 && (
-        <nav
-          aria-label={`${name}'s social profiles`}
-          className="absolute bottom-0 left-0 right-0 z-30 flex items-center gap-2 px-4 pb-4 pt-10 bg-gradient-to-t from-black/70 to-transparent"
-        >
-          {socialLinks.map((link) => (
-            <a
-              key={link.id}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={link.label}
-              className="inline-flex items-center justify-center rounded-[5px] transition-transform duration-150 hover:scale-110 active:scale-95 drop-shadow-lg"
-            >
-              <SocialIcon id={link.id as SocialIconId} size={28} />
-            </a>
-          ))}
-        </nav>
-      )}
-
       <div className="sr-only">
         <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-white/70">
           {index}
@@ -332,7 +305,6 @@ export default function MeetTheHumans() {
             showFavicon
             isOppositeHovered={hoveredProfile === "aman"}
             reduceMotion={reduceMotion}
-            socialLinks={socials.harshita as SocialLink[]}
           />
 
           <motion.div
@@ -357,6 +329,21 @@ export default function MeetTheHumans() {
               that feel obvious, then worries the last two percent until they feel
               inevitable.
             </p>
+
+            <nav aria-label="Harshita Upadhyay's social profiles" className="mt-6 flex items-center gap-3">
+              {(socials.harshita as SocialLink[]).map((link) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-neutral-400 transition-colors duration-200 hover:border-white/30 hover:text-foreground"
+                >
+                  <SocialIcon id={link.id as SocialIconId} className="h-[14px] w-[14px]" />
+                </a>
+              ))}
+            </nav>
 
           </motion.div>
         </article>
@@ -386,7 +373,6 @@ export default function MeetTheHumans() {
             faviconVerticalPositionClassName="-top-28"
             isOppositeHovered={hoveredProfile === "harshita"}
             reduceMotion={reduceMotion}
-            socialLinks={socials.aman as SocialLink[]}
           />
 
           <motion.div
@@ -411,6 +397,21 @@ export default function MeetTheHumans() {
               honest. He prototypes early, breaks things on purpose, and rebuilds
               them simpler.
             </p>
+
+            <nav aria-label="Aman Raj's social profiles" className="mt-6 flex items-center gap-3">
+              {(socials.aman as SocialLink[]).map((link) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-neutral-400 transition-colors duration-200 hover:border-white/30 hover:text-foreground"
+                >
+                  <SocialIcon id={link.id as SocialIconId} className="h-[14px] w-[14px]" />
+                </a>
+              ))}
+            </nav>
 
           </motion.div>
         </article>
