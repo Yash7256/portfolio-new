@@ -1,12 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useInView,
-  useReducedMotion,
-} from "framer-motion";
+import { useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import testimonialsData from "../data/testimonials.json";
 
 type Testimonial = (typeof testimonialsData)[number] & {
@@ -14,9 +9,6 @@ type Testimonial = (typeof testimonialsData)[number] & {
 };
 
 const testimonials: Testimonial[] = testimonialsData;
-
-const quoteClass =
-  "mx-auto max-w-[54ch] text-pretty font-serif text-[clamp(1.6rem,3.1vw,2.7rem)] font-normal leading-[1.14] tracking-[-0.015em] text-foreground";
 
 function getInitials(person: string) {
   return person
@@ -28,161 +20,132 @@ function getInitials(person: string) {
     .toUpperCase();
 }
 
+function TestimonialCard({ item }: { item: Testimonial }) {
+  return (
+    <article className="flex w-[300px] shrink-0 flex-col justify-between rounded-[8px] border border-white/10 bg-light-surface p-6 transition-colors duration-300 hover:border-white/20 sm:w-[360px] md:w-[420px] md:p-7">
+      <blockquote className="font-sans text-[14px] leading-[1.7] text-neutral-200 md:text-[15px]">
+        &ldquo;{item.quote.trim()}&rdquo;
+      </blockquote>
+      <div className="mt-6 flex items-center gap-3.5 border-t border-white/10 pt-4 md:mt-7 md:pt-5">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/[0.06] font-mono text-[11px] font-medium tracking-[0.08em] text-neutral-300">
+          {item.avatar ? (
+            <img
+              src={item.avatar}
+              alt=""
+              className="h-full w-full rounded-full object-cover"
+            />
+          ) : (
+            getInitials(item.person)
+          )}
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-sans text-[14px] font-semibold text-foreground md:text-[15px]">
+            {item.person}
+          </p>
+          <p className="truncate font-mono text-[11px] uppercase tracking-[0.1em] text-neutral-400 md:text-[12px]">
+            {item.role}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function Testimonials() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const reduceMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { amount: 0.2 });
-  const story = testimonials[active];
-  const total = String(testimonials.length).padStart(2, "0");
-  const isPaused = paused || hovered || focused || !isInView || reduceMotion;
 
-  useEffect(() => {
-    if (isPaused) return;
+  // Duplicate for seamless infinite loop
+  const cards = [...testimonials, ...testimonials];
 
-    const timer = window.setInterval(() => {
-      setActive((current) => (current + 1) % testimonials.length);
-    }, 7000);
+  if (reduceMotion) {
+    return (
+      <section
+        id="testimonials"
+        aria-labelledby="testimonials-heading"
+        className="py-16 md:py-24"
+      >
+        <div className="pb-8 md:pb-10">
+          <h2
+            id="testimonials-heading"
+            className="mt-3 font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-foreground"
+          >
+            What people say.
+          </h2>
+        </div>
 
-    return () => window.clearInterval(timer);
-  }, [active, isPaused]);
-
-  const goTo = (direction: number) => {
-    setActive(
-      (current) =>
-        (current + direction + testimonials.length) % testimonials.length,
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+          {testimonials.map((item) => (
+            <TestimonialCard key={item.id} item={item} />
+          ))}
+        </div>
+      </section>
     );
-  };
-
-  const fade = {
-    initial: reduceMotion ? false : { opacity: 0, y: 12 },
-    animate: { opacity: 1, y: 0 },
-    exit: reduceMotion ? { opacity: 1 } : { opacity: 0, y: -8 },
-    transition: {
-      duration: reduceMotion ? 0 : 0.4,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  };
+  }
 
   return (
     <section
-      ref={sectionRef}
       id="testimonials"
       aria-labelledby="testimonials-heading"
-      className="py-20 md:py-28"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocusCapture={() => setFocused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-          setFocused(false);
-        }
-      }}
+      className="py-16 md:py-24"
     >
-      <h2
-        id="testimonials-heading"
-        className="mb-10 text-center font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-foreground md:mb-14"
-      >
-        What people say.
-      </h2>
-
-      <div className="mx-auto flex max-w-[64rem] flex-col items-center text-center">
-        <div
-          aria-live={isPaused ? "polite" : "off"}
-          aria-atomic="true"
-          className="w-full"
+      <div className="pb-8 md:pb-10">
+        <h2
+          id="testimonials-heading"
+          className="mt-3 font-sans text-[clamp(2.4rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.04em] text-foreground"
         >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.figure key={active} {...fade}>
-              <blockquote className="relative">
-                <div aria-hidden="true" className="invisible grid select-none">
-                  {testimonials.map((item) => (
-                    <p
-                      key={item.id}
-                      className={`${quoteClass} col-start-1 row-start-1`}
-                    >
-                      &ldquo;{item.quote.trim()}&rdquo;
-                    </p>
-                  ))}
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <p className={quoteClass}>
-                    &ldquo;{story.quote.trim()}&rdquo;
-                  </p>
-                </div>
-              </blockquote>
+          What people say.
+        </h2>
+      </div>
 
-              <figcaption className="mt-10 flex flex-col items-center md:mt-12">
-                <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-white/[0.06]">
-                  {story.avatar ? (
-                    <img
-                      src={story.avatar}
-                      alt=""
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <span
-                      aria-hidden="true"
-                      className="font-mono text-[12px] tracking-[0.08em] text-neutral-300"
-                    >
-                      {getInitials(story.person)}
-                    </span>
-                  )}
-                </div>
-                <p className="mt-4 font-sans text-[15px] font-semibold text-foreground">
-                  {story.person}
-                </p>
-                <p className="mt-1 max-w-[34ch] font-sans text-[13px] leading-relaxed text-neutral-400">
-                  {story.role}
-                </p>
-              </figcaption>
-            </motion.figure>
-          </AnimatePresence>
+      <div className="pause-on-hover relative -mx-4 overflow-hidden sm:-mx-[4vw] lg:-mx-[5vw] xl:-mx-[6vw]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-background to-transparent sm:w-20 md:w-32"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-background to-transparent sm:w-20 md:w-32"
+        />
+
+        <div
+          className="animate-marquee-cards flex gap-5 py-2 md:gap-6"
+          style={{ animationPlayState: isPaused ? "paused" : undefined }}
+        >
+          <div className="flex shrink-0 gap-5 md:gap-6">
+            {cards.map((item, index) => (
+              <TestimonialCard
+                key={`track-1-${item.id}-${index}`}
+                item={item}
+              />
+            ))}
+          </div>
+          <div className="flex shrink-0 gap-5 md:gap-6" aria-hidden="true">
+            {cards.map((item, index) => (
+              <TestimonialCard
+                key={`track-2-${item.id}-${index}`}
+                item={item}
+              />
+            ))}
+          </div>
         </div>
+      </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 md:mt-12">
-          <button
-            type="button"
-            onClick={() => goTo(-1)}
-            aria-label="Previous testimonial"
-            className="inline-flex min-h-11 items-center px-2 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
-          >
-            Previous
-          </button>
-
-          <span className="min-w-[4.5rem] font-mono text-[12px] tracking-[0.14em] text-neutral-500">
-            {String(active + 1).padStart(2, "0")}{" "}
-            <span className="text-neutral-600">/</span> {total}
-          </span>
-
-          <button
-            type="button"
-            onClick={() => goTo(1)}
-            aria-label="Next testimonial"
-            className="inline-flex min-h-11 items-center px-2 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
-          >
-            Next
-          </button>
-
-          <span aria-hidden="true" className="h-3 w-px bg-white/15" />
-
-          <button
-            type="button"
-            onClick={() => setPaused((current) => !current)}
-            aria-pressed={paused}
-            aria-label={
-              paused
-                ? "Resume automatic testimonial rotation"
-                : "Pause automatic testimonial rotation"
-            }
-            className="inline-flex min-h-11 min-w-[3.5rem] items-center justify-center px-2 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
-          >
-            {paused ? "Play" : "Pause"}
-          </button>
-        </div>
+      <div className="mt-8 flex items-center justify-between font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500">
+        <span>Client feedback</span>
+        <button
+          type="button"
+          onClick={() => setIsPaused((prev) => !prev)}
+          aria-pressed={isPaused}
+          aria-label={
+            isPaused
+              ? "Resume automatic testimonial marquee"
+              : "Pause automatic testimonial marquee"
+          }
+          className="inline-flex min-h-11 items-center px-2 text-neutral-500 transition-colors duration-200 hover:text-accent focus-visible:text-accent"
+        >
+          [ {isPaused ? "Play" : "Pause"} ]
+        </button>
       </div>
     </section>
   );

@@ -47,12 +47,14 @@ export default function Services() {
             key={item.name}
             className="group grid gap-3 py-6 transition-colors duration-300 hover:bg-white/[0.02] md:grid-cols-[48px_minmax(0,1.2fr)_minmax(0,1fr)_auto] md:items-center md:gap-6 md:py-7"
           >
-            <span className="font-mono text-[12px] text-neutral-500">
-              [0{index + 1}]
-            </span>
-            <h3 className="font-sans text-[18px] font-semibold text-foreground transition-colors group-hover:text-accent md:text-[21px]">
-              {item.name}
-            </h3>
+            <div className="flex items-baseline gap-3 md:contents">
+              <span className="font-mono text-[12px] text-neutral-500">
+                [0{index + 1}]
+              </span>
+              <h3 className="font-sans text-[18px] font-semibold text-foreground transition-colors group-hover:text-accent md:text-[21px]">
+                {item.name}
+              </h3>
+            </div>
             <span className="font-sans text-[14px] text-neutral-400 md:text-[15px]">
               {item.discipline}
             </span>

@@ -124,7 +124,7 @@ function Portrait({
               height={height}
               loading="lazy"
               decoding="async"
-              className={`h-full w-full origin-top scale-[1.1] object-contain object-bottom brightness-[1.06] contrast-[1.16] saturate-[1.04] transition-[filter] duration-500 md:group-hover/portrait:blur-[3px] ${imagePositionClassName}`}
+              className={`h-full w-full origin-top scale-[1.1] object-contain object-bottom brightness-[1.06] contrast-[1.16] saturate-[1.04] transition-[filter] duration-500 ${imagePositionClassName}`}
             />
           </motion.div>
         </motion.div>
@@ -219,10 +219,10 @@ export default function MeetTheHumans() {
             >
               Harshita Upadhyay
             </h3>
-            <p className="mt-2 font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-neutral-300 md:text-[13px]">
+            <p className="mt-2 font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-neutral-400 md:text-[13px]">
               Design / Product / UI
             </p>
-            <p className="mt-5 max-w-[46ch] text-pretty text-[14px] leading-[1.65] text-neutral-300">
+            <p className="mt-5 max-w-[46ch] text-pretty text-[14px] leading-[1.65] text-foreground md:text-[15px]">
               Harshita is the designer in the room, part systems thinker, part
               compulsive doodler. She turns tangled product flows into interfaces
               that feel obvious, then worries the last two percent until they feel
@@ -272,10 +272,10 @@ export default function MeetTheHumans() {
             >
               Aman Raj
             </h3>
-            <p className="mt-2 font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-neutral-300 md:text-[13px]">
+            <p className="mt-2 font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-neutral-400 md:text-[13px]">
               Engineering / Product
             </p>
-            <p className="mt-5 max-w-[46ch] text-pretty text-[14px] leading-[1.65] text-neutral-300">
+            <p className="mt-5 max-w-[46ch] text-pretty text-[14px] leading-[1.65] text-foreground md:text-[15px]">
               Aman is the engineer who loves the invisible work: architecture,
               performance, and the small decisions that keep a product fast and
               honest. He prototypes early, breaks things on purpose, and rebuilds

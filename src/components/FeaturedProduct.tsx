@@ -114,7 +114,7 @@ export default function FeaturedProduct() {
             designer needs, all in one room.
           </p>
 
-          <div className="mt-8 md:mt-10">
+          <div className="mt-8 flex justify-center md:justify-start md:mt-10">
             <Link
               to="/contact"
               className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-sans text-[15px] font-semibold tracking-tight text-black shadow-lg transition-colors hover:bg-neutral-200"

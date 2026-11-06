@@ -77,7 +77,7 @@ export default function Articles() {
           </div>
 
           {item.image && (
-            <div className="w-full min-w-0 max-w-[240px] justify-self-end self-center md:max-w-none md:justify-self-end">
+            <div className="hidden w-full min-w-0 max-w-[240px] justify-self-end self-center md:block md:max-w-none md:justify-self-end">
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[4px]">
                 <img
                   src={item.image}
