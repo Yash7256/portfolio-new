@@ -43,7 +43,7 @@ export const journalArticles: JournalArticle[] = [
       "A design system is a shared set of tokens, components and rules that keeps a product consistent. Learn why startups need one and how to build it lean.",
     category: "Design",
     href: journalArticleLinks.skedioDesignSystem,
-    image: "/designsystem.png",
+    image: "/designsystem.webp",
     imageAlt: "What Is a Design System & Why Startups Need One",
   },
   {
@@ -68,7 +68,7 @@ export const journalArticles: JournalArticle[] = [
       "if people only need to read about you, you need a website. If people need to log in, manage data, or complete tasks, you need a web app. ",
     category: "Development",
     href: journalArticleLinks.doYouNeedWebsite,
-    image: "/doyouneedwebsite.png",
+    image: "/doyouneedwebsite.webp",
     imageAlt:
       "Cover artwork for Do You Need a Custom Web App or Just a Website?",
   },

@@ -23,7 +23,6 @@ function escapeXml(value: string): string {
 }
 
 export function loader() {
-  const lastmod = new Date().toISOString();
   const url = (path: string) => `${site.url}${path === "/" ? "/" : path}`;
 
   const entries = [
@@ -52,7 +51,6 @@ ${entries
   .map(
     (entry) => `  <url>
     <loc>${escapeXml(entry.loc)}</loc>
-    <lastmod>${lastmod}</lastmod>
     <changefreq>${entry.changefreq}</changefreq>
     <priority>${entry.priority}</priority>
   </url>`,

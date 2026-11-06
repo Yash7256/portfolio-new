@@ -1,9 +1,18 @@
-import { Link, useParams, type MetaFunction } from "react-router";
+import { Link, useParams, type LoaderFunctionArgs, type MetaFunction } from "react-router";
 import Image from "@/components/Img";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 import { getNextWork, getWork } from "@/data/works";
-import { createMeta, createWorkDescription } from "@/lib/site";
+import { createMeta, createWorkDescription, site } from "@/lib/site";
+import { createBreadcrumbJsonLd } from "@/lib/schema";
+
+export function loader({ params }: LoaderFunctionArgs) {
+  if (!getWork(params.slug ?? "")) {
+    throw new Response("Work not found", { status: 404 });
+  }
+  return null;
+}
 
 const mono =
   "font-mono uppercase tracking-[0.02em] text-[12px] leading-[1.2]";
@@ -59,6 +68,23 @@ export default function WorkPage() {
     <>
       <Navbar />
       <main id="main-content" className="flex flex-1 flex-col pt-24 md:pt-28">
+        <JsonLd
+          data={createBreadcrumbJsonLd([
+            { name: "Home", url: site.url },
+            { name: "Works", url: `${site.url}/works` },
+            { name: work.name, url: `${site.url}/works/${work.slug}` },
+          ])}
+        />
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-2 border-b border-white/10 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500"
+        >
+          <Link to="/" className="transition-colors hover:text-foreground">Home</Link>
+          <span aria-hidden="true">/</span>
+          <Link to="/works" className="transition-colors hover:text-foreground">Works</Link>
+          <span aria-hidden="true">/</span>
+          <span className="text-neutral-300">{work.name}</span>
+        </nav>
         <article className="flex flex-1 flex-col">
           <header className="pt-8 md:pt-12">
             <div className={`${mono} flex items-center justify-between gap-4`}>
@@ -72,9 +98,9 @@ export default function WorkPage() {
             </div>
 
             <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 md:mt-16 md:grid-cols-[50%_1fr] md:items-end md:gap-8">
-              <h1 className="font-sans text-[clamp(2rem,7vw,7.5rem)] font-medium uppercase leading-[0.88] tracking-[-0.05em] break-words">
+              <div aria-hidden="true" className="font-sans text-[clamp(2rem,7vw,7.5rem)] font-medium uppercase leading-[0.88] tracking-[-0.05em] break-words">
                 {work.name}
-              </h1>
+              </div>
               <p className="max-w-[42ch] font-sans text-[15px] sm:text-[18px] leading-[1.4] md:pb-2 md:text-[20px]">
                 {work.summary}
               </p>

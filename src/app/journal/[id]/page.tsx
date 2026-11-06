@@ -1,9 +1,11 @@
-import { Link, useParams, type MetaFunction } from "react-router";
+import { Link, useParams, type LoaderFunctionArgs, type MetaFunction } from "react-router";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import NotFoundPage from "@/components/NotFoundPage";
+import JsonLd from "@/components/JsonLd";
 import journal from "@/data/journal";
-import { createMeta } from "@/lib/site";
+import { createMeta, site } from "@/lib/site";
+import { createBreadcrumbJsonLd } from "@/lib/schema";
 
 const mono =
   "font-mono uppercase tracking-[0.14em] text-[11px] leading-[1.2]";
@@ -12,6 +14,13 @@ function getPost(id: string) {
   return journal.find(
     (post) => post.id === id && !post.draft && !post.externalUrl,
   );
+}
+
+export function loader({ params }: LoaderFunctionArgs) {
+  if (!getPost(params.id ?? "")) {
+    throw new Response("Journal post not found", { status: 404 });
+  }
+  return null;
 }
 
 function formatDate(iso: string) {
@@ -54,6 +63,23 @@ export default function JournalPostPage() {
         id="main-content"
         className="flex flex-1 flex-col pt-[var(--header-height)]"
       >
+        <JsonLd
+          data={createBreadcrumbJsonLd([
+            { name: "Home", url: site.url },
+            { name: "Journal", url: `${site.url}/journal` },
+            { name: post.title, url: `${site.url}/journal/${post.id}` },
+          ])}
+        />
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-2 border-b border-white/10 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500"
+        >
+          <Link to="/" className="transition-colors hover:text-foreground">Home</Link>
+          <span aria-hidden="true">/</span>
+          <Link to="/journal" className="transition-colors hover:text-foreground">Journal</Link>
+          <span aria-hidden="true">/</span>
+          <span className="truncate text-neutral-300">{post.title}</span>
+        </nav>
         <article className="py-14 md:py-20">
           <div className={`${mono} flex items-center justify-between gap-4 text-neutral-500`}>
             <Link

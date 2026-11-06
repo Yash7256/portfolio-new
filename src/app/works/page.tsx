@@ -67,9 +67,9 @@ export default function WorksPage() {
 
               {/* Centre heading */}
               <div>
-                <h1 className="font-sans text-[clamp(4rem,7vw,8rem)] font-medium leading-[0.85] tracking-[-0.055em] text-foreground">
+                <div aria-hidden="true" className="font-sans text-[clamp(4rem,7vw,8rem)] font-medium leading-[0.85] tracking-[-0.055em] text-foreground">
                   Works.
-                </h1>
+                </div>
                 <p className="mt-6 max-w-[32ch] text-[14px] leading-relaxed text-neutral-400 lg:text-[15px]">
                   Identity, editorial, product and web — each project designed
                   and built by the same small team.

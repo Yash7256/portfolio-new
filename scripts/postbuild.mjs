@@ -7,8 +7,8 @@ const file = path.resolve(
 );
 
 if (!existsSync(file)) {
-  console.error("postbuild: build/client/__spa-fallback.html not found");
-  process.exit(1);
+  console.log("postbuild: no SPA fallback generated; SSR handles document responses");
+  process.exit(0);
 }
 
 let html = readFileSync(file, "utf8");

@@ -4,7 +4,8 @@ import Footer from "@/components/Footer";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 import type { Service } from "@/data/services";
-import { createFaqJsonLd, createServiceJsonLd } from "@/lib/schema";
+import { createBreadcrumbJsonLd, createFaqJsonLd, createServiceJsonLd } from "@/lib/schema";
+import { site } from "@/lib/site";
 import { CardGrid2x2, Chips, GlanceCard, NumberedGrid, ProofStrip, RelatedServices } from "@/components/service/sections";
 
 export default function ServicePage({ service, index }: { service: Service; index: number }) {
@@ -16,6 +17,23 @@ export default function ServicePage({ service, index }: { service: Service; inde
       <main id="main-content" className="flex flex-1 flex-col pt-[var(--header-height)]">
         <JsonLd data={createServiceJsonLd(service)} />
         <JsonLd data={createFaqJsonLd(service)} />
+        <JsonLd
+          data={createBreadcrumbJsonLd([
+            { name: "Home", url: site.url },
+            { name: "Services", url: `${site.url}/#services` },
+            { name: service.name, url: `${site.url}/services/${service.slug}` },
+          ])}
+        />
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-2 border-b border-white/10 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500 sm:px-[4vw] md:px-8 lg:px-12"
+        >
+          <Link to="/" className="transition-colors hover:text-foreground">Home</Link>
+          <span aria-hidden="true">/</span>
+          <Link to="/#services" className="transition-colors hover:text-foreground">Services</Link>
+          <span aria-hidden="true">/</span>
+          <span className="text-neutral-300">{service.name}</span>
+        </nav>
 
         <header className="border-b border-white/10 px-4 py-8 sm:px-[4vw] sm:py-10 md:hidden">
           <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-neutral-500">Service [{String(index + 1).padStart(2, "0")}]</p>
@@ -34,7 +52,7 @@ export default function ServicePage({ service, index }: { service: Service; inde
                 <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.18em] text-neutral-600">{service.serviceType}</p>
               </div>
               <div>
-                <h1 className="font-sans text-[clamp(2.5rem,5vw,5.5rem)] font-medium leading-[0.88] tracking-[-0.055em] text-foreground">{service.name}.</h1>
+                <div aria-hidden="true" className="font-sans text-[clamp(2.5rem,5vw,5.5rem)] font-medium leading-[0.88] tracking-[-0.055em] text-foreground">{service.name}.</div>
                 <p className="mt-6 max-w-[32ch] text-[14px] leading-relaxed text-neutral-400 lg:text-[15px]">{service.heroSubline}</p>
                 <Link to="/contact" className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-sans text-[14px] font-semibold tracking-tight text-black transition-colors hover:bg-neutral-200">Start a project</Link>
               </div>

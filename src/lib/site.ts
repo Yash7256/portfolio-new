@@ -10,7 +10,7 @@ export const site = {
     "Anvik Labs is a product design & engineering studio in India, helping startups build clear interfaces, fast websites, and practical AI solutions.",
   url: "https://anviklabs.site",
   // TODO(owner): confirm mailbox exists on anviklabs.site.
-  email: "hello@anviklabs.com",
+  email: "anviklabs@gmail.com",
   areaServed: "Worldwide",
   logo: "/favicon-192x192.png",
   ogImage: "/og.png",
