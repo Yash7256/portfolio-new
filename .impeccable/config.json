@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-06T18:01:52.623Z",
+        "reason": "User confirmed existing Inter font system must be preserved for the service-page rebuild"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-11-06T18:01:52.624Z",
+        "reason": "User confirmed existing Instrument Serif font system must be preserved for the service-page rebuild"
+      }
+    ]
+  }
+}

@@ -11,7 +11,7 @@ export const site = {
   url: "https://anviklabs.site",
   // TODO(owner): confirm mailbox exists on anviklabs.site.
   email: "hello@anviklabs.com",
-  areaServed: "IN",
+  areaServed: "Worldwide",
   logo: "/favicon-192x192.png",
   ogImage: "/og.png",
   ogImageWidth: "1200",

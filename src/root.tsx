@@ -21,13 +21,13 @@ const organizationJsonLd = {
   logo: `${site.url}${site.logo}`,
   image: `${site.url}${site.ogImage}`,
   description: site.description,
-  areaServed: "IN",
+  areaServed: "Worldwide",
   email: site.email,
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",
     email: site.email,
-    areaServed: "IN",
+    areaServed: "Worldwide",
     availableLanguage: ["en"],
   },
   // TODO(owner): LinkedIn/GitHub/Instagram URLs + foundingDate.

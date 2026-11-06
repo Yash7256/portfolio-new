@@ -1,9 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
-const faqData = [
+type FaqItem = {
+  q: string;
+  a: string;
+};
+
+const faqData: FaqItem[] = [
   {
     q: "What services do you offer?",
     a: "We work across product design, design systems, web development, AI solutions and ongoing website care. Most engagements combine design and front-end engineering.",
@@ -30,8 +35,17 @@ const faqData = [
   },
 ];
 
-export default function Faq() {
+export default function Faq({
+  items = faqData,
+  metaLabel = "Notes / 007",
+  metaTitle = "Clarifications",
+}: {
+  items?: FaqItem[];
+  metaLabel?: string;
+  metaTitle?: string;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const reduceMotion = useReducedMotion();
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -41,11 +55,11 @@ export default function Faq() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="border-t border-white/10 py-16 md:py-24"
+      className="border-t border-white/10 px-4 pt-16 sm:px-[4vw] md:px-8 md:pt-24 lg:px-12"
     >
       <div className="mb-8 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400 md:mb-12">
-        <span className="text-neutral-500">Notes / 007</span>
-        <span>Clarifications</span>
+        <span className="text-neutral-500">{metaLabel}</span>
+        <span>{metaTitle}</span>
       </div>
 
       <div className="flex flex-col items-start justify-between gap-6 border-b border-white/10 pb-10 lg:flex-row lg:items-end">
@@ -62,7 +76,7 @@ export default function Faq() {
       </div>
 
       <div className="mt-6 divide-y divide-white/10">
-        {faqData.map((item, index) => {
+        {items.map((item, index) => {
           const isOpen = openIndex === index;
           const panelId = `faq-panel-${index}`;
           const buttonId = `faq-button-${index}`;
@@ -104,10 +118,10 @@ export default function Faq() {
                     id={panelId}
                     role="region"
                     aria-labelledby={buttonId}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                    animate={reduceMotion ? { height: "auto", opacity: 1 } : { height: "auto", opacity: 1 }}
+                    exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
                     <p className="max-w-3xl pb-2 pl-12 pr-4 pt-3 font-sans text-[14px] leading-relaxed text-neutral-400 md:pl-16 md:text-[15px]">
