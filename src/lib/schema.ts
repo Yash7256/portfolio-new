@@ -10,7 +10,7 @@ export function createServiceJsonLd(service: Service) {
     serviceType: service.serviceType,
     description: service.description,
     url: `${site.url}/services/${service.slug}`,
-    areaServed: "Worldwide",
+    areaServed: site.areaServed,
     provider: { "@id": organizationId },
   };
 }

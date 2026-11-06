@@ -5,11 +5,9 @@ export const site = {
   name: "Anvik Labs",
   title: "Anvik Labs | Product Design & Engineering",
   studioTagline: "Product design & engineering studio",
-  // TODO(owner): Confirm founding year, then set `foundingDate` (for example "2024").
   description:
-    "Anvik Labs is a product design & engineering studio in India, helping startups build clear interfaces, fast websites, and practical AI solutions.",
+    "Anvik Labs is a product design & engineering studio in India, helping startups and small businesses build clear interfaces, fast websites, and practical AI solutions.",
   url: "https://anviklabs.site",
-  // TODO(owner): confirm mailbox exists on anviklabs.site.
   email: "anviklabs@gmail.com",
   areaServed: "Worldwide",
   logo: "/favicon-192x192.png",
@@ -20,8 +18,8 @@ export const site = {
   ogImageAlt: "Anvik Labs — Product design & engineering studio",
   themeColor: "#080808",
   backgroundColor: "#080808",
-  // TODO(owner): LinkedIn/GitHub/Instagram URLs + foundingDate.
-  // Individual team profiles live in `src/data/socials.json` and must not be used here.
+  // Add verified Anvik Labs profiles here when official company accounts exist.
+  // Individual team profiles live in `src/data/socials.json` and are not used here.
   sameAs: [] as string[],
   foundingDate: undefined as string | undefined,
 };

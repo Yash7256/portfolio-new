@@ -1,4 +1,5 @@
 import { site } from "@/lib/site";
+import { Link } from "react-router";
 
 const products = ["Chisel UI", "CyberSec Toolkit", "Designers Room"];
 
@@ -21,6 +22,22 @@ export default function Hero() {
               Every product starts as a spark: an idea, a problem, or plain
               curiosity. We turn that spark into a real product, with design, web
               development and a healthy engineering obsession.
+            </p>
+            <p className="mt-4 max-w-[58ch] font-sans text-[15px] leading-relaxed text-neutral-300 md:text-[16px]">
+              Anvik Labs is a product design and engineering studio in India. We
+              help startups and small businesses with{" "}
+              <Link className="text-foreground underline decoration-white/25 underline-offset-4 transition-colors hover:text-accent" to="/services/product-design">
+                product design
+              </Link>,{" "}
+              <Link className="text-foreground underline decoration-white/25 underline-offset-4 transition-colors hover:text-accent" to="/services/web-development">
+                web development
+              </Link>,{" "}
+              <Link className="text-foreground underline decoration-white/25 underline-offset-4 transition-colors hover:text-accent" to="/services/ai-solutions">
+                practical AI solutions
+              </Link>, and ongoing{" "}
+              <Link className="text-foreground underline decoration-white/25 underline-offset-4 transition-colors hover:text-accent" to="/services/website-maintenance">
+                website maintenance
+              </Link>.
             </p>
           </div>
 
