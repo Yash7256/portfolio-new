@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { href, Link } from "react-router";
+import { Link } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/lib/site";
-import { label } from "framer-motion/client";
 
 const quickLinks = [
   { label: "Works", href: "/works" },

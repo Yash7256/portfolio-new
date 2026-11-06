@@ -123,11 +123,10 @@ Do not introduce a second accent. Do not switch the site to a light theme. Avoid
 - Studio statement, footer navigation, email, and back-to-top control.
 - The CTA uses the same white pill button pattern as the featured product.
 
-### Works and gallery
+### Works and project galleries
 
 - `/works` is a data-driven index from `src/data/works.ts`.
 - `/works/:slug` renders project metadata, narrative, gallery, and next-project link.
-- `/gallery` reuses project hero imagery and links each image back to its case study.
 
 ## Motion
 
@@ -158,7 +157,4 @@ Do not introduce a second accent. Do not switch the site to a light theme. Avoid
 - `/` — home
 - `/works` — project index
 - `/works/:slug` — project detail
-- `/gallery` — imagery archive
 - `/contact` — inquiry
-- `/challenge` — community challenge
-- `/community` — community

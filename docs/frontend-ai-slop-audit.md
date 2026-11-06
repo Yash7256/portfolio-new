@@ -15,7 +15,7 @@ The strongest signals were not individual colors or shadows. They were the numbe
 | # | Finding | Severity | Resolution |
 | --- | --- | --- | --- |
 | 1 | The repository described itself as a Next.js app while running React Router + Vite. `design.md` documented a different product (TITARVL) and a different visual system. | High | Rewrote `README.md`, `AGENTS.md`, and `design.md` for the actual Anvik Labs stack and interface. |
-| 2 | Navigation and CTAs pointed at missing or placeholder destinations (`/about`, `/work`, `#`, external template links). | High | Replaced with real routes: `/`, `/works`, `/works/:slug`, `/gallery`, `/contact`, `/#services`. Rebuilt the works and gallery pages. |
+| 2 | Navigation and CTAs pointed at missing or placeholder destinations (`/about`, `/work`, `#`, external template links). | High | Replaced with real routes: `/`, `/works`, `/works/:slug`, `/contact`, `/#services`. |
 | 3 | Contact information was placeholding or inconsistent. | High | Standardised on `hello@anviklabs.com`, India-based studio copy, and an explicit `mailto:` draft flow. |
 | 4 | The home page mixed unrelated template sections and duplicated heading patterns. | High | Removed `Advantage`, `Awards`, `Pricing`, `Latest`, `WhatIDo`, and the cursor-image component. Home is now a deliberate sequence: hero, featured product, team, services, testimonials, writing. |
 | 5 | Large amounts of dead code, unused hooks, unused assets, and a Palmer template asset tree remained in the repo. | Medium | Removed unused components, hooks, utilities, and unused public assets, including `public/palmer`. Renamed project mockups to semantic filenames. |
@@ -37,7 +37,7 @@ The strongest signals were not individual colors or shadows. They were the numbe
 - Meet the Humans keeps its original portrait treatment, with a static heading consistent with the rest of the home page and hover detail anchored at the bottom.
 - Services and writing use hairline rows and restrained hover states instead of cards.
 - The testimonial section is centered, quiet, and typographic. It uses Instrument Serif for the quote, Inter for the author, and a circular portrait or initials mark.
-- Works and gallery are driven by the same project data, so they cannot drift into separate fake case-study sets.
+- Works and project galleries are driven by the same project data, so they cannot drift into separate fake case-study sets.
 - Contact is explicit about being a mailto draft, not a backend form.
 
 ## Verification performed
@@ -45,7 +45,7 @@ The strongest signals were not individual colors or shadows. They were the numbe
 - `npm run typecheck` — pass.
 - `npm run lint` — pass.
 - `npm run build` — pass, including route prerendering.
-- Headless browser checks at 1440px and 390px across `/`, `/works`, `/works/chronicae`, `/gallery`, `/contact`, `/challenge`, and `/community`:
+- Headless browser checks at 1440px and 390px across `/`, `/works`, `/works/chronicae`, and `/contact`:
   - No document-level horizontal overflow.
   - No application console errors after the gallery key fix.
   - No missing `alt` attributes on meaningful images.
@@ -74,5 +74,4 @@ The strongest signals were not individual colors or shadows. They were the numbe
 - `src/components/Services.tsx`, `src/components/Articles.tsx` — editorial rows.
 - `src/components/Contact.tsx` — mailto inquiry form.
 - `src/data/works.ts` — project content.
-- `src/app/gallery/page.tsx` — gallery index.
 - `README.md`, `AGENTS.md`, `design.md` — current project and design documentation.
