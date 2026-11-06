@@ -2,14 +2,14 @@ import type { MetaFunction } from "react-router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ComingSoon from "@/components/ComingSoon";
+import { createMeta } from "@/lib/site";
 
-export const meta: MetaFunction = () => [
-  { title: "Community | Anvik Labs" },
-  {
-    name: "description",
-    content: "The Anvik Labs community page is coming soon.",
-  },
-];
+export const meta: MetaFunction = () =>
+  createMeta({
+    title: "Community | Anvik Labs",
+    description: "The Anvik Labs community page is coming soon.",
+    path: "/community",
+  });
 
 export default function CommunityPage() {
   return (

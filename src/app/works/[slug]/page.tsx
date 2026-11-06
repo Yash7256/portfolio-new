@@ -3,6 +3,7 @@ import Image from "@/components/Img";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getNextWork, getWork } from "@/data/works";
+import { createMeta } from "@/lib/site";
 
 const mono =
   "font-mono uppercase tracking-[0.02em] text-[12px] leading-[1.2]";
@@ -14,12 +15,13 @@ export const meta: MetaFunction = ({ params }) => {
     return [{ title: "Work not found | Anvik Labs" }];
   }
 
-  return [
-    { title: `${work.name} | Anvik Labs` },
-    { name: "description", content: work.summary },
-    { property: "og:title", content: `${work.name} | Anvik Labs` },
-    { property: "og:description", content: work.summary },
-  ];
+  return createMeta({
+    title: `${work.name} | Anvik Labs`,
+    description: work.summary,
+    path: `/works/${work.slug}`,
+    image: work.hero.src,
+    imageAlt: work.hero.alt,
+  });
 };
 
 export default function WorkPage() {

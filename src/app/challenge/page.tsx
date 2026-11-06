@@ -2,14 +2,14 @@ import type { MetaFunction } from "react-router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ComingSoon from "@/components/ComingSoon";
+import { createMeta } from "@/lib/site";
 
-export const meta: MetaFunction = () => [
-  { title: "Challenge | Anvik Labs" },
-  {
-    name: "description",
-    content: "The Anvik Labs challenge page is coming soon.",
-  },
-];
+export const meta: MetaFunction = () =>
+  createMeta({
+    title: "Challenge | Anvik Labs",
+    description: "The Anvik Labs challenge page is coming soon.",
+    path: "/challenge",
+  });
 
 export default function ChallengePage() {
   return (

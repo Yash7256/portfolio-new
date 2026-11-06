@@ -3,21 +3,15 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WorksGrid from "@/components/WorksGrid";
 import { works } from "@/data/works";
+import { createMeta } from "@/lib/site";
 
-export const meta: MetaFunction = () => [
-  { title: "Works | Anvik Labs" },
-  {
-    name: "description",
-    content:
+export const meta: MetaFunction = () =>
+  createMeta({
+    title: "Works | Anvik Labs",
+    description:
       "Selected identity, editorial, product and web work by Anvik Labs.",
-  },
-  { property: "og:title", content: "Works | Anvik Labs" },
-  {
-    property: "og:description",
-    content:
-      "Selected identity, editorial, product and web work by Anvik Labs.",
-  },
-];
+    path: "/works",
+  });
 
 export default function WorksPage() {
   return (

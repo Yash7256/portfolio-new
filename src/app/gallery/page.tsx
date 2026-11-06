@@ -3,19 +3,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "@/components/Img";
 import { works } from "@/data/works";
+import { createMeta } from "@/lib/site";
 
-export const meta: MetaFunction = () => [
-  { title: "Gallery | Anvik Labs" },
-  {
-    name: "description",
-    content: "A closer look at selected Anvik Labs product and brand work.",
-  },
-  { property: "og:title", content: "Gallery | Anvik Labs" },
-  {
-    property: "og:description",
-    content: "A closer look at selected Anvik Labs product and brand work.",
-  },
-];
+export const meta: MetaFunction = () =>
+  createMeta({
+    title: "Gallery | Anvik Labs",
+    description: "A closer look at selected Anvik Labs product and brand work.",
+    path: "/gallery",
+  });
 
 const images = works.map((work) => ({ image: work.hero, work }));
 

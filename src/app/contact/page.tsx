@@ -3,21 +3,15 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 import Faq from "@/components/Faq";
+import { createMeta } from "@/lib/site";
 
-export const meta: MetaFunction = () => [
-  { title: "Contact | Anvik Labs" },
-  {
-    name: "description",
-    content:
+export const meta: MetaFunction = () =>
+  createMeta({
+    title: "Contact | Anvik Labs",
+    description:
       "Contact Anvik Labs about product design and engineering work.",
-  },
-  { property: "og:title", content: "Contact | Anvik Labs" },
-  {
-    property: "og:description",
-    content:
-      "Contact Anvik Labs about product design and engineering work.",
-  },
-];
+    path: "/contact",
+  });
 
 export default function ContactPage() {
   return (

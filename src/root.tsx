@@ -9,26 +9,20 @@ import {
   type MetaFunction,
 } from "react-router";
 import Background from "@/components/Background";
-import { site } from "@/lib/site";
+import { createMeta, site } from "@/lib/site";
 import "./app/globals.css";
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: site.name,
+  url: site.url,
+  logo: `${site.url}/favicon-192x192.png`,
+  image: `${site.url}${site.ogImage}`,
   description: site.description,
 };
 
-export const meta: MetaFunction = () => [
-  { title: site.title },
-  { name: "description", content: site.description },
-  { name: "application-name", content: site.name },
-  { name: "author", content: site.name },
-  { name: "theme-color", content: "#080808" },
-  { property: "og:site_name", content: site.name },
-  { property: "og:type", content: "website" },
-  { name: "twitter:card", content: "summary" },
-];
+export const meta: MetaFunction = () => createMeta();
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
