@@ -55,6 +55,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="google-site-verification"
+          content="YKwDO53XArYWQP27b8PIS4l1ALXtKu3OeDreuFCzuN4"
+        />
         <meta name="theme-color" content={site.themeColor} />
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
