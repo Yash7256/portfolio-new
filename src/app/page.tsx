@@ -7,9 +7,10 @@ import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
 import Articles from "@/components/Articles";
 import Footer from "@/components/Footer";
-import { createMeta } from "@/lib/site";
+import { createMeta, site } from "@/lib/site";
 
-export const meta: MetaFunction = () => createMeta();
+export const meta: MetaFunction = () =>
+  createMeta({ description: site.description });
 
 export default function Home() {
   return (

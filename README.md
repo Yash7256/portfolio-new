@@ -47,8 +47,16 @@ Run all three before considering a change complete.
 | `/contact` | Inquiry details and mailto form |
 | `/challenge` | Community challenge page |
 | `/community` | Community page |
+| `/journal` | Writing index |
+| `/services/web-development` | Web development service |
+| `/services/product-design` | UI/UX and product design service |
+| `/services/ai-solutions` | AI solutions service |
+| `/services/website-maintenance` | Website maintenance service |
+| `/sitemap.xml` | Generated sitemap (static routes plus work case studies) |
 
-Routes are declared in `src/routes.ts`.
+Routes are declared in `src/routes.ts`. SEO metadata is centralised in `src/lib/site.ts`
+(`createMeta()`, `createWorkDescription()`, and organisation config). `public/robots.txt`
+and `public/llms.txt` are static; the sitemap is prerendered from `src/app/sitemap.ts`.
 
 ## Project structure
 

@@ -2,5 +2,17 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "react-router",
   "buildCommand": "npm run build",
-  "outputDirectory": "build/client"
+  "outputDirectory": "build/client",
+  "redirects": [
+    {
+      "source": "/work",
+      "destination": "/works",
+      "statusCode": 301
+    },
+    {
+      "source": "/work/",
+      "destination": "/works",
+      "statusCode": 301
+    }
+  ]
 }

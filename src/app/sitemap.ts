@@ -1,0 +1,73 @@
+import journal from "@/data/journal";
+import { works } from "@/data/works";
+import { site } from "@/lib/site";
+
+const staticPaths = [
+  { path: "/", changefreq: "weekly", priority: "1.0" },
+  { path: "/works", changefreq: "monthly", priority: "0.9" },
+  { path: "/gallery", changefreq: "monthly", priority: "0.7" },
+  { path: "/journal", changefreq: "weekly", priority: "0.7" },
+  { path: "/services/web-development", changefreq: "monthly", priority: "0.8" },
+  { path: "/services/product-design", changefreq: "monthly", priority: "0.8" },
+  { path: "/services/ai-solutions", changefreq: "monthly", priority: "0.8" },
+  { path: "/services/website-maintenance", changefreq: "monthly", priority: "0.8" },
+  { path: "/contact", changefreq: "yearly", priority: "0.6" },
+  { path: "/challenge", changefreq: "monthly", priority: "0.5" },
+  { path: "/community", changefreq: "monthly", priority: "0.5" },
+] as const;
+
+function escapeXml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+export function loader() {
+  const lastmod = new Date().toISOString();
+  const url = (path: string) => `${site.url}${path === "/" ? "/" : path}`;
+
+  const entries = [
+    ...staticPaths.map((entry) => ({
+      loc: url(entry.path),
+      changefreq: entry.changefreq,
+      priority: entry.priority,
+    })),
+    ...works.map((work) => ({
+      loc: url(`/works/${work.slug}`),
+      changefreq: "yearly" as const,
+      priority: "0.6",
+    })),
+    ...journal
+      .filter((post) => !post.draft)
+      .map((post) => ({
+        loc: url(`/journal/${post.id}`),
+        changefreq: "monthly" as const,
+        priority: "0.5",
+      })),
+  ];
+
+  const body = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${entries
+  .map(
+    (entry) => `  <url>
+    <loc>${escapeXml(entry.loc)}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${entry.changefreq}</changefreq>
+    <priority>${entry.priority}</priority>
+  </url>`,
+  )
+  .join("\n")}
+</urlset>
+`;
+
+  return new Response(body, {
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, max-age=3600",
+    },
+  });
+}

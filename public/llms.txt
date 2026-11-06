@@ -1,0 +1,10 @@
+# Anvik Labs
+
+> Anvik Labs is a product design and engineering studio in India, helping startups and small businesses build clear interfaces, fast websites, and practical AI solutions.
+
+- [Home](https://anviklabs.site/): Studio overview, services, team, and selected work.
+- [Works](https://anviklabs.site/works): Case studies across product design, identity, editorial, and web development.
+- [Product Design](https://anviklabs.site/services/product-design): UI/UX research, flows, Figma interfaces, and design systems.
+- [Web Development](https://anviklabs.site/services/web-development): Fast, accessible React and TypeScript websites and apps.
+- [AI Solutions](https://anviklabs.site/services/ai-solutions): LLM integrations, RAG search, and chatbot development.
+- [Contact](https://anviklabs.site/contact): Start a project or ask a question.

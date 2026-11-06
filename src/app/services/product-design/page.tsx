@@ -2,38 +2,91 @@ import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { createMeta } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { createMeta, organizationId, site } from "@/lib/site";
 
-export const meta: MetaFunction = () =>
-  createMeta({
-    title: "Product Design | Anvik Labs",
-    description:
-      "Research-grounded interfaces that feel inevitable to use. User research, information architecture, Figma UI design, and design system creation.",
-    path: "/services/product-design",
-  });
+const description =
+  "Anvik Labs designs websites and apps for startups and small businesses: user flows, wireframes, Figma interfaces and design systems.";
 
 const mono = "font-mono uppercase tracking-[0.18em] text-[11px]";
 
+export const meta: MetaFunction = () =>
+  createMeta({
+    title: "UI/UX & Product Design Services | Anvik Labs",
+    description,
+    path: "/services/product-design",
+  });
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${site.url}/services/product-design#service`,
+  name: "UI/UX & Product Design",
+  serviceType: "UI/UX design",
+  description,
+  url: `${site.url}/services/product-design`,
+  areaServed: "Worldwide",
+  provider: { "@id": organizationId },
+};
+
+const overview = [
+  "We design websites, web apps and mobile interfaces for startups, small businesses and individuals around the world. That covers user flows, wireframes, screen designs in Figma and, when a project needs it, a small design system.",
+  "Every project starts with a conversation about your users, your goals and what already exists. We then share a plan, a timeline and a price range in writing before design work begins.",
+  "Our designer works in the same team as our developers, so designs are made with the build in mind.",
+];
+
 const included = [
-  "User research & competitive audit",
-  "Information architecture & user flows",
-  "Wireframing & low-fidelity prototyping",
-  "High-fidelity UI design in Figma",
-  "Design system creation",
-  "Usability testing & iteration",
+  "Understanding your users and reviewing similar products",
+  "Page structure and user flows",
+  "Wireframes and clickable prototypes",
+  "Screen designs in Figma",
+  "Design systems: colours, type, components",
+  "Feedback rounds and revisions",
+  "Organised Figma files for developers",
 ];
 
 const process = [
-  { step: "01", label: "Research", desc: "Talk to users, map competitors, and surface real pain points." },
-  { step: "02", label: "Define", desc: "Translate findings into a clear problem statement and design principles." },
-  { step: "03", label: "Design", desc: "Wireframes, then high-fidelity screens with a coherent system behind them." },
-  { step: "04", label: "Validate", desc: "Usability tests, iteration, and handoff-ready Figma deliverables." },
+  { step: "01", label: "Discuss", desc: "You explain the idea. We ask about users, goals, budget and deadline." },
+  { step: "02", label: "Plan", desc: "We share scope, timeline and cost in writing before work starts." },
+  { step: "03", label: "Design", desc: "We move from wireframes to full screens, sharing progress at each stage." },
+  { step: "04", label: "Refine", desc: "We collect your feedback, revise the designs and test them with a few real users where the project allows." },
+  { step: "05", label: "Hand off", desc: "You get organised Figma files. We can also build the design ourselves if you want." },
 ];
 
 const whyUs = [
-  { title: "We design systems not just screens", desc: "Every component is part of a coherent whole — tokens, patterns, and documentation included." },
-  { title: "Every decision is justified by research", desc: "We don't design by gut feel. Each choice traces back to a user insight or a defined principle." },
-  { title: "Handoff-ready Figma files", desc: "Developers receive annotated, well-structured files — not beautiful JPEGs that break in code." },
+  { title: "Design and development together", desc: "Our designer and developer work on the same project, so nothing gets lost between design and code." },
+  { title: "We design our own products", desc: "We designed and shipped products like CyberSec Toolkit and Designer's Room, so we know how designs hold up in real use." },
+  { title: "Clear communication", desc: "No jargon. Clear plans and honest timelines." },
+  { title: "Small team", desc: "Fewer handoffs. You know who is working on your project." },
+];
+
+const tools = [
+  { area: "Design", tools: "Figma, FigJam" },
+  { area: "Deliverables", tools: "Wireframes, prototypes, design systems, handoff files" },
+  { area: "Works with", tools: "Your developers or ours" },
+];
+
+const faqs = [
+  {
+    q: "How long does a design project take?",
+    a: "It depends on the number of screens and how much research is needed. A small project can take a couple of weeks. We give an estimate after the first discussion.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "It depends on scope. We share a written quote before starting.",
+  },
+  {
+    q: "Can you redesign my existing website or app?",
+    a: "Yes. We review what you have, find what is not working and design improvements.",
+  },
+  {
+    q: "Can you also build the design?",
+    a: "Yes. Our developers can build it, or we can hand the Figma files to your own team.",
+  },
+  {
+    q: "Do you work with clients outside India?",
+    a: "Yes. We work with clients anywhere by video call, chat and email.",
+  },
 ];
 
 export default function ProductDesignPage() {
@@ -42,6 +95,7 @@ export default function ProductDesignPage() {
       <Navbar />
 
       <main id="main-content" className="flex flex-1 flex-col pt-[var(--header-height)]">
+        <JsonLd data={serviceJsonLd} />
         {/* Mobile header */}
         <header className="border-b border-white/10 px-4 py-8 sm:px-[4vw] sm:py-10 md:hidden">
           <p className={`${mono} text-neutral-500`}>Service [02] · Design</p>

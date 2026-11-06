@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { href, Link } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
+import { site } from "@/lib/site";
+import { label } from "framer-motion/client";
 
 const quickLinks = [
-  { label: "Home", href: "/" },
   { label: "Works", href: "/works" },
   { label: "Services", href: "/#services" },
+  {label: "Journal", href: "/journal"},
   { label: "Contact", href: "/contact" },
 ];
 
@@ -181,7 +183,7 @@ export default function Navbar() {
 
             <div className="mt-auto flex flex-col gap-1 border-t border-white/10 pt-6 text-[13px]">
               <span className="font-sans font-medium text-foreground">
-                Independent product studio
+                {site.studioTagline}
               </span>
               <span className="font-sans text-neutral-400">
                 Based in India, working globally

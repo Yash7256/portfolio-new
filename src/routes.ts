@@ -13,4 +13,7 @@ export default [
   route("services/ai-solutions", "app/services/ai-solutions/page.tsx"),
   route("services/website-maintenance", "app/services/website-maintenance/page.tsx"),
   route("journal", "app/journal/page.tsx"),
+  route("journal/:id", "app/journal/[id]/page.tsx"),
+  route("sitemap.xml", "app/sitemap.ts"),
+  route("*", "app/not-found.tsx"),
 ] satisfies RouteConfig;

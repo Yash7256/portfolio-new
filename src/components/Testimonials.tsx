@@ -132,7 +132,6 @@ export default function Testimonials() {
       </div>
 
       <div className="mt-8 flex items-center justify-between font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-500">
-        <span>Client feedback</span>
         <button
           type="button"
           onClick={() => setIsPaused((prev) => !prev)}

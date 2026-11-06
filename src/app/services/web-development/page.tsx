@@ -2,46 +2,94 @@ import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { createMeta } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { createMeta, organizationId, site } from "@/lib/site";
+
+const description =
+  "Web development for startups in India — fast, accessible React and TypeScript websites, apps, and dashboards built to scale. Start a project.";
 
 export const meta: MetaFunction = () =>
   createMeta({
-    title: "Web Development | Anvik Labs",
-    description:
-      "Fast, accessible, and production-ready web products built with modern React. Custom apps, TypeScript architecture, performance optimisation, and full deployment.",
+    title: "Web Development for Startups and Buisnesses | Anvik Labs | Technology Labs",
+    description,
     path: "/services/web-development",
   });
 
-const mono = "font-mono uppercase tracking-[0.18em] text-[11px]";
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${site.url}/services/web-development#service`,
+  name: "Web Development",
+  serviceType: "Web development",
+  description,
+  url: `${site.url}/services/web-development`,
+  areaServed: "Worldwide",
+  provider: { "@id": organizationId },
+};
 
+const mono = "font-mono uppercase tracking-[0.18em] text-[11px]";
 const included = [
-  "Custom React / Next.js / Vite apps",
-  "TypeScript codebase architecture",
-  "Responsive mobile-first development",
-  "Performance optimisation (Core Web Vitals)",
-  "API integration & backend wiring",
-  "Deployment setup (Vercel, Firebase, Railway)",
+  "Business websites, portfolios and landing pages",
+  "Web apps, dashboards and customer portals",
+  "Internal tools and admin panels",
+  "Backend APIs, login systems and databases",
+  "Third-party integrations (payments, email, maps and more)",
+  "Fixes, new features and migrations for existing projects",
 ];
 
 const process = [
-  { step: "01", label: "Discovery", desc: "Understand goals, constraints, and existing tech stack." },
-  { step: "02", label: "Architecture", desc: "Define tech choices, folder structure, and data model." },
-  { step: "03", label: "Build", desc: "Iterative development with continuous feedback." },
-  { step: "04", label: "Launch", desc: "CI/CD, deployment, monitoring, and handoff." },
+  { step: "01", label: "Discuss", desc: "You explain the idea. We ask about users, budget and deadline." },
+  { step: "02", label: "Plan", desc: "We share scope, timeline and cost in writing before work starts." },
+  { step: "03", label: "Build", desc: "We build in small stages and show you progress along the way." },
+  { step: "04", label: "Launch", desc: "We deploy, test and walk you through how everything works." },
+  { step: "05", label: "Support", desc: "Bug fixes after launch, and ongoing maintenance if you want it." },
 ];
 
 const whyUs = [
-  { title: "Small team moves fast", desc: "No handoffs between departments — the same engineers own the work end to end." },
-  { title: "We write clean, maintainable code", desc: "TypeScript, documented APIs, and test coverage mean you can extend it later." },
-  { title: "Full-stack capability", desc: "From React UI to backend APIs and infrastructure — we handle the whole chain." },
+  { title: "Design and development together", desc: "Our UI/UX designer and developer work on the same project." },
+  { title: "We build our own products", desc: "We run CyberSec Toolkit, so we know what keeping a live product running involves." },
+  { title: "Plain communication", desc: "No jargon. Clear plans and honest timelines." },
+  { title: "Small team", desc: "Fewer handoffs. You know who is working on your project." },
 ];
 
+// New: tools section
+const stack = [
+  { area: "Frontend", tools: "React, Next.js, TypeScript, Tailwind CSS" },
+  { area: "Backend", tools: "Node.js, REST APIs" },
+  { area: "Databases", tools: "PostgreSQL, MongoDB" },
+  { area: "Hosting", tools: "Vercel, AWS, Firebase, Railway" },
+];
+
+// New: FAQ (also use for FAQPage JSON-LD)
+const faqs = [
+  {
+    q: "How long does a project take?",
+    a: "It depends on the scope. A small website can take a few weeks. Larger apps take longer. We give an estimate after the first discussion.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "It depends on pages, features and integrations. We share a written quote before starting.",
+  },
+  {
+    q: "Do you work with clients outside India?",
+    a: "Yes. We work with clients anywhere and keep in touch by video call, chat and email.",
+  },
+  {
+    q: "Can you improve my existing website?",
+    a: "Yes. We can fix issues, add features or rebuild parts of it.",
+  },
+  {
+    q: "Will I own the code?",
+    a: "Yes. Ownership terms are agreed before the project starts.",
+  },
+];
 export default function WebDevelopmentPage() {
   return (
     <>
       <Navbar />
 
       <main id="main-content" className="flex flex-1 flex-col pt-[var(--header-height)]">
+        <JsonLd data={serviceJsonLd} />
         {/* Mobile header */}
         <header className="border-b border-white/10 px-4 py-8 sm:px-[4vw] sm:py-10 md:hidden">
           <p className={`${mono} text-neutral-500`}>Service [01] · Engineering</p>
@@ -97,20 +145,13 @@ export default function WebDevelopmentPage() {
               <p className={`${mono} mb-5 text-neutral-500`}>Overview</p>
               <div className="max-w-[64ch] space-y-4 sm:space-y-5 text-[14px] sm:text-[15px] leading-relaxed text-neutral-300">
                 <p>
-                  We build web products that people actually want to use — fast, accessible, and
-                  production-ready from day one. Whether you need a marketing site, a complex SaaS
-                  dashboard, or a custom internal tool, we work in modern React with TypeScript
-                  throughout.
+                  We design and build websites and web applications for startups, small businesses and individuals around the world. That includes business websites, dashboards, web apps and internal tools, built with React, Next.js, Node.js and TypeScript.
                 </p>
                 <p>
-                  Every project starts with an understanding of your users and your constraints. We
-                  favour pragmatic choices over fashionable ones, and we write code that the next
-                  developer (or your future self) will be able to understand.
+                  Every project starts with a conversation about what you need and what you already have. We then suggest a plan, a rough timeline and a price range before any work begins. If a simple site is enough, we will say so.
                 </p>
                 <p>
-                  This service is best suited for founders and product teams who want a trusted
-                  engineering partner — not a code factory. We stay small deliberately so we can
-                  stay accountable.
+                  We are a small, India-based team that works with clients remotely. You talk directly to the people building your project.
                 </p>
               </div>
             </section>

@@ -6,8 +6,9 @@ import { createMeta } from "@/lib/site";
 
 export const meta: MetaFunction = () =>
   createMeta({
-    title: "Challenge | Anvik Labs",
-    description: "The Anvik Labs challenge page is coming soon.",
+    title: "Design Challenges & Prompts | Anvik Labs",
+    description:
+      "Join the Anvik Labs design challenge: practical prompts and briefs to sharpen your UI/UX and product thinking. New challenges are on the way.",
     path: "/challenge",
   });
 

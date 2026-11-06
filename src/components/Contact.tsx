@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { site } from "@/lib/site";
 
 const servicesOptions = [
   "Product design",
@@ -46,7 +47,7 @@ export default function Contact() {
       ].join("\n"),
     );
 
-    window.location.href = `mailto:hello@anviklabs.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
     setStatus("opened");
   };
 
@@ -58,7 +59,7 @@ export default function Contact() {
     >
       <div className="mb-8 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 font-mono text-[12px] uppercase tracking-[0.12em] text-neutral-400 md:mb-12">
         <span className="text-neutral-500">Inquiry / 006</span>
-        <span>Independent studio / India</span>
+        <span>{site.studioTagline} / India</span>
       </div>
 
       <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end">
@@ -80,10 +81,10 @@ export default function Contact() {
               Direct email
             </span>
             <a
-              href="mailto:hello@anviklabs.com"
+              href={`mailto:${site.email}`}
               className="break-all font-sans text-[22px] font-semibold text-foreground underline decoration-white/20 underline-offset-8 transition-colors hover:text-accent md:text-[28px]"
             >
-              hello@anviklabs.com
+              {site.email}
             </a>
           </div>
 
@@ -118,10 +119,10 @@ export default function Contact() {
                 Your email app should have opened with the project details filled
                 in. If it did not, send the same information directly to{" "}
                 <a
-                  href="mailto:hello@anviklabs.com"
+                  href={`mailto:${site.email}`}
                   className="text-accent underline underline-offset-4"
                 >
-                  hello@anviklabs.com
+                  {site.email}
                 </a>
                 .
               </p>

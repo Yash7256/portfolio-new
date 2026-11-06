@@ -2,15 +2,27 @@ import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { createMeta } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { createMeta, organizationId } from "@/lib/site";
+
+const description =
+  "AI solutions and chatbot development from Anvik Labs — LLM integrations, RAG search, and automation built into real products. Start a project.";
 
 export const meta: MetaFunction = () =>
   createMeta({
-    title: "AI Solutions | Anvik Labs",
-    description:
-      "LLM-powered tools and automations built into real products. RAG pipelines, custom chatbots, prompt engineering, and production-ready AI integrations.",
+    title: "AI Solutions & Chatbot Development | Anvik Labs",
+    description,
     path: "/services/ai-solutions",
   });
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AI Solutions & Chatbot Development",
+  description,
+  areaServed: "IN",
+  provider: { "@id": organizationId },
+};
 
 const mono = "font-mono uppercase tracking-[0.18em] text-[11px]";
 
@@ -42,6 +54,7 @@ export default function AiSolutionsPage() {
       <Navbar />
 
       <main id="main-content" className="flex flex-1 flex-col pt-[var(--header-height)]">
+        <JsonLd data={serviceJsonLd} />
         {/* Mobile header */}
         <header className="border-b border-white/10 px-4 py-8 sm:px-[4vw] sm:py-10 md:hidden">
           <p className={`${mono} text-neutral-500`}>Service [03] · Applied AI</p>

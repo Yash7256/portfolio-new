@@ -1,12 +1,13 @@
 "use client";
 
 import { Link } from "react-router";
+import { site } from "@/lib/site";
 
 const footerLinks = [
   { label: "Home", href: "/" },
   { label: "Works", href: "/works" },
   { label: "Journal", href: "/journal" },
-  { label: "Gallery", href: "/gallery" },
+  { label: "Journal", href: "/journal" },
   { label: "Services", href: "/#services" },
   { label: "Contact", href: "/contact" },
 ];
@@ -23,7 +24,7 @@ export default function Footer() {
     <footer className="-mx-4 border-t border-white/10 sm:-mx-[4vw] lg:-mx-[5vw] xl:-mx-[6vw]">
       <div className="container-page py-14 md:py-20">
         <div className="flex items-center justify-between font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-500">
-          <span>Technology studio</span>
+          <span>{site.studioTagline}</span>
           <span>India / Global</span>
         </div>
 
@@ -67,10 +68,10 @@ export default function Footer() {
               </p>
               <div className="flex flex-col items-start gap-3 font-sans text-[14px] text-neutral-300">
                 <a
-                  href="mailto:hello@anviklabs.com"
+                  href={`mailto:${site.email}`}
                   className="break-all transition-colors duration-200 hover:text-accent"
                 >
-                  hello@anviklabs.com
+                  {site.email}
                 </a>
                 <span className="text-neutral-400">Product design + engineering</span>
                 <span className="text-neutral-400">Remote, India</span>

@@ -9,20 +9,45 @@ import {
   type MetaFunction,
 } from "react-router";
 import Background from "@/components/Background";
-import { createMeta, site } from "@/lib/site";
+import { createMeta, organizationId, site, websiteId } from "@/lib/site";
 import "./app/globals.css";
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": organizationId,
   name: site.name,
   url: site.url,
-  logo: `${site.url}/favicon-192x192.png`,
+  logo: `${site.url}${site.logo}`,
   image: `${site.url}${site.ogImage}`,
   description: site.description,
+  areaServed: "IN",
+  email: site.email,
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    email: site.email,
+    areaServed: "IN",
+    availableLanguage: ["en"],
+  },
+  // TODO(owner): LinkedIn/GitHub/Instagram URLs + foundingDate.
+  ...(site.sameAs.length > 0 ? { sameAs: site.sameAs } : {}),
+  ...(site.foundingDate ? { foundingDate: site.foundingDate } : {}),
 };
 
-export const meta: MetaFunction = () => createMeta();
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": websiteId,
+  url: site.url,
+  name: site.name,
+  description: site.description,
+  inLanguage: "en",
+  publisher: { "@id": organizationId },
+};
+
+export const meta: MetaFunction = () =>
+  createMeta({ description: site.description });
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -30,6 +55,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content={site.themeColor} />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
         <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
@@ -45,6 +72,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <Meta />
         <Links />

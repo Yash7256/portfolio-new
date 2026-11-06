@@ -291,7 +291,7 @@ export default function MeetTheHumans() {
         >
           <Portrait
             src="/profile/harshitaupadhyay-cutout.png"
-            alt="Harshita Upadhyay, designer at Anvik Labs"
+            alt="Harshita Upadhyay, UI/UX Product Designer at Anvik Labs"
             name="Harshita Upadhyay"
             role="Design / Product & UI"
             description="Harshita is the designer in the room, part systems thinker, part compulsive doodler. She turns tangled product flows into interfaces that feel obvious, then worries the last two percent until they feel inevitable."
@@ -356,7 +356,7 @@ export default function MeetTheHumans() {
         >
           <Portrait
             src="/profile/amanraj-cutout.png"
-            alt="Aman Raj, engineer at Anvik Labs"
+            alt="Aman Raj, Developer at Anvik Labs"
             name="Aman Raj"
             role="Engineering / Product"
             description="Aman is the engineer who loves the invisible work: architecture, performance, and the small decisions that keep a product fast and honest. He prototypes early, breaks things on purpose, and rebuilds them simpler."

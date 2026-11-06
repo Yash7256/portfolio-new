@@ -1,6 +1,8 @@
 export type WorkImage = {
   src: string;
   alt: string;
+  width?: number;
+  height?: number;
 };
 
 export type Work = {
@@ -17,10 +19,23 @@ export type Work = {
   gallery: WorkImage[];
 };
 
-const mockup = (file: string, alt: string): WorkImage => ({
-  src: `/mockups/${encodeURIComponent(file)}`,
-  alt,
-});
+const IMAGE_DIMENSIONS: Record<string, { width: number; height: number }> = {
+  "aurora-skincare-laptop.png": { width: 1520, height: 1034 },
+  "chronicae-editorial-spread.png": { width: 1520, height: 1035 },
+  "arcane-studio-laptop.png": { width: 1519, height: 1036 },
+  "edifier-magazine-cover.png": { width: 1519, height: 1036 },
+  "macbook-scroll-mockup.png": { width: 4000, height: 3000 },
+  "wayfarer-screen-in-interior.png": { width: 1519, height: 1035 },
+};
+
+const mockup = (file: string, alt: string): WorkImage => {
+  const dimensions = IMAGE_DIMENSIONS[file];
+  return {
+    src: `/mockups/${encodeURIComponent(file)}`,
+    alt,
+    ...(dimensions ?? {}),
+  };
+};
 
 const AURORA = "aurora-skincare-laptop.png";
 const CHRONICAE = "chronicae-editorial-spread.png";

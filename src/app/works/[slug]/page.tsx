@@ -3,7 +3,7 @@ import Image from "@/components/Img";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getNextWork, getWork } from "@/data/works";
-import { createMeta } from "@/lib/site";
+import { createMeta, createWorkDescription } from "@/lib/site";
 
 const mono =
   "font-mono uppercase tracking-[0.02em] text-[12px] leading-[1.2]";
@@ -12,15 +12,20 @@ export const meta: MetaFunction = ({ params }) => {
   const work = getWork(params.slug ?? "");
 
   if (!work) {
-    return [{ title: "Work not found | Anvik Labs" }];
+    return [
+      { title: "Work not found | Anvik Labs" },
+      { name: "robots", content: "noindex" },
+    ];
   }
 
   return createMeta({
     title: `${work.name} | Anvik Labs`,
-    description: work.summary,
+    description: createWorkDescription(work),
     path: `/works/${work.slug}`,
     image: work.hero.src,
     imageAlt: work.hero.alt,
+    imageWidth: work.hero.width,
+    imageHeight: work.hero.height,
   });
 };
 

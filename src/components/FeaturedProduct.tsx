@@ -109,9 +109,7 @@ export default function FeaturedProduct() {
           </h2>
 
           <p className="mt-5 max-w-[52ch] text-[16px] leading-[1.7] text-neutral-300 md:mt-6 md:text-[17px] xl:text-[18px]">
-            <span className="text-accent">Designers Room</span> is a space for
-            designers to learn, share, connect, and grow together. Everything a
-            designer needs, all in one room.
+            <span>Where</span><span className="text-accent"> designers </span>level up roadmaps, challenges and a community that builds with you.
           </p>
 
           <div className="mt-8 flex justify-center md:justify-start md:mt-10">

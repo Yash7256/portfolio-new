@@ -6,8 +6,9 @@ import { createMeta } from "@/lib/site";
 
 export const meta: MetaFunction = () =>
   createMeta({
-    title: "Community | Anvik Labs",
-    description: "The Anvik Labs community page is coming soon.",
+    title: "Design & Developer Community | Anvik Labs",
+    description:
+      "Join the Anvik Labs community for designers and developers to share work, ask questions, and learn together. Launching soon — get involved.",
     path: "/community",
   });
 

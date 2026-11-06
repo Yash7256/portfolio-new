@@ -2,15 +2,27 @@ import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { createMeta } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { createMeta, organizationId } from "@/lib/site";
+
+const description =
+  "Website maintenance and support from Anvik Labs — security updates, performance fixes, content changes, and hosting care for live sites.";
 
 export const meta: MetaFunction = () =>
   createMeta({
-    title: "Website Maintenance | Anvik Labs",
-    description:
-      "Ongoing care so your product stays fast, secure, and up to date. Dependency updates, performance monitoring, bug fixes, and hosting management.",
+    title: "Website Maintenance & Support | Anvik Labs",
+    description,
     path: "/services/website-maintenance",
   });
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Website Maintenance & Support",
+  description,
+  areaServed: "IN",
+  provider: { "@id": organizationId },
+};
 
 const mono = "font-mono uppercase tracking-[0.18em] text-[11px]";
 
@@ -42,6 +54,7 @@ export default function WebsiteMaintenancePage() {
       <Navbar />
 
       <main id="main-content" className="flex flex-1 flex-col pt-[var(--header-height)]">
+        <JsonLd data={serviceJsonLd} />
         {/* Mobile header */}
         <header className="border-b border-white/10 px-4 py-8 sm:px-[4vw] sm:py-10 md:hidden">
           <p className={`${mono} text-neutral-500`}>Service [04] · Care</p>

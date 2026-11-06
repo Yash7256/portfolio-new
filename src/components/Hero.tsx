@@ -1,3 +1,5 @@
+import { site } from "@/lib/site";
+
 const products = ["Chisel UI", "CyberSec Toolkit", "Designers Room"];
 
 export default function Hero() {
@@ -16,9 +18,9 @@ export default function Hero() {
               Precise by engineering.
             </h1>
             <p className="mt-5 max-w-[52ch] font-sans text-[15px] leading-relaxed text-neutral-400 md:text-[16px]">
-              It usually starts with an idea, a problem or just curiosity. We turn
-              those beginnings into digital products through thoughtful design, web
-              development and a little engineering obsession.
+              Every product starts as a spark: an idea, a problem, or plain
+              curiosity. We turn that spark into a real product, with design, web
+              development and a healthy engineering obsession.
             </p>
           </div>
 
@@ -70,7 +72,7 @@ export default function Hero() {
       <div aria-hidden className="my-2 h-px w-full bg-white/15 md:my-3" />
 
       <div className="flex flex-col items-center justify-between gap-3 pb-1 pt-1 font-mono text-[12px] tracking-[0.04em] text-neutral-400 sm:flex-row md:text-[12px]">
-        <span>Technology studio / India</span>
+        <span>{site.studioTagline} / India</span>
         <a
           href="#featured-product"
           className="text-neutral-300 transition-colors duration-200 hover:text-foreground"

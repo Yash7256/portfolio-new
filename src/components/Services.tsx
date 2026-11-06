@@ -69,20 +69,8 @@ export default function Services() {
               <span className="text-neutral-500">{item.detail}</span>
               <span className="inline-flex items-center gap-1.5 text-neutral-300">
                 {item.scope}
-                <span
-                  aria-hidden="true"
-                  className="text-neutral-500 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-accent md:hidden"
-                >
-                  →
-                </span>
               </span>
             </div>
-            <span
-              aria-hidden="true"
-              className="hidden font-mono text-[12px] text-neutral-600 transition-colors duration-200 group-hover:text-accent md:block"
-            >
-              →
-            </span>
           </Link>
         ))}
       </div>

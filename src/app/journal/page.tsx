@@ -7,9 +7,9 @@ import { createMeta } from "@/lib/site";
 
 export const meta: MetaFunction = () =>
   createMeta({
-    title: "Journal | Anvik Labs",
+    title: "Journal: Design & Web Development | Anvik Labs",
     description:
-      "Thoughts on design, engineering, and building products from the Anvik Labs team.",
+      "Read the Anvik Labs journal for practical notes on UI/UX design, web development, product strategy, and building products with AI.",
     path: "/journal",
   });
 
