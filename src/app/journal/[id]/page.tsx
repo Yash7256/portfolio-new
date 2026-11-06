@@ -5,7 +5,8 @@ import NotFoundPage from "@/components/NotFoundPage";
 import JsonLd from "@/components/JsonLd";
 import journal from "@/data/journal";
 import { createMeta, site } from "@/lib/site";
-import { createBreadcrumbJsonLd } from "@/lib/schema";
+import { createArticleJsonLd, createBreadcrumbJsonLd } from "@/lib/schema";
+import { getService } from "@/data/services";
 
 const mono =
   "font-mono uppercase tracking-[0.14em] text-[11px] leading-[1.2]";
@@ -24,7 +25,11 @@ export function loader({ params }: LoaderFunctionArgs) {
 }
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-GB", {
+  const parsed = new Date(iso);
+
+  if (Number.isNaN(parsed.getTime())) return iso;
+
+  return parsed.toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -56,6 +61,8 @@ export default function JournalPostPage() {
     return <NotFoundPage />;
   }
 
+  const articleJsonLd = createArticleJsonLd(post);
+
   return (
     <>
       <Navbar />
@@ -70,6 +77,7 @@ export default function JournalPostPage() {
             { name: post.title, url: `${site.url}/journal/${post.id}` },
           ])}
         />
+        {articleJsonLd && <JsonLd data={articleJsonLd} />}
         <nav
           aria-label="Breadcrumb"
           className="flex items-center gap-2 border-b border-white/10 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500"
@@ -96,17 +104,61 @@ export default function JournalPostPage() {
           </h1>
 
           <div className={`${mono} mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-neutral-500`}>
-            <time dateTime={post.date}>{formatDate(post.date)}</time>
-            <span>{post.readTime}</span>
+            <time dateTime={post.datePublished ?? post.date}>
+              {formatDate(post.datePublished ?? post.date)}
+            </time>
+            {post.authorUrl ? (
+              <a
+                href={post.authorUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-foreground"
+              >
+                {post.author}
+              </a>
+            ) : (
+              <span>{post.author}</span>
+            )}
+            {post.authorRole && <span>{post.authorRole}</span>}
           </div>
 
-          <p className="mt-10 max-w-[62ch] font-sans text-[18px] leading-relaxed text-neutral-300 md:text-[20px]">
-            {post.excerpt}
-          </p>
+          <div className="mt-10 max-w-[68ch]">
+            <p className="font-sans text-[20px] leading-relaxed text-foreground md:text-[24px]">
+              {post.answer ?? post.excerpt}
+            </p>
 
-          <p className="mt-8 max-w-[58ch] text-[14px] leading-relaxed text-neutral-400">
-            The full essay is in progress. Check back soon.
-          </p>
+            {post.sections?.map((section) => (
+              <section key={section.heading} className="mt-12 border-t border-white/10 pt-6 md:mt-16 md:pt-8">
+                <h2 className="font-sans text-[24px] font-medium tracking-[-0.025em] text-foreground md:text-[32px]">
+                  {section.heading}
+                </h2>
+                <div className="mt-5 space-y-5 text-[16px] leading-[1.6] text-neutral-300">
+                  {section.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+                {section.bullets && (
+                  <ul className="mt-5 space-y-3 border-l border-accent/50 pl-5 text-[15px] leading-relaxed text-neutral-300">
+                    {section.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
+          </div>
+
+          {post.serviceSlug && getService(post.serviceSlug) && (
+            <aside className="mt-12 border-t border-white/10 pt-6 md:mt-16 md:pt-8">
+              <p className={`${mono} text-neutral-500`}>Related service</p>
+              <Link
+                to={`/services/${post.serviceSlug}`}
+                className="mt-3 inline-flex text-[17px] text-foreground underline decoration-white/25 underline-offset-4 transition-colors hover:text-accent"
+              >
+                {getService(post.serviceSlug).name} →
+              </Link>
+            </aside>
+          )}
         </article>
       </main>
       <Footer />

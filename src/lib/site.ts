@@ -21,7 +21,7 @@ export const site = {
   // Add verified Anvik Labs profiles here when official company accounts exist.
   // Individual team profiles live in `src/data/socials.json` and are not used here.
   sameAs: [] as string[],
-  foundingDate: undefined as string | undefined,
+  foundingDate: "2020-11-02",
 };
 
 export const organizationId = `${site.url}/#organization`;

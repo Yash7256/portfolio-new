@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
+# AI search access is enabled. GPTBot is also allowed because no separate
+# training-crawl restriction has been requested for this public portfolio.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
 Sitemap: https://anviklabs.site/sitemap.xml

@@ -17,18 +17,14 @@ export default function Articles() {
         </h2>
       </div>
 
-      {homepageJournalArticles.map((item) => (
-        <a
-          key={item.id}
-          href={item.href}
-          target="_blank"
-          rel="noreferrer"
-          className={`group grid w-full min-w-0 max-w-full grid-cols-1 gap-4 border-y border-white/10 py-6 transition-colors duration-300 hover:border-accent/50 md:items-start md:gap-8 md:py-8 ${
+      {homepageJournalArticles.map((item) => {
+        const className = `group grid w-full min-w-0 max-w-full grid-cols-1 gap-4 border-y border-white/10 py-6 transition-colors duration-300 hover:border-accent/50 md:items-start md:gap-8 md:py-8 ${
             item.image
               ? "md:grid-cols-[150px_minmax(0,1fr)_200px] lg:grid-cols-[160px_minmax(0,1fr)_240px]"
               : "md:grid-cols-[160px_minmax(0,1fr)]"
-          }`}
-        >
+          }`;
+        const content = (
+          <>
           <div className="min-w-0 max-w-full flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[12px] uppercase tracking-[0.1em] text-neutral-500 md:flex">
             <span>{item.date}</span>
             <span aria-hidden="true">/</span>
@@ -64,8 +60,25 @@ export default function Articles() {
               </div>
             </div>
           )}
-        </a>
-      ))}
+          </>
+        );
+
+        return item.externalUrl ? (
+          <a
+            key={item.id}
+            href={item.externalUrl}
+            target="_blank"
+            rel="noreferrer"
+            className={className}
+          >
+            {content}
+          </a>
+        ) : (
+          <Link key={item.id} to={item.href} className={className}>
+            {content}
+          </Link>
+        );
+      })}
 
       <div className="mt-8 flex justify-center md:justify-start">
         <Link

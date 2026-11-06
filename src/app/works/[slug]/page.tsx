@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import { getNextWork, getWork } from "@/data/works";
 import { createMeta, createWorkDescription, site } from "@/lib/site";
-import { createBreadcrumbJsonLd } from "@/lib/schema";
+import { createBreadcrumbJsonLd, createWorkJsonLd } from "@/lib/schema";
 
 export function loader({ params }: LoaderFunctionArgs) {
   if (!getWork(params.slug ?? "")) {
@@ -75,6 +75,7 @@ export default function WorkPage() {
             { name: work.name, url: `${site.url}/works/${work.slug}` },
           ])}
         />
+        <JsonLd data={createWorkJsonLd(work)} />
         <nav
           aria-label="Breadcrumb"
           className="flex items-center gap-2 border-b border-white/10 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500"
