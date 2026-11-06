@@ -1,0 +1,46 @@
+{
+  "harshita": [
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/harshita-upadhyay-designer/"
+    },
+    {
+      "id": "behance",
+      "label": "Behance",
+      "href": "https://www.behance.net/harshitaupadhyay"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "https://www.instagram.com/harshitaupadhyay_design/"
+    },
+    {
+      "id": "figma",
+      "label": "Figma",
+      "href": "https://www.figma.com/@harshitaupadhyay"
+    }
+  ],
+  "aman": [
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/amanrajengg/"
+    },
+    {
+      "id": "github",
+      "label": "GitHub",
+      "href": "https://github.com/Yash7256"
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "https://www.instagram.com/aman.raj.engg/"
+    },
+    {
+      "id": "twitter",
+      "label": "Twitter / X",
+      "href": "https://twitter.com/amanrajengg"
+    }
+  ]
+}
