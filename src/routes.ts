@@ -8,4 +8,9 @@ export default [
   route("contact", "app/contact/page.tsx"),
   route("challenge", "app/challenge/page.tsx"),
   route("community", "app/community/page.tsx"),
+  route("services/web-development", "app/services/web-development/page.tsx"),
+  route("services/product-design", "app/services/product-design/page.tsx"),
+  route("services/ai-solutions", "app/services/ai-solutions/page.tsx"),
+  route("services/website-maintenance", "app/services/website-maintenance/page.tsx"),
+  route("journal", "app/journal/page.tsx"),
 ] satisfies RouteConfig;

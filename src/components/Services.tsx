@@ -1,24 +1,30 @@
+import { Link } from "react-router";
+
 const services = [
   {
     name: "Web Development",
+    slug: "/services/web-development",
     discipline: "Engineering",
     detail: "React / TypeScript",
     scope: "Design to launch",
   },
   {
     name: "Product Design",
+    slug: "/services/product-design",
     discipline: "Design",
     detail: "Interface / Systems",
     scope: "Research to UI",
   },
   {
     name: "AI Solutions",
+    slug: "/services/ai-solutions",
     discipline: "Applied AI",
     detail: "LLM / Automation",
     scope: "Prototype to production",
   },
   {
     name: "Website Maintenance",
+    slug: "/services/website-maintenance",
     discipline: "Care",
     detail: "Performance / Updates",
     scope: "Ongoing support",
@@ -43,8 +49,9 @@ export default function Services() {
 
       <div className="divide-y divide-white/10 border-t border-white/10">
         {services.map((item, index) => (
-          <div
+          <Link
             key={item.name}
+            to={item.slug}
             className="group grid gap-3 py-6 transition-colors duration-300 hover:bg-white/[0.02] md:grid-cols-[48px_minmax(0,1.2fr)_minmax(0,1fr)_auto] md:items-center md:gap-6 md:py-7"
           >
             <div className="flex items-baseline gap-3 md:contents">
@@ -62,7 +69,13 @@ export default function Services() {
               <span className="text-neutral-500">{item.detail}</span>
               <span className="text-neutral-300">{item.scope}</span>
             </div>
-          </div>
+            <span
+              aria-hidden="true"
+              className="hidden font-mono text-[12px] text-neutral-600 transition-colors duration-200 group-hover:text-accent md:block"
+            >
+              →
+            </span>
+          </Link>
         ))}
       </div>
     </section>

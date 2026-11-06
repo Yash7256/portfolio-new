@@ -5,6 +5,7 @@ import { Link } from "react-router";
 const footerLinks = [
   { label: "Home", href: "/" },
   { label: "Works", href: "/works" },
+  { label: "Journal", href: "/journal" },
   { label: "Gallery", href: "/gallery" },
   { label: "Services", href: "/#services" },
   { label: "Contact", href: "/contact" },
