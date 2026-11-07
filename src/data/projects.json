@@ -1,102 +1,23 @@
 [
   {
-    "id": "chronicae",
-    "name": "Chronicae",
-    "genre": "Identity / Editorial / Web",
-    "description": "A living archive for a research collective, organised around time, notation and the quiet authority of a printed index.",
-    "workType": "both",
-    "projectType": "client",
-    "coverImage": "/mockups/chronicae-editorial-spread.png",
-    "coverAlt": "Chronicae identity applied to a printed editorial spread."
+    "id": "cybersec-toolkit",
+    "name": "CyberSec Toolkit",
+    "genre": "AI-powered security SaaS",
+    "description": "AI-powered network recon and vulnerability scanning platform, nmap plus Shodan plus an AI analyst in one tool.",
+    "workType": "Design + Development",
+    "projectType": "Anvik Labs",
+    "coverImage": "/mockups/cybersec-toolkit.png",
+    "coverAlt": "3D desktop monitor mockup displaying the CyberSec cybersecurity platform website with an AI-powered vulnerability scanning dashboard in a dark purple interface."
   },
-  {
-    "id": "arcane-studio",
-    "name": "Arcane Studio",
-    "genre": "Identity / Art Direction / Web",
-    "description": "A restrained identity for an architecture practice working between built form and atmosphere.",
-    "workType": "both",
-    "projectType": "client",
-    "coverImage": "/mockups/arcane-studio-laptop.png",
-    "coverAlt": "Arcane Studio website displayed on a laptop in a dim interior."
-  },
-  {
-    "id": "solara",
-    "name": "Solara",
-    "genre": "Identity / Packaging / Web",
-    "description": "A skincare label built around light: warm, direct and deliberately unadorned.",
-    "workType": "ui-ux",
-    "projectType": "client",
-    "coverImage": "/mockups/aurora-skincare-laptop.png",
-    "coverAlt": "Solara skincare website shown on a laptop resting in a mossy landscape."
-  },
-  {
-    "id": "edifier-magazine",
-    "name": "Edifier® Magazine",
-    "genre": "Editorial / Art Direction / Web",
-    "description": "An independent music magazine with a strict grid and enough room for sound to remain loud.",
-    "workType": "ui-ux",
-    "projectType": "own",
-    "coverImage": "/mockups/edifier-magazine-cover.png",
-    "coverAlt": "Edifier magazine cover and feature spread displayed on a laptop."
-  },
-  {
-    "id": "rowan-keats",
-    "name": "Rowan Keats",
-    "genre": "Identity / Web / Photography",
-    "description": "A personal identity for a photographer whose work sits between portraiture and landscape.",
-    "workType": "both",
-    "projectType": "client",
-    "coverImage": "/mockups/wayfarer-screen-in-interior.png",
-    "coverAlt": "Rowan Keats photography portfolio shown on a screen in a cosy room."
-  },
-  {
-    "id": "big-baby-tape-magazine",
-    "name": "Big Baby Tape® Magazine",
-    "genre": "Editorial / Type / Web",
-    "description": "A music publication with a fast, physical layout and a typographic system built to be broken.",
-    "workType": "ui-ux",
-    "projectType": "own",
-    "coverImage": "/mockups/macbook-scroll-mockup.png",
-    "coverAlt": "Big Baby Tape magazine website shown on a laptop with a bold editorial layout."
-  },
-  {
-    "id": "cartes-datelier",
-    "name": "Cartes d'Atelier",
-    "genre": "Identity / Packaging / Print",
-    "description": "A stationery and print studio identity built from the language of the workshop.",
-    "workType": "ui-ux",
-    "projectType": "client",
-    "coverImage": "/mockups/arcane-studio-laptop.png",
-    "coverAlt": "Cartes d'Atelier stationery and packaging arranged on a studio surface."
-  },
-  {
-    "id": "palmira",
-    "name": "Palmira",
-    "genre": "Identity / Web / Motion",
-    "description": "A hospitality identity that moves slowly, with a warmth carried through type, image and motion.",
-    "workType": "both",
-    "projectType": "client",
-    "coverImage": "/mockups/aurora-skincare-laptop.png",
-    "coverAlt": "Palmira hospitality website shown on a laptop in a natural setting."
-  },
-  {
-    "id": "scene-pro",
-    "name": "Scene Pro",
-    "genre": "Web / Product / Development",
-    "description": "A production tool for film crews, designed to stay legible on set and fast between takes.",
-    "workType": "development",
-    "projectType": "own",
-    "coverImage": "/mockups/edifier-magazine-cover.png",
-    "coverAlt": "Scene Pro product interface shown on a laptop in a production setting."
-  },
-  {
-    "id": "exala",
-    "name": "Exala (A)",
-    "genre": "Identity / Editorial / Web",
-    "description": "An independent publisher with a flexible identity for essays, images and occasional experiments.",
-    "workType": "both",
-    "projectType": "own",
-    "coverImage": "/mockups/chronicae-editorial-spread.png",
-    "coverAlt": "Exala publication covers and website shown on a laptop."
+    {
+
+    "id": "notify-ed",
+    "name": "Notify-ED",
+    "genre": "Communication automation platform",
+    "description": "Instant multi-channel grade notification platform for colleges: upload a roster, enter marks, and students get Email, WhatsApp and in-app alerts with delivery tracking.",
+    "workType": "Design + Development",
+    "projectType": "Anvik Labs",
+    "coverImage": "/mockups/notifyed.png",
+    "coverAlt": "3D laptop mockup showcasing the Notifyed student grade notification platform website with automated email and WhatsApp alerts, featuring a clean cream and orange interface."
   }
 ]

@@ -18,11 +18,6 @@ export default function Hero() {
               <br />
               Precise by engineering.
             </h1>
-            <p className="mt-5 max-w-[52ch] font-sans text-[15px] leading-relaxed text-neutral-400 md:text-[16px]">
-              Every product starts as a spark: an idea, a problem, or plain
-              curiosity. We turn that spark into a real product, with design, web
-              development and a healthy engineering obsession.
-            </p>
             <p className="mt-4 max-w-[58ch] font-sans text-[15px] leading-relaxed text-neutral-300 md:text-[16px]">
               Anvik Labs is a product design and engineering studio in India. We
               help startups and small businesses with{" "}
