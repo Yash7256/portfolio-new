@@ -52,9 +52,9 @@ export default function Services() {
           <Link
             key={item.name}
             to={item.slug}
-            className="group grid gap-3 py-6 transition-colors duration-300 hover:bg-white/[0.02] md:grid-cols-[48px_minmax(0,1.2fr)_minmax(0,1fr)_auto] md:items-center md:gap-6 md:py-7"
+            className="group grid grid-cols-1 gap-3 py-6 transition-colors duration-300 hover:bg-white/[0.02] md:grid-cols-[minmax(0,6fr)_minmax(0,40fr)_minmax(0,20fr)_minmax(0,34fr)] md:items-center md:gap-x-4 md:py-7 lg:grid-cols-[minmax(0,4fr)_minmax(0,44fr)_minmax(0,20fr)_minmax(0,32fr)] lg:gap-x-6"
           >
-            <div className="flex items-baseline gap-3 md:contents">
+            <div className="grid grid-cols-[auto_1fr] items-baseline gap-3 md:contents">
               <span className="font-mono text-[12px] text-neutral-500">
                 [0{index + 1}]
               </span>
@@ -65,11 +65,9 @@ export default function Services() {
             <span className="font-sans text-[14px] text-neutral-400 md:text-[15px]">
               {item.discipline}
             </span>
-            <div className="flex items-center justify-between gap-4 font-mono text-[12px] text-neutral-400 md:justify-end md:gap-6">
+            <div className="grid grid-cols-1 gap-1 font-mono text-[12px] text-neutral-400 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:gap-x-5 lg:gap-x-6">
               <span className="text-neutral-500">{item.detail}</span>
-              <span className="inline-flex items-center gap-1.5 text-neutral-300">
-                {item.scope}
-              </span>
+              <span className="text-neutral-300">{item.scope}</span>
             </div>
           </Link>
         ))}
