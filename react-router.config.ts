@@ -1,6 +1,6 @@
 import type { Config } from "@react-router/dev/config";
 import journal from "./src/data/journal";
-import { works } from "./src/data/works";
+import { projects } from "./src/data/projects";
 
 export default {
   appDirectory: "src",
@@ -8,7 +8,7 @@ export default {
   prerender: [
     "/",
     "/works",
-    ...works.map((work) => `/works/${work.slug}`),
+    ...projects.map((project) => `/works/${project.id}`),
     "/contact",
     "/journal",
     ...journal

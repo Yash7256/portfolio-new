@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "@/components/Img";
-import projects from "@/data/projects.json";
+import { projects, getProjectWorkType } from "@/data/projects";
 import { createMeta } from "@/lib/site";
 
 export const meta: MetaFunction = () =>
@@ -19,7 +19,8 @@ const mono = "font-mono uppercase tracking-[0.02em] text-[12px] leading-[1.2]";
 /** Human-readable label for workType */
 const WORK_TYPE_LABEL: Record<string, string> = {
   development: "Development",
-  "ui-ux": "UI / UX",
+  design: "Design",
+  "ui-ux": "Design",
   both: "Design + Dev",
 };
 
@@ -40,15 +41,9 @@ export default function WorksPage() {
       >
         {/* ── Mobile header (shown below md) ───────────────────────────────── */}
         <header className="border-b border-white/10 px-4 py-8 sm:px-[4vw] sm:py-10 md:hidden">
-          <p className={`${mono} text-neutral-500`}>
-            Selected work · {String(projects.length).padStart(2, "0")} projects
-          </p>
           <h1 className="mt-3 font-sans text-[clamp(2.75rem,14vw,7rem)] font-medium leading-[0.88] tracking-[-0.05em] text-foreground break-words">
             Works.
           </h1>
-          <p className="mt-3 text-[13px] sm:text-[14px] leading-relaxed text-neutral-400">
-            Identity, editorial, product and web — each project designed and built by the same small team.
-          </p>
         </header>
 
         {/* ── Two-column split (md+) ────────────────────────────────────────── */}
@@ -70,10 +65,6 @@ export default function WorksPage() {
                 <div aria-hidden="true" className="font-sans text-[clamp(4rem,7vw,8rem)] font-medium leading-[0.85] tracking-[-0.055em] text-foreground">
                   Works.
                 </div>
-                <p className="mt-6 max-w-[32ch] text-[14px] leading-relaxed text-neutral-400 lg:text-[15px]">
-                  Identity, editorial, product and web — each project designed
-                  and built by the same small team.
-                </p>
               </div>
 
               {/* Bottom caption */}
@@ -112,7 +103,7 @@ export default function WorksPage() {
                       </span>
                       {/* Work type badge */}
                       <span className="inline-flex items-center rounded-full border border-white/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-neutral-400">
-                        {WORK_TYPE_LABEL[project.workType] ?? project.workType}
+                        {WORK_TYPE_LABEL[getProjectWorkType(project)] ?? project.workType}
                       </span>
                       {/* Own / Client badge */}
                       <span

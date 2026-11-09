@@ -73,7 +73,7 @@ public/
 
 ## Content
 
-- Project data lives in `src/data/works.ts`. Each project supplies its own index, slug, metadata, summary, body copy, hero image, gallery images, and next-project relationship.
+- Project data lives in `src/data/projects.json`, with typed accessors in `src/data/projects.ts`. Each project supplies its work type plus the design and/or development decisions shown on its dedicated case-study page.
 - Testimonials live in `src/data/testimonials.json`. Author avatars are optional via an `avatar` field; entries without an image render a circular initials fallback.
 - The contact form intentionally opens an email draft to `hello@anviklabs.com`. There is no backend or message storage.
 - Before launch, confirm that project names, case-study copy, mockups, and client quotes are approved for publication. Some current project content is portfolio placeholder material.

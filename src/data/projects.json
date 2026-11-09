@@ -4,20 +4,63 @@
     "name": "CyberSec Toolkit",
     "genre": "AI-powered security SaaS",
     "description": "AI-powered network recon and vulnerability scanning platform, nmap plus Shodan plus an AI analyst in one tool.",
-    "workType": "Design + Development",
+    "workType": "both",
     "projectType": "Anvik Labs",
+    "year": "2026",
     "coverImage": "/mockups/cybersec-toolkit.png",
-    "coverAlt": "3D desktop monitor mockup displaying the CyberSec cybersecurity platform website with an AI-powered vulnerability scanning dashboard in a dark purple interface."
+    "coverAlt": "3D desktop monitor mockup displaying the CyberSec cybersecurity platform website with an AI-powered vulnerability scanning dashboard in a dark purple interface.",
+    "designDecisions": [
+      { "title": "Signal before surface", "description": "The interface puts scan status, severity, and the next useful action ahead of decorative dashboard chrome." },
+      { "title": "A readable threat model", "description": "Findings are grouped by asset and severity so the product can be understood quickly during an active investigation." },
+      { "title": "One analyst voice", "description": "AI explanations sit beside the underlying evidence, keeping the recommendation useful without hiding the source of the signal." }
+    ],
+    "developmentDecisions": [
+      { "title": "Composable scan pipeline", "description": "Reconnaissance, enrichment, and analysis are treated as separate steps so each part can evolve without reshaping the whole product." },
+      { "title": "Actionable results", "description": "The result model keeps raw findings connected to severity, affected assets, and remediation context." },
+      { "title": "Make the expensive work visible", "description": "Long-running scans communicate their state clearly, so users always know what is running and what is ready to review." }
+    ]
   },
-    {
+ {
+  "id": "designers-room",
+  "name": "Designer's Room",
+  "genre": "Community & learning platform",
+  "description": "A roadmap-driven learning and community platform for designers: follow structured guidebooks like UI/UX Designer, learn topic by topic, and share thoughts and experiences with other designers. Think roadmap.sh meets TryHackMe, built for design.",
+  "workType": "both",
+  "projectType": "Anvik Labs",
+  "year": "2026",
+  "coverImage": "/mockups/designersroom.png",
+  "coverAlt": "3D laptop mockup showcasing the Designer's Room platform with a guidebook roadmap page and community feed, in a clean modern interface.",
+  "designDecisions": [
+    { "title": "Progress is the primary navigation", "description": "The roadmap gives learning a visible shape, making the next step easier to find than a loose collection of resources." },
+    { "title": "Reading before reacting", "description": "Guidebook content gets a calm, focused layout while community contributions remain close enough to add context." },
+    { "title": "A system that can grow", "description": "The visual language uses repeatable type, spacing, and status patterns so new topics feel part of one product." }
+  ],
+  "developmentDecisions": [
+    { "title": "Content as structured data", "description": "Roadmaps, topics, and progress states are modeled independently so the same learning system can support multiple guidebooks." },
+    { "title": "Useful state at every step", "description": "The product makes unfinished, current, and completed topics distinguishable without relying on color alone." },
+    { "title": "Community with a clear boundary", "description": "The discussion layer is connected to learning context, keeping conversation attached to the topic rather than becoming a separate feed." }
+  ]
+},
+{
 
     "id": "notify-ed",
     "name": "Notify-ED",
     "genre": "Communication automation platform",
     "description": "Instant multi-channel grade notification platform for colleges: upload a roster, enter marks, and students get Email, WhatsApp and in-app alerts with delivery tracking.",
-    "workType": "Design + Development",
+    "workType": "both",
     "projectType": "Anvik Labs",
+    "year": "2026",
     "coverImage": "/mockups/notifyed.png",
-    "coverAlt": "3D laptop mockup showcasing the Notifyed student grade notification platform website with automated email and WhatsApp alerts, featuring a clean cream and orange interface."
-  }
+    "coverAlt": "3D laptop mockup showcasing the Notifyed student grade notification platform website with automated email and WhatsApp alerts, featuring a clean cream and orange interface.",
+    "designDecisions": [
+      { "title": "A short path to send", "description": "The flow is organized around the real task: upload a roster, review the marks, and send with confidence." },
+      { "title": "Trust in the review step", "description": "Recipient counts, channel choices, and message previews are visible before a notification leaves the system." },
+      { "title": "Operational clarity", "description": "Delivery states are designed to be scanned quickly, helping staff spot what succeeded and what needs attention." }
+    ],
+    "developmentDecisions": [
+      { "title": "One source, many channels", "description": "A shared notification model keeps email, WhatsApp, and in-app delivery aligned while allowing channel-specific handling." },
+      { "title": "Import with guardrails", "description": "Roster parsing is treated as a validation step, surfacing problems before they become partial or misdirected sends." },
+      { "title": "Delivery you can audit", "description": "Each notification preserves enough status context to understand its outcome after the initial send." }
+    ]
+  } 
 ]

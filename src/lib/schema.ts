@@ -1,7 +1,7 @@
 import { organizationId, site } from "@/lib/site";
 import type { Service } from "@/data/services";
 import type { JournalArticle, JournalPost } from "@/data/journal";
-import type { Work } from "@/data/works";
+import type { Project } from "@/data/projects";
 
 export function createServiceJsonLd(service: Service) {
   return {
@@ -72,17 +72,17 @@ export function createArticleJsonLd(article: JournalArticle | JournalPost) {
   };
 }
 
-export function createWorkJsonLd(work: Work) {
+export function createWorkJsonLd(work: Project) {
   return {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    "@id": `${site.url}/works/${work.slug}#work`,
+    "@id": `${site.url}/works/${work.id}#work`,
     name: work.name,
-    description: work.summary,
-    url: `${site.url}/works/${work.slug}`,
-    image: `${site.url}${work.hero.src}`,
+    description: work.description,
+    url: `${site.url}/works/${work.id}`,
+    image: `${site.url}${work.coverImage}`,
     dateCreated: work.year,
     creator: { "@id": organizationId },
-    keywords: work.services,
+    keywords: [work.genre, work.workType],
   };
 }

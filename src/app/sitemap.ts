@@ -1,5 +1,5 @@
 import journal from "@/data/journal";
-import { works } from "@/data/works";
+import { projects } from "@/data/projects";
 import { site } from "@/lib/site";
 
 const staticPaths = [
@@ -31,8 +31,8 @@ export function loader() {
       changefreq: entry.changefreq,
       priority: entry.priority,
     })),
-    ...works.map((work) => ({
-      loc: url(`/works/${work.slug}`),
+    ...projects.map((project) => ({
+      loc: url(`/works/${project.id}`),
       changefreq: "yearly" as const,
       priority: "0.6",
     })),

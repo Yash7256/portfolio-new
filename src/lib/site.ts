@@ -1,12 +1,12 @@
 import type { MetaDescriptor } from "react-router";
-import type { Work } from "@/data/works";
+import type { Project } from "@/data/projects";
 
 export const site = {
   name: "Anvik Labs",
   title: "Anvik Labs | Product Design & Engineering",
   studioTagline: "Product design & engineering studio",
   description:
-    "Anvik Labs is a product design & engineering studio in India, helping startups and small businesses build clear interfaces, fast websites, and practical AI solutions.",
+    "Anvik Labs is a Product Design & Engineering Studio in India, helping startups and small businesses build clear interfaces, fast websites, and practical AI solutions.",
   url: "https://anviklabs.site",
   email: "anviklabs@gmail.com",
   areaServed: "Worldwide",
@@ -102,8 +102,8 @@ export function createMeta(options: PageMetaOptions): MetaDescriptor[] {
   ];
 }
 
-export function createWorkDescription(work: Work): string {
-  const lead = `${work.name} by Anvik Labs — ${work.summary}`;
+export function createWorkDescription(work: Project): string {
+  const lead = `${work.name} by Anvik Labs — ${work.description}`;
   const withCta = `${lead} Explore the full case study.`;
 
   if (withCta.length <= 155) {
