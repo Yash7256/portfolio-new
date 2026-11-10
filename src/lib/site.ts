@@ -10,7 +10,7 @@ export const site = {
   url: "https://anviklabs.site",
   email: "anviklabs@gmail.com",
   areaServed: "Worldwide",
-  logo: "/favicon-192x192.png",
+  logo: "/assets/favicon.ico",
   ogImage: "/og.png",
   ogImageWidth: "1200",
   ogImageHeight: "630",

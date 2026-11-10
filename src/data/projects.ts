@@ -7,6 +7,12 @@ export type ProjectDecision = {
   description: string;
 };
 
+export type ProjectLinks = {
+  behance?: string;
+  live?: string;
+  github?: string;
+};
+
 export type Project = {
   id: string;
   name: string;
@@ -17,6 +23,7 @@ export type Project = {
   year: string;
   coverImage: string;
   coverAlt: string;
+  links?: ProjectLinks;
   designDecisions: ProjectDecision[];
   developmentDecisions: ProjectDecision[];
 };

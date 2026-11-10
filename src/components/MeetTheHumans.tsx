@@ -186,7 +186,7 @@ function Portrait({
       >
         {showFavicon && (
           <img
-            src="/favicon.svg"
+            src="/assets/favicon.ico"
             alt=""
             aria-hidden="true"
             className={`pointer-events-none absolute ${faviconPositionClassName} ${faviconVerticalPositionClassName} z-10 h-full w-full object-contain opacity-20`}
