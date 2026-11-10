@@ -113,10 +113,10 @@ Do not introduce a second accent. Do not switch the site to a light theme. Avoid
 
 ### Contact
 
-- Contact details, studio description, and a mailto draft form.
+- Contact details, studio description, and a contact form backed by FormSubmit.
 - Labels are explicit; required fields are marked.
-- The form does not submit to a backend. It opens the visitor's email client.
-- Keep the copy honest: do not imply server-side storage or delivery.
+- The form submits to FormSubmit, which emails the inquiry to `anviklabs@gmail.com`.
+- The form shows sending, success, and error states; nothing is stored in this repo.
 
 ### Footer
 

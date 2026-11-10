@@ -122,6 +122,15 @@ p {
   outline-offset: 3px;
 }
 
+select {
+  color-scheme: dark;
+}
+
+select option {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
 * {
   scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
   scrollbar-width: thin;

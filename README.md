@@ -43,7 +43,7 @@ Run all three before considering a change complete.
 | `/` | Home: introduction, Designers Room feature, team, services, testimonials, writing |
 | `/works` | Selected work index |
 | `/works/:slug` | Project case study |
-| `/contact` | Inquiry details and mailto form |
+| `/contact` | Inquiry details and contact form |
 | `/journal` | Writing index |
 | `/services/web-development` | Web development service |
 | `/services/product-design` | UI/UX and product design service |
@@ -75,7 +75,7 @@ public/
 
 - Project data lives in `src/data/projects.json`, with typed accessors in `src/data/projects.ts`. Each project supplies its work type plus the design and/or development decisions shown on its dedicated case-study page.
 - Testimonials live in `src/data/testimonials.json`. Author avatars are optional via an `avatar` field; entries without an image render a circular initials fallback.
-- The contact form intentionally opens an email draft to `hello@anviklabs.com`. There is no backend or message storage.
+- The contact form submits to FormSubmit (`https://formsubmit.co/ajax/anviklabs@gmail.com`), which forwards each inquiry to `anviklabs@gmail.com`. The first submission sends an activation email to that address; click its link once to start receiving messages. Submissions are not stored in this repo.
 - Before launch, confirm that project names, case-study copy, mockups, and client quotes are approved for publication. Some current project content is portfolio placeholder material.
 
 ## Design and accessibility

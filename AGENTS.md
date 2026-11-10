@@ -34,5 +34,5 @@ Run `typecheck`, `lint`, and `build` after code changes. For visual or responsiv
 - Respect `prefers-reduced-motion` for non-essential animation.
 - Use existing components and utilities before adding dependencies.
 - Do not present placeholder case studies, client quotes, or imagery as verified facts. Note provenance where content is provisional.
-- The contact form is a `mailto:` draft flow, not a backend submission.
+- The contact form posts to FormSubmit (`https://formsubmit.co/ajax/anviklabs@gmail.com`), which emails inquiries to `anviklabs@gmail.com`. No submissions are stored in this repo.
 - Update `README.md`, `design.md`, or the audit report when a change alters the stack, routes, design system, or documented risks.
