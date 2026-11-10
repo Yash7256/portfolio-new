@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/lib/site";
 
@@ -14,8 +15,13 @@ const quickLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -63,7 +69,8 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-background/85 backdrop-blur-md">
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 bg-background/85 backdrop-blur-md">
       <div className="w-full px-4 sm:px-[4vw] lg:px-[5vw] xl:px-[6vw]">
         <motion.div
           initial={{ opacity: 0, y: -8 }}
@@ -125,8 +132,12 @@ export default function Navbar() {
         <div className="h-px w-full origin-bottom scale-y-50 bg-white/15" />
       </div>
 
-      <AnimatePresence>
-        {open && (
+      </header>
+
+      {mounted
+        ? createPortal(
+            <AnimatePresence>
+              {open && (
           <motion.div
             id="mobile-navigation"
             role="dialog"
@@ -136,7 +147,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-50 flex flex-col bg-background px-4 py-5 sm:px-[4vw] md:hidden"
+            className="fixed inset-0 z-50 flex flex-col bg-black px-4 py-5 sm:px-[4vw] md:hidden"
           >
             <div className="flex items-center justify-between">
               <Link
@@ -190,7 +201,10 @@ export default function Navbar() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
-    </header>
+      </AnimatePresence>,
+            document.body,
+          )
+        : null}
+    </>
   );
 }
